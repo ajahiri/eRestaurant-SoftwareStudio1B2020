@@ -38,7 +38,6 @@ class SignUp extends React.Component {
                 this.refs.registerPassword.value = '';
                 this.refs.registerPhone.value = '';
                 this.refs.registerName.value = '';
-                this.toggle();
             }
         });
     }
@@ -47,7 +46,7 @@ class SignUp extends React.Component {
         return (
             <MDBContainer>
                 <MDBNavItem>
-                    <MDBNavLink to="" onClick={this.toggle}>SignUp</MDBNavLink>
+                    <a className="navbar-text white-text" onClick={this.toggle}>SignUp</a>
                 </MDBNavItem>
                 <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
                     <MDBModalHeader toggle={this.toggle}>SignUp</MDBModalHeader>

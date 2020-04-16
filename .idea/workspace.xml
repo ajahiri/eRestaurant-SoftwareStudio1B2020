@@ -2,19 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SoftwareStudio_1B2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SoftwareStudio_1B2020.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.meteor/packages" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/cover.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/LogIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/LogIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/components/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +59,8 @@
       <workItem from="1586759623483" duration="11995000" />
       <workItem from="1586791517344" duration="15434000" />
       <workItem from="1586850467752" duration="10124000" />
-      <workItem from="1586875434891" duration="9679000" />
+      <workItem from="1586875434891" duration="9978000" />
+      <workItem from="1587024522134" duration="3809000" />
     </task>
     <servers />
   </component>

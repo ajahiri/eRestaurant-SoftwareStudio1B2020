@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Header from "./header";
 import HomePage from "./home/homeBody";
+import Booking from "./booking/booking";
 
 // All routes should be defined here
 
@@ -18,17 +19,18 @@ export default function App()  {
                     <Route exact path="/">
                         <div className="homepage">
                             <Header/>
-                            <HomePage />
+                            <HomePage/>
                         </div>
                     </Route>
                     <Route exact path="/about">
-                        <HomePage/>
+                        <Header/>
                     </Route>
-                    <Route exact path="/book">
-                        <HomePage/>
+                    <Route exact path="/booking">
+                        <Header/>
+                        <Booking/>
                     </Route>
                     <Route exact path="/contact">
-                        <HomePage/>
+                        <Header/>
                     </Route>
                 </Switch>
             </div>
