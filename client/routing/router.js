@@ -5,9 +5,9 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import Header from "./header";
-import HomePage from "./home/homeBody";
-import Booking from "./booking/booking";
+import Header from "../ui/components/header";
+import HomePage from "../ui/pages/home/homeBody";
+import Booking from "../ui/pages/booking/booking";
 
 // All routes should be defined here
 

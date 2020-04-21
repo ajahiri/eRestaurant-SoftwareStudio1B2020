@@ -6,7 +6,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 // React Components
-import App from "./components/router";
+import App from "./routing/router";
 
 
 Meteor.startup(() => {
