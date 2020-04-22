@@ -9,6 +9,27 @@ class Admin extends React.Component {
         super(props);
     }
 
+    addBranchSubmit(event) {
+        event.preventDefault();
+        console.log("Add Branch Submitted");
+
+        //Build our data from input
+        const branchName = this.refs.branchName.value;
+        const branchManager = this.refs.branchManager.value;
+        const branchPhone = this.refs.branchPhone.value;
+        const branchAddress = {
+            unitNo: this.refs.branchUnit.value,
+            street: this.refs.branchStreetName.value,
+            streetNumber: this.refs.branchStreetNumber.value,
+            city: this.refs.branchCity.value,
+            state: this.refs.branchState.value,
+            postCode: this.refs.branchPostcode.value
+        }
+        console.log(branchName);
+
+        //Meteor.call('branches.insert', branchName, branchManager, branchPhone, branchAddress);
+    }
+
     render() {
         return (
             <MDBContainer>
@@ -50,27 +71,34 @@ class Admin extends React.Component {
                         </MDBTable>
                     </MDBCol>
                 </MDBRow>
-                <MDBRow>
-                    <MDBCol>
-                        <h3>Add New Branch</h3>
-                        <form>
-                            <div className="grey-text">
-                                <MDBInput label="Restaurant Name" group type="text" validate error="wrong"
-                                          success="right" />
-                                <MDBInput label="Manager ID" group type="email" validate error="wrong"
-                                          success="right" />
-                                <MDBInput label="Phone" group type="text" validate error="wrong" success="right" />
-                                <MDBInput type="textarea" rows="2" label="Your message" />
-                            </div>
-                            <div className="text-center">
-                                <MDBBtn color="primary">
-                                    Add Branch
-                                    <MDBIcon far icon="paper-plane" className="ml-1" />
-                                </MDBBtn>
-                            </div>
-                        </form>
-                    </MDBCol>
-                </MDBRow>
+
+                <form onSubmit={this.addBranchSubmit.bind(this)}>
+                    <h3>Add New Branch</h3>
+                    <MDBRow>
+                        <MDBCol>
+                            <MDBInput name="branchName" label="Restaurant Name" />
+                            <MDBInput ref="branchManager" label="Manager Username" group type="text" validate error="wrong" success="right" />
+                            <MDBInput ref="branchPhone" label="Phone Number" validate error="wrong" success="right" type="number" />
+                        </MDBCol>
+                        <MDBCol>
+                            <MDBInput ref="branchUnit" label="Unit Number" group type="text" validate error="wrong" success="right" />
+                            <MDBInput ref="branchStreetName" label="Street Name" group type="text" validate error="wrong" success="right" />
+                            <MDBInput ref="branchStreetNumber" label="Street Number" group type="text" validate error="wrong" success="right" />
+                        </MDBCol>
+                        <MDBCol>
+                            <MDBInput ref="branchCity" label="City" group type="text" validate error="wrong" success="right" />
+                            <MDBInput ref="branchState" label="State" group type="text" validate error="wrong" success="right" />
+                            <MDBInput ref="branchPostcode" label="Postcode" group type="number" validate error="wrong" success="right" />
+                        </MDBCol>
+                    </MDBRow>
+
+                    <div className="text-center">
+                        <MDBBtn type="submit" color="primary">
+                            Add Branch
+                            <MDBIcon far icon="paper-plane" className="ml-1" />
+                        </MDBBtn>
+                    </div>
+                </form>
             </MDBContainer>
         );
     }
