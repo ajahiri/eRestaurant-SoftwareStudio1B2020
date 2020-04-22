@@ -35,9 +35,9 @@ class Booking extends React.Component {
                     <MDBCol sm="4" md="4" lg="4"><MDBInput type="number" label="Number of Guests" size="lg" hint="0" /></MDBCol>
                     {/* Flatpickr code START */}
                     {/*May include ability for Owner to disable certain dates (holidays)*/}
-                    <MDBCol sm="4" md="4" lg="4" ><div className="md-form" >
+                    <MDBCol sm="4" md="4" lg="4" ><div className="md-form" > {/* this div changes the input field to the mdb input field */}
                     <Flatpickr
-                        className="form-control-lg"
+                        className="form-control-lg" //sets input field font size to lg
                         value={date}
                         onChange={date => {
                         this.setState({ date }); // return date for the selected Date String
@@ -53,7 +53,7 @@ class Booking extends React.Component {
                             }
                         }}
                         options={{
-                            altInput: true, 
+                            altInput: true, // altInput is teh human friendly format (April 22, 2020)
                             altFormat: defaultDateFormat,
                             dateFormat: "Y-m-d", //set altInput to false to use this format
                             minDate:"today",
