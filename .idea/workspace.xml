@@ -3,11 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/LogIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/LogIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/components/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/components/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/packages" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/branchs/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/branchs/Branches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/routing/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/routing/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +26,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -61,11 +63,12 @@
       <workItem from="1586850467752" duration="10124000" />
       <workItem from="1586875434891" duration="9978000" />
       <workItem from="1587024522134" duration="3809000" />
+      <workItem from="1587543299865" duration="6811000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="711" y="316" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586805270780">

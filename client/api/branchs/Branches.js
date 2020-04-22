@@ -5,7 +5,13 @@ export const Branches = new Mongo.Collection('branches');
 Branches.schema = new SimpleSchema({
     _id: {type: String},
     Manager: {type: String},
-    Staff: {type: String},
+    Staff: {type: Object},
+    "staff.name": {
+        type: String
+    },
+    "staff.id": {
+        type: String
+    },
     name: {type: String},
     phone: {type: String},
     address: {type: Object},

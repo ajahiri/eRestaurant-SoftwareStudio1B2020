@@ -8,9 +8,9 @@ import {
 import Header from "../ui/components/header";
 import HomePage from "../ui/pages/home/homeBody";
 import Booking from "../ui/pages/booking/booking";
+import Admin from "../ui/pages/admin/admin";
 
 // All routes should be defined here
-
 export default function App()  {
     return (
         <Router>
@@ -31,6 +31,10 @@ export default function App()  {
                     </Route>
                     <Route exact path="/contact">
                         <Header/>
+                    </Route>
+                    <Route exact path="/admin">
+                        <Header/>
+                        <Admin/>
                     </Route>
                 </Switch>
             </div>
