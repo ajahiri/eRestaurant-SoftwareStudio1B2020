@@ -21,9 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/bookings/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/branchs/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Branches.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/packages" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/release" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/release" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
@@ -84,6 +84,8 @@
       <workItem from="1587024522134" duration="3809000" />
       <workItem from="1587543299865" duration="6811000" />
       <workItem from="1587575282598" duration="3938000" />
+      <workItem from="1587632539979" duration="1322000" />
+      <workItem from="1587793167762" duration="4476000" />
     </task>
     <servers />
   </component>
@@ -100,6 +102,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="711" y="316" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586805270780">
@@ -123,9 +126,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586791500464" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586793425624">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2751" y="-19" width="896" height="913" key="search.everywhere.popup" timestamp="1587794680790">
+      <screen x="1920" y="-322" width="2560" height="1400" />
     </state>
+    <state x="2751" y="-19" width="896" height="913" key="search.everywhere.popup/0.0.1920.1040/1920.-322.2560.1400@1920.-322.2560.1400" timestamp="1587794680790" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586793425624" />
   </component>
 </project>
