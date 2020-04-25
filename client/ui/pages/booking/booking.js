@@ -7,8 +7,8 @@ import "./custom-table.scss";
 //import {Bookings} from "../../api/bookings/Bookings.js";
 
 class Booking extends React.Component {  
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
         available: true,
