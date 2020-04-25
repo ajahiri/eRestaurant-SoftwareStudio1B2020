@@ -11,7 +11,16 @@ Meteor.publish(null, function () {
     }
 })
 
+// Branches Publish, checks for user login and must be in admin group to get data.
+Meteor.publish('branches', function () {
+    if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(),'admin')) {
+        return Branches.find({});
+    } else {
+        return [];
+    }
+});
+
 Meteor.startup(() => {
-    Roles.createRole('admin');
-    Roles.addUsersToRoles("r2GgL4WpZRkuRg6Jn", ['admin']);
+    //Roles.createRole('admin');
+    Roles.addUsersToRoles("gB99P7WAaw6TrKynD", ['admin']);
 });

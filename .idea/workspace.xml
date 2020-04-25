@@ -21,10 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.meteor/packages" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.meteor/release" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/release" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Branches.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
@@ -47,6 +45,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="HbShouldOpenHtmlAsHb" value="enabled" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.meteor.library.cached" value="$PROJECT_DIR$/.meteor" />
@@ -55,7 +54,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -86,6 +85,7 @@
       <workItem from="1587575282598" duration="3938000" />
       <workItem from="1587632539979" duration="1322000" />
       <workItem from="1587793167762" duration="4476000" />
+      <workItem from="1587845129783" duration="6464000" />
     </task>
     <servers />
   </component>
@@ -122,10 +122,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586853440202" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1586791500464">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="977" y="359" width="1585" height="1198" key="SettingsEditor" timestamp="1587845267800">
+      <screen x="72" y="27" width="3768" height="2133" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586791500464" />
+    <state x="977" y="359" width="1585" height="1198" key="SettingsEditor/72.27.3768.2133@72.27.3768.2133" timestamp="1587845267800" />
     <state x="2751" y="-19" width="896" height="913" key="search.everywhere.popup" timestamp="1587794680790">
       <screen x="1920" y="-322" width="2560" height="1400" />
     </state>
