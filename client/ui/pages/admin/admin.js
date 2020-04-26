@@ -1,7 +1,9 @@
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
-import React from 'react';
+import React from "react";
 import AddNewBranch from "../../components/AddNewBranch";
+import StaffManagement from "../../components/StaffManagement";
+import {MDBContainer} from "mdbreact";
 
 class Admin extends React.Component {
     constructor(props) {
@@ -10,7 +12,10 @@ class Admin extends React.Component {
 
     render() {
         return (
-            <AddNewBranch/>
+            <MDBContainer>
+                <StaffManagement/>
+                <AddNewBranch/>
+            </MDBContainer>
         );
     }
 }

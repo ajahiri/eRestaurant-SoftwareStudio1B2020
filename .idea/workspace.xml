@@ -22,10 +22,7 @@
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/collections/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Branches.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +83,8 @@
       <workItem from="1587632539979" duration="1322000" />
       <workItem from="1587793167762" duration="4476000" />
       <workItem from="1587845129783" duration="6464000" />
+      <workItem from="1587891530239" duration="6019000" />
+      <workItem from="1587918626846" duration="8516000" />
     </task>
     <servers />
   </component>

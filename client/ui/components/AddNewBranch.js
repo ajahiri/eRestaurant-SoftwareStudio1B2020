@@ -32,7 +32,7 @@ class AddNewBranch extends React.Component {
     * */
     render() {
         return (
-            <MDBContainer>
+            <>
                 <MDBRow>
                     <MDBCol>
                         <h2>Branch Management</h2>
@@ -53,10 +53,8 @@ class AddNewBranch extends React.Component {
                         </MDBTable>
                     </MDBCol>
                 </MDBRow>
-
                 <AddBranchForm/>
-
-            </MDBContainer>
+            </>
         );
     }
 };
