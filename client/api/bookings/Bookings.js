@@ -8,10 +8,11 @@ Bookings.schema = new SimpleSchema({
     customerName: {type: String},
     email: {type: String},
     phone: {type: String},
-    GuestsNum: {type: String},
-    Date: {type: String},
-    Time: {type: String},
-    Completed: {type: Boolean},
-    Cancelled: {type: Boolean},
+    guestNum: {type: String},
+    date: {type: String},
+    time: {type: String},
+    payed: {type: Boolean},
+    concluded: {type: Boolean}, // Have the customers left the restaurant after dining. The staff member will check them out by changing this to true when the customers leave.
+    cancelled: {type: Boolean}, // Has the booking been cancelled?
     createdAt: {type: Date()},
 });
