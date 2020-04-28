@@ -52,8 +52,9 @@ class Booking extends React.Component {
     }
     handleSubmit() {
         const state = this.state;
+        const date = new Date(state.date).toDateString(); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May 
         Meteor.call('bookings.insert', state.branch, state.customerName, state.email, 
-            state.phone, state.guestNum, state.date, state.time,
+            state.phone, state.guestNum, date, state.time,
             function(error) {
                 console.log(error);
             }
@@ -216,7 +217,7 @@ class Booking extends React.Component {
 
     render() {
         //const date = this.state.date; 
-        const { date } = this.state;
+        const date = this.state.date;
         const defaultDateFormat = this.state.defaultDateFormat;
 
         const btnFour = this.state.btnFour;
@@ -269,8 +270,8 @@ class Booking extends React.Component {
                             className="form-control-lg" //sets input field font size to lg
                             value={date}
                             onChange={date => {
-                            this.setState({ date }); // return this.state.date for the selected Date String
-                            console.log(date);
+                            this.setState({ date: date }); // return this.state.date for the selected Date String
+                            console.log(date);  
                             }}
                             onOpen={() => {
                                 this.setState({ defaultDateFormat: "F j, Y" });
