@@ -1,4 +1,5 @@
 import { Mongo } from 'meteor/mongo';
+import SimpleSchema from 'simpl-schema';
 
 export const Bookings = new Mongo.Collection('bookings');
 
@@ -16,3 +17,15 @@ Bookings.schema = new SimpleSchema({
     cancelled: {type: Boolean}, // Has the booking been cancelled?
     createdAt: {type: Date()},
 });
+
+// const addBooking = () => /*props.Bookings.map( () => */ {
+//     Bookings.insert({
+//     branch: branch,
+//     customerName: customerName,
+//     email: email,
+//     phone: phone,
+//     guestNum: guestNum,
+//     date: date,
+//     time: time,
+//     });
+// }; //)

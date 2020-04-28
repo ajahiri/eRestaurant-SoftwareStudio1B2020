@@ -1,6 +1,7 @@
 import React from "react";
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
+import {Bookings} from '../../../api/bookings/Bookings.js'
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
 
@@ -31,11 +32,11 @@ class Booking extends React.Component {
         
         // START Booking Details Attributes
         customerName: '',
-        branch: null,
-        email: null,
-        phone: null,
-        guestNum: null,
-        time: null,
+        branch: '',
+        email: '',
+        phone: '',
+        guestNum: '',
+        time: '',
         date: new Date(),
         // END Booking Details Attributes
         defaultDateFormat: "\\Se\\lect \\Date...", //Workaround: Used to display placeholder in date picker input field.
@@ -46,7 +47,21 @@ class Booking extends React.Component {
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
         this.handleGuestNum = this.handleGuestNum.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+    handleSubmit() {
+        const state = this.state;
+        Bookings.insert({
+            branch: state.branch,
+            customerName: state.customerName,
+            email: state.email,
+            phone: state.phone,
+            guestNum: state.guestNum,
+            date: state.date,
+            time: state.time,
+            });
+    }
+
  // START handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     handleBtnSelect(event) {
         const selectedBtn = event.target.id; // id of the button that was clicked
@@ -221,7 +236,7 @@ class Booking extends React.Component {
         const btnTen_thirty = this.state.btnTen_thirty;
 
         return (
-            <form>
+            <form onSubmit={this.handleSubmit} >
                 <MDBContainer> 
                     <MDBRow>
                         <MDBTypography tag="h2" className="page-heading" >Create Booking</MDBTypography>
@@ -318,6 +333,7 @@ class Booking extends React.Component {
                     </MDBRow>
                     <MDBRow className='btn-confirm-padding'>
                     <MDBCol><MDBBtn color="indigo" size='lg' type='submit'>Confirm Booking</MDBBtn></MDBCol>
+                    <MDBCol><MDBBtn onClick={this.handleSubmit}>Test AddBooking</MDBBtn></MDBCol>
                     </MDBRow>
                 </MDBContainer>
             </form>
