@@ -21,15 +21,16 @@ Bookings.schema = new SimpleSchema({
 
 Meteor.methods({
     'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time) {
-        console.log("attempting to add branch");
+        console.log("attempting to add booking");
         Bookings.insert({
-            branch,
-            customerName,
-            email,
-            phone,
-            guestNum,
-            date,
-            time
+            branch: branch,
+            customerName: customerName,
+            email: email,
+            phone: phone,
+            guestNum: guestNum,
+            date: date,
+            time: time,
         });
+        console.log(Bookings.find().fetch());
     }
 });
