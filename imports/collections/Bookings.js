@@ -23,13 +23,13 @@ Meteor.methods({
     'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time) {
         console.log("attempting to add booking");
         Bookings.insert({
-            branch: branch,
-            customerName: customerName,
-            email: email,
-            phone: phone,
-            guestNum: guestNum,
-            date: date,
-            time: time,
+            branch,
+            customerName,
+            email,
+            phone,
+            guestNum,
+            date,
+            time,
         });
         console.log(Bookings.find().fetch());
     }

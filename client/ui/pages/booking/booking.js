@@ -215,7 +215,8 @@ class Booking extends React.Component {
     }
 
     render() {
-        const calendarDate = this.state.date; 
+        //const date = this.state.date; 
+        const { date } = this.state;
         const defaultDateFormat = this.state.defaultDateFormat;
 
         const btnFour = this.state.btnFour;
@@ -266,18 +267,19 @@ class Booking extends React.Component {
                         <MDBCol sm="4" md="4" lg="4" ><div className="md-form" > {/* this div changes the input field to the mdb input field */}
                         <Flatpickr
                             className="form-control-lg" //sets input field font size to lg
-                            value={calendarDate}
-                            onChange={calendarDate => {
-                            this.setState({ calendarDate }); // return this.state.date for the selected Date String
+                            value={date}
+                            onChange={date => {
+                            this.setState({ date }); // return this.state.date for the selected Date String
+                            console.log(date);
                             }}
                             onOpen={() => {
                                 this.setState({ defaultDateFormat: "F j, Y" });
                             }}  
                             onClose={() => {
                                 // Bug Fix: If backspace is used when input field is selected input field is blank
-                                if (calendarDate.length==0) {
+                                if (date.length==0) {
                                     this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." });
-                                    this.setState({ calendarDate: Date() }) //resets date to Date() -> returns todays date
+                                    this.setState({ date: Date() }) //resets date to Date() -> returns todays date
                                 }
                             }}
                             options={{
