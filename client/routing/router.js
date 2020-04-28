@@ -7,8 +7,7 @@ import {
 } from "react-router-dom";
 import Header from "../ui/components/header";
 import HomePage from "../ui/pages/home/homeBody";
-//import Booking from "../ui/pages/booking/booking";
-import Booking from "../api/bookings/booking-imports.js";
+import Booking from "../ui/pages/booking/booking";
 
 // All routes should be defined here
 

@@ -1,7 +1,7 @@
+import { Meteor } from 'meteor/meteor';
 import React from "react";
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
-import {Bookings} from '../../../api/bookings/Bookings.js'
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
 
@@ -51,15 +51,12 @@ class Booking extends React.Component {
     }
     handleSubmit() {
         const state = this.state;
-        Bookings.insert({
-            branch: state.branch,
-            customerName: state.customerName,
-            email: state.email,
-            phone: state.phone,
-            guestNum: state.guestNum,
-            date: state.date,
-            time: state.time,
-            });
+        Meteor.call('bookingsInsert', state.branch, state.customerName, state.email, 
+            state.phone, state.guestNum, state.date, state.time,
+            function(error) {
+                console.log(error);
+            }
+            );
     }
 
  // START handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

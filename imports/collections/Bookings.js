@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
@@ -18,14 +19,17 @@ Bookings.schema = new SimpleSchema({
     createdAt: {type: Date()},
 });
 
-// const addBooking = () => /*props.Bookings.map( () => */ {
-//     Bookings.insert({
-//     branch: branch,
-//     customerName: customerName,
-//     email: email,
-//     phone: phone,
-//     guestNum: guestNum,
-//     date: date,
-//     time: time,
-//     });
-// }; //)
+Meteor.methods({
+    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time) {
+        console.log("attempting to add branch");
+        Bookings.insert({
+            branch,
+            customerName,
+            email,
+            phone,
+            guestNum,
+            date,
+            time
+        });
+    }
+});
