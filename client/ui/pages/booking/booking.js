@@ -68,8 +68,8 @@ class Booking extends React.Component {
         const btnFour = this.state.btnFour;
         if(selectedBtn == '4:00') {
             if(btnFour == 'indigo') { //deselect: toggle between primary and indigo
-                this.setState({btnFour: 'primary'});
-                } else { this.setState({btnFour: 'indigo'}); }
+                this.setState({btnFour: 'primary', time: selectedBtn}); //selected
+                } else { this.setState({btnFour: 'indigo', time: ''}); } //deselected
         } else {
             this.setState({btnFour: 'indigo'}); //change all non-selected btns to indigo
         }
@@ -77,8 +77,8 @@ class Booking extends React.Component {
         const btnFour_thirty = this.state.btnFour_thirty;
         if(selectedBtn == '4:30') {
             if(btnFour_thirty == 'indigo') {
-                this.setState({btnFour_thirty: 'primary'});
-                } else { this.setState({btnFour_thirty: 'indigo'}); }
+                this.setState({btnFour_thirty: 'primary', time: selectedBtn});
+                } else { this.setState({btnFour_thirty: 'indigo', time: ''}); }
         } else {
             this.setState({btnFour_thirty: 'indigo'});
         }
@@ -86,8 +86,8 @@ class Booking extends React.Component {
         const btnFive = this.state.btnFive;
         if(selectedBtn == '5:00') {
             if(btnFive == 'indigo') {
-            this.setState({btnFive: 'primary'});
-            } else { this.setState({btnFive: 'indigo'}); }
+            this.setState({btnFive: 'primary', time: selectedBtn});
+            } else { this.setState({btnFive: 'indigo', time: ''}); }
         } else {
             this.setState({btnFive: 'indigo'});
         }
@@ -95,8 +95,8 @@ class Booking extends React.Component {
         const btnFive_thirty = this.state.btnFive_thirty;
         if(selectedBtn == '5:30') {
             if(btnFive_thirty == 'indigo') {
-                this.setState({btnFive_thirty: 'primary'});
-                } else { this.setState({btnFive_thirty: 'indigo'}); }
+                this.setState({btnFive_thirty: 'primary', time: selectedBtn});
+                } else { this.setState({btnFive_thirty: 'indigo', time: ''}); }
         } else {
             this.setState({btnFive_thirty: 'indigo'});
         }
@@ -104,8 +104,8 @@ class Booking extends React.Component {
         const btnSix = this.state.btnSix;
         if(selectedBtn == '6:00') {
             if(btnSix == 'indigo') {
-                this.setState({btnSix: 'primary'});
-                } else { this.setState({btnSix: 'indigo'}); }
+                this.setState({btnSix: 'primary', time: selectedBtn});
+                } else { this.setState({btnSix: 'indigo', time: ''}); }
         } else {
             this.setState({btnSix: 'indigo'});
         }
@@ -113,8 +113,8 @@ class Booking extends React.Component {
         const btnSix_thirty = this.state.btnSix_thirty;
         if(selectedBtn == '6:30') {
             if(btnSix_thirty == 'indigo') {
-                this.setState({btnSix_thirty: 'primary'});
-                } else { this.setState({btnSix_thirty: 'indigo'}); }
+                this.setState({btnSix_thirty: 'primary', time: selectedBtn});
+                } else { this.setState({btnSix_thirty: 'indigo', time: ''}); }
         } else {
             this.setState({btnSix_thirty: 'indigo'});
         }
@@ -122,8 +122,8 @@ class Booking extends React.Component {
         const btnSeven = this.state.btnSeven;
         if(selectedBtn == '7:00') {
             if(btnSeven == 'indigo') {
-                this.setState({btnSeven: 'primary'});
-                } else { this.setState({btnSeven: 'indigo'}); }
+                this.setState({btnSeven: 'primary', time: selectedBtn});
+                } else { this.setState({btnSeven: 'indigo', time: ''}); }
         } else {
             this.setState({btnSeven: 'indigo'});
         }
@@ -131,8 +131,8 @@ class Booking extends React.Component {
         const btnSeven_thirty = this.state.btnSeven_thirty;
         if(selectedBtn == '7:30') {
             if(btnSeven_thirty == 'indigo') {
-                this.setState({btnSeven_thirty: 'primary'});
-                } else { this.setState({btnSeven_thirty: 'indigo'}); }
+                this.setState({btnSeven_thirty: 'primary', time: selectedBtn});
+                } else { this.setState({btnSeven_thirty: 'indigo', time: ''}); }
         } else {
             this.setState({btnSeven_thirty: 'indigo'});
         }
@@ -140,8 +140,8 @@ class Booking extends React.Component {
         const btnEight = this.state.btnEight;
         if(selectedBtn == '8:00') {
             if(btnEight == 'indigo') {
-                this.setState({btnEight: 'primary'});
-                } else { this.setState({btnEight: 'indigo'}); }
+                this.setState({btnEight: 'primary', time: selectedBtn});
+                } else { this.setState({btnEight: 'indigo', time: ''}); }
         } else {
             this.setState({btnEight: 'indigo'});
         }
@@ -149,8 +149,8 @@ class Booking extends React.Component {
         const btnEight_thirty = this.state.btnEight_thirty;
         if(selectedBtn == '8:30') {
             if(btnEight_thirty == 'indigo') {
-                this.setState({btnEight_thirty: 'primary'});
-                } else { this.setState({btnEight_thirty: 'indigo'}); }
+                this.setState({btnEight_thirty: 'primary', time: selectedBtn});
+                } else { this.setState({btnEight_thirty: 'indigo', time: ''}); }
         } else {
             this.setState({btnEight_thirty: 'indigo'});
         }
@@ -158,8 +158,8 @@ class Booking extends React.Component {
         const btnNine = this.state.btnNine;
         if(selectedBtn == '9:00') {
             if(btnNine == 'indigo') {
-                this.setState({btnNine: 'primary'});
-                } else { this.setState({btnNine: 'indigo'}); }
+                this.setState({btnNine: 'primary', time: selectedBtn});
+                } else { this.setState({btnNine: 'indigo', time: ''}); }
         } else {
             this.setState({btnNine: 'indigo'});
         }
@@ -167,8 +167,8 @@ class Booking extends React.Component {
         const btnNine_thirty = this.state.btnNine_thirty;
         if(selectedBtn == '9:30') {
             if(btnNine_thirty == 'indigo') {
-                this.setState({btnNine_thirty: 'primary'});
-                } else { this.setState({btnNine_thirty: 'indigo'}); }
+                this.setState({btnNine_thirty: 'primary', time: selectedBtn});
+                } else { this.setState({btnNine_thirty: 'indigo', time: ''}); }
         } else {
             this.setState({btnNine_thirty: 'indigo'});
         }
@@ -176,8 +176,8 @@ class Booking extends React.Component {
         const btnTen = this.state.btnTen;
         if(selectedBtn == '10:00') {
             if(btnTen == 'indigo') {
-                this.setState({btnTen: 'primary'});
-                } else { this.setState({btnTen: 'indigo'}); }
+                this.setState({btnTen: 'primary', time: selectedBtn});
+                } else { this.setState({btnTen: 'indigo', time: ''}); }
         } else {
             this.setState({btnTen: 'indigo'});
         }
@@ -185,8 +185,8 @@ class Booking extends React.Component {
         const btnTen_thirty = this.state.btnTen_thirty;
         if(selectedBtn == '10:30') {
             if(btnTen_thirty == 'indigo') {
-                this.setState({btnTen_thirty: 'primary'});
-                } else { this.setState({btnTen_thirty: 'indigo'}); }
+                this.setState({btnTen_thirty: 'primary', time: selectedBtn});
+                } else { this.setState({btnTen_thirty: 'indigo', time: ''}); }
         } else {
             this.setState({btnTen_thirty: 'indigo'});
         }
@@ -298,11 +298,6 @@ class Booking extends React.Component {
                             <MDBCol sm="8" md="8" lg="8">
                                 <MDBTypography className="table-heading" tag="h5" >Time:</MDBTypography>
                                 <table className="time-selector">
-                                    {/* <thead>
-                                        <tr>
-                                            <th> <h5 className="table-heading">Time:</h5> </th>
-                                        </tr>   
-                                    </thead>  */}
                                     <tbody>
                                         <tr>
                                             <td><MDBBtn id='4:00' color={btnFour} onClick={this.handleBtnSelect} disabled>4:00</MDBBtn></td>
