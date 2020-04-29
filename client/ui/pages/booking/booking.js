@@ -39,6 +39,7 @@ class Booking extends React.Component {
         guestNum: '',
         time: '',
         date: new Date(),
+        specialRequest: '',
         // END Booking Details Attributes
         defaultDateFormat: "\\Se\\lect \\Date...", //Workaround: Used to display placeholder in date picker input field.
         };                                                    // altFormat is then set to the proper date format using the Flatpickr onOpen function.
@@ -48,13 +49,14 @@ class Booking extends React.Component {
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
         this.handleGuestNum = this.handleGuestNum.bind(this);
+        this.handleSpecialRequest = this.handleSpecialRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit() {
         const state = this.state;
         const date = new Date(state.date).toDateString(); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May 
         Meteor.call('bookings.insert', state.branch, state.customerName, state.email, 
-            state.phone, state.guestNum, date, state.time,
+            state.phone, state.guestNum, date, state.time, state.specialRequest,
             function(error) {
                 console.log(error);
             }
@@ -214,6 +216,9 @@ class Booking extends React.Component {
     handleGuestNum(event) {
         this.setState({guestNum: event.target.value});
     }
+    handleSpecialRequest(event) {
+        this.setState({specialRequest: event.target.value});
+    }
 
     render() {
         //const date = this.state.date; 
@@ -324,7 +329,7 @@ class Booking extends React.Component {
                     </MDBContainer>
                     <MDBRow center>
                         <MDBCol sm="8" md="8" lg="8" className="text-area-padding">
-                            <MDBInput type="textarea" label="Special Request" hint="Let us know if you have any special event requests!" outline size="lg" />
+                            <MDBInput type="textarea" label="Special Request" hint="Let us know if you have any special event requests!" outline size="lg" onChange={this.handleSpecialRequest}/>
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className='btn-confirm-padding'>

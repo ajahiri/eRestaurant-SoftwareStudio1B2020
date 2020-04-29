@@ -13,6 +13,7 @@ Bookings.schema = new SimpleSchema({
     guestNum: {type: String},
     date: {type: String},
     time: {type: String},
+    specialRequest: {type: String},
     payed: {type: Boolean},
     concluded: {type: Boolean}, // Have the customers left the restaurant after dining. The staff member will check them out by changing this to true when the customers leave.
     cancelled: {type: Boolean}, // Has the booking been cancelled?
@@ -20,7 +21,7 @@ Bookings.schema = new SimpleSchema({
 });
 
 Meteor.methods({
-    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time) {
+    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time, specialRequest) {
         console.log("attempting to add booking");
         Bookings.insert({
             branch,
@@ -30,6 +31,7 @@ Meteor.methods({
             guestNum,
             date,
             time,
+            specialRequest,
         });
         console.log(Bookings.find().fetch());
     }
