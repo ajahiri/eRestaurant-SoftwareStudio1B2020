@@ -1,11 +1,9 @@
-// Tables
 table {
     &.time-selector {
         display: block;
         overflow: scroll;
         overflow: auto;
         width: 100%;
-        padding-top: 15px;
         th,
         td {
             padding:0;
@@ -15,4 +13,13 @@ table {
 
 .table-heading {
     color: rgb(80, 80, 80);
+    padding-top: 15px;
+}
+
+.text-area-padding {
+    padding-top:20px;
+}
+
+.btn-confirm-padding {
+    padding-left:60px;
 }
