@@ -9,8 +9,8 @@ import '../../../main.scss';
 {/* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */}
 
 class Booking extends React.Component {  
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.firstName = '';
         this.lastName = '';

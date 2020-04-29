@@ -12,10 +12,10 @@ import LogIn from "./LogIn";
 class Header extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isOpen: false,
+        }
     }
-    state = {
-        isOpen: false
-    };
 
     toggleCollapse = () => {
         this.setState({
@@ -48,6 +48,10 @@ class Header extends React.Component {
                         <MDBNavItem>
                             <MDBNavLink to="/booking">Book</MDBNavLink>
                         </MDBNavItem>
+                        {this.props.isAdmin ?
+                            <MDBNavItem>
+                                <MDBNavLink to="/admin">Admin</MDBNavLink>
+                            </MDBNavItem> : <div></div>}
                     </MDBNavbarNav>
 
                     <MDBNavbarNav right>
@@ -71,5 +75,6 @@ class Header extends React.Component {
 export default withTracker(() => {
     return {
         currentUser: Meteor.user(),
+        isAdmin: Roles.userIsInRole(Meteor.userId(), ['admin']),
     }
 })(Header);
