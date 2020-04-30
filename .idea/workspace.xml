@@ -20,9 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/admin/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/AddStaffForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddStaffForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Branches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +38,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1a2L9V25S6rEirQihSZJIBqAYhu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -85,6 +98,7 @@
       <workItem from="1587845129783" duration="6464000" />
       <workItem from="1587891530239" duration="6019000" />
       <workItem from="1587918626846" duration="8516000" />
+      <workItem from="1588223289125" duration="22537000" />
     </task>
     <servers />
   </component>
@@ -109,10 +123,11 @@
     </state>
     <state x="-1209" y="634" key="#com.intellij.fileTypes.FileTypeChooser/-1920.324.1920.1020/0.0.2560.1400@-1920.324.1920.1020" timestamp="1586776048090" />
     <state x="711" y="316" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586805270780" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586804591941">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="3300" y="555" width="786" height="745" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588225740572">
+      <screen x="1920" y="0" width="3840" height="2160" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586804591941" />
+    <state x="3300" y="555" width="786" height="745" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.3840.2160/0.498.1920.1080@1920.0.3840.2160" timestamp="1588225740572" />
     <state x="3588" y="902" width="494" height="296" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1587576591041">
       <screen x="1920" y="0" width="3840" height="2160" />
     </state>
@@ -126,10 +141,11 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586791500464" />
     <state x="977" y="359" width="1585" height="1198" key="SettingsEditor/72.27.3768.2133@72.27.3768.2133" timestamp="1587845267800" />
-    <state x="2751" y="-19" width="896" height="913" key="search.everywhere.popup" timestamp="1587794680790">
-      <screen x="1920" y="-322" width="2560" height="1400" />
+    <state x="3167" y="467" width="1344" height="1409" key="search.everywhere.popup" timestamp="1588242944391">
+      <screen x="1920" y="0" width="3840" height="2160" />
     </state>
     <state x="2751" y="-19" width="896" height="913" key="search.everywhere.popup/0.0.1920.1040/1920.-322.2560.1400@1920.-322.2560.1400" timestamp="1587794680790" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586793425624" />
+    <state x="3167" y="467" width="1344" height="1409" key="search.everywhere.popup/1920.0.3840.2160/0.498.1920.1080@1920.0.3840.2160" timestamp="1588242944391" />
   </component>
 </project>

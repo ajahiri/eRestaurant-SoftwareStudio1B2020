@@ -20,6 +20,19 @@ class AddNewBranch extends React.Component {
                     <td>{branch._id}</td>
                     <td>{branch.name}</td>
                     <td>{branch.manager}</td>
+                    <td>
+                        {branch.staff ?
+                            <ul className="staffInBranchList">
+                                {branch.staff.map(staff => {
+                                    return (
+                                        <li key={staff.name + staff.role}>{staff.name} | {staff.role}</li>
+                                    );
+                                })}
+                            </ul>
+                            :
+                            <p>No Staff</p>
+                        }
+                    </td>
                     <td>{branch.phone}</td>
                     <td>{addressNice}</td>
                 </tr>
@@ -43,6 +56,7 @@ class AddNewBranch extends React.Component {
                                     <th>#id</th>
                                     <th>Name</th>
                                     <th>Manager</th>
+                                    <th>Staff</th>
                                     <th>Phone</th>
                                     <th>Address</th>
                                 </tr>
