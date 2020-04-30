@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Bookings } from '../imports/collections/Bookings.js';
 import { Accounts } from 'meteor/accounts-base';
 import {Branches} from "../imports/collections/Branches";
 
