@@ -23,5 +23,5 @@ Meteor.publish('branches', function () {
 
 Meteor.startup(() => {
     //Roles.createRole('admin');
-    Roles.addUsersToRoles("gB99P7WAaw6TrKynD", ['admin']);
+    //Roles.addUsersToRoles("gB99P7WAaw6TrKynD", ['admin']);
 });
