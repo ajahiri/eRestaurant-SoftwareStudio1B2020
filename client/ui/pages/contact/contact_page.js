@@ -6,7 +6,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBBtn, MD
 class ContactPage extends React.Component {
     render() {
         return (
-            <MDBContainer fluid>
+            <MDBContainer >
                 <section className="contact-section my-5">
                     <h2 className="h1-responsive font-weight-bold text-center my-5">
                         Contact us
@@ -90,15 +90,16 @@ class ContactPage extends React.Component {
                                     <h3 className="my-4 pb-2">Contact information</h3>
                                     <ul className="text-lg-left list-unstyled ml-4">
                                         <li>
+                                            
                                             <p>
                                                 <MDBIcon icon="map-marker-alt" className="pr-2" />
-                                                New York, 94126 USA
+                                                Church street, Parramatta, NSW 2156
                                             </p>
                                         </li>
                                         <li>
                                             <p>
                                                 <MDBIcon icon="phone" className="pr-2" />
-                                                + 01 234 567 89
+                                                + 02 234 567 89
                                                 </p>
                                         </li>
                                         <li>

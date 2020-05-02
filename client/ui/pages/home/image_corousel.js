@@ -14,13 +14,13 @@ const ImageCorousel = () => {
 
         <div id="couresel">
             <div className="w-100 p3 h-25">
-                <MDBCarousel activeItem={1} length={3} showControls={true} showIndicators={true} className="z-depth-1" >
+                <MDBCarousel activeItem={1} length={3} showControls={true} showIndicators={true} className="z-depth-2" >
                     <MDBCarouselInner >
-                        <MDBCarouselItem itemId="1" >
+                        <MDBCarouselItem itemId="1" height="400px">
                             <MDBView hover zoom >
                                 <img
-                                    className="d-block w-100"
-                                    src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"
+                                    className="d-block w-100" height="400px"
+                                    src="https://mdbootstrap.com/img/Others/documentation/img%20(136)-mini.jpg"
                                     alt="First slide" />
                                 <MDBMask overlay="black-strong" />
                             </MDBView>
@@ -30,12 +30,13 @@ const ImageCorousel = () => {
                             </MDBCarouselCaption>
                         </MDBCarouselItem>
 
-                        <MDBCarouselItem itemId="2" >
+                        <MDBCarouselItem itemId="2" height="400px">
                             <MDBView hover zoom>
                                 <img
-                                    className="d-block w-100"
+                                    className="d-block w-100" height="400px"
                                     src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"
-                                    //I tried this and it doesnt work src="../../../../public/images/chefs.jpg"
+                                    //I tried this and it doesnt work src="../../../../public/images/r-bg.jpg" 
+                                    //and I also tried src="require('../../../../public/images/r-bg.jpg')"
 
                                     alt="Second slide"
                                 />
@@ -48,10 +49,10 @@ const ImageCorousel = () => {
                         </MDBCarouselItem>
 
 
-                        <MDBCarouselItem itemId="3" >
+                        <MDBCarouselItem itemId="3" height="400px">
                             <MDBView hover zoom >
                                 <img
-                                    className="d-block w-100"
+                                    className="d-block w-100" height="400px"
                                     src="https://mdbootstrap.com/img/Photos/Slides/img%20(35).jpg"
                                     alt="Third slide"
                                 />

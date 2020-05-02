@@ -17,17 +17,17 @@ const HomePage = () => {
         <div>
             <main role="main" className="inner cover">
 
-                <ImageCorousel /> {/* not sure how to chnage the Height :( */}
+                <ImageCorousel /> 
 
                 <br></br>
 
                 <MDBContainer fluid>
-                    <hr className="w-responsive mb-2" />
+                    <hr className="w-responsive mb-2" color="black" />
 
                     <div className="w-responsive text-left mx-auto p-3 mt-2 " >
                         <h3> Find your Table for any Occasion</h3>
                     </div>
-                    <hr className="w-responsive mb-2" />
+                    <hr className="w-responsive mb-2" color="black"/>
                 </MDBContainer>
 
 
