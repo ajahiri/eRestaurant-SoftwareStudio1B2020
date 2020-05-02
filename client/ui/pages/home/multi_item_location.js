@@ -39,7 +39,7 @@ const MultiItemlLocations = () => {
 
                                 <MDBCol md="4">
                                     <MDBCard className="mb-2" style={{ width: "22rem" }}>
-                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" />
+                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"/>
                                         <MDBCardBody>
                                             <MDBCardTitle>Sapori Unici Marrickville</MDBCardTitle>
                                             <MDBCardText>
