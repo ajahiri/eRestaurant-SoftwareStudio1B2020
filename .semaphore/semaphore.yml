@@ -15,9 +15,9 @@ blocks:
             - meteor npm i
             - pwd
             - ls
-            - export METEOR_SESSION_FILE=~/deployment_token.json
+            - export METEOR_SESSION_FILE=./deployment_token.json
             - export DEPLOY_HOSTNAME=ap-southeast-2.galaxy.meteor.com
-            - meteor deploy erestaurant.arianjahiri.com --settings ~/settings.json
+            - meteor deploy erestaurant.arianjahiri.com --settings ./settings.json
       prologue:
         commands:
           - 'curl https://install.meteor.com/ | sh'
