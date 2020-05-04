@@ -11,15 +11,15 @@ blocks:
         - name: Initialise and Deploy
           commands:
             - checkout
-            - meteor npm install
-            - meteor login
-            - arianj
-            - METEORPASSWD
-            - DEPLOY_HOSTNAME=ap-southeast-2.galaxy.meteor.com meteor deploy erestaurant.arianjahiri.com --settings settings.json
+            - meteor --version
+            - meteor npm i
+            - export METEOR_SESSION_FILE=deployment_token.json
+            - export DEPLOY_HOSTNAME=ap-southeast-2.galaxy.meteor.com
+            - meteor deploy erestaurant.arianjahiri.com --settings settings.json
       prologue:
         commands:
           - 'curl https://install.meteor.com/ | sh'
       secrets:
         - name: Settings File
-        - name: Meteor Acc Psswd
+        - name: Deploy Token
     dependencies: []
