@@ -20,15 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/AddStaffForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddStaffForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/collections/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Branches.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,6 +94,8 @@
       <workItem from="1587891530239" duration="6019000" />
       <workItem from="1587918626846" duration="8516000" />
       <workItem from="1588223289125" duration="22537000" />
+      <workItem from="1588566761513" duration="18000" />
+      <workItem from="1588566795086" duration="6538000" />
     </task>
     <servers />
   </component>

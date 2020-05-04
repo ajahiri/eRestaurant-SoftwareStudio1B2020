@@ -58,9 +58,11 @@ class Booking extends React.Component {
         Meteor.call('bookings.insert', state.branch, state.customerName, state.email, 
             state.phone, state.guestNum, date, state.time, state.specialRequest,
             function(error) {
-                console.log(error);
+                if (error) {
+                    console.log(error);
+                }
             }
-            );
+        );
     }
 
  // START handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
