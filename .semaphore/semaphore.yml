@@ -22,6 +22,5 @@ blocks:
         commands:
           - 'curl https://install.meteor.com/ | sh'
       secrets:
-        - name: Settings File
-        - name: Deploy Token
+        - name: Deploy Files
     dependencies: []
