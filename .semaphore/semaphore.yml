@@ -5,19 +5,17 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: Checkout and Setup
+  - name: 'Checkout, Install Meteor and Deploy'
     task:
       jobs:
-        - name: Initialise Environment
+        - name: Initialise and Deploy
           commands:
             - checkout
             - meteor npm install
+            - DEPLOY_HOSTNAME=ap-southeast-2.galaxy.meteor.com meteor deploy erestaurant.arianjahiri.com --settings settings.json
       prologue:
         commands:
           - 'curl https://install.meteor.com/ | sh'
-  - name: Deploy to Galaxy
-    task:
-      jobs:
-        - name: Deploy using Meteor
-          commands:
-            - DEPLOY_HOSTNAME=ap-southeast-2.galaxy.meteor.com meteor deploy erestaurant.arianjahiri.com --settings settings.json
+      secrets:
+        - name: Settings File
+    dependencies: []
