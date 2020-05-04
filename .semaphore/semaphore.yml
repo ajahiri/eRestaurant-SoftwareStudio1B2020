@@ -13,7 +13,9 @@ blocks:
             - checkout
             - meteor --version
             - meteor npm i
-            - export METEOR_SESSION_FILE=deployment_token.json
+            - pwd
+            - ls
+            - export METEOR_SESSION_FILE=/home/semaphore/deployment_token.json
             - export DEPLOY_HOSTNAME=ap-southeast-2.galaxy.meteor.com
             - meteor deploy erestaurant.arianjahiri.com --settings settings.json
       prologue:
