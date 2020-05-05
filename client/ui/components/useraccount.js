@@ -9,7 +9,7 @@ class UserAcount extends React.Component {
     constructor(props) {
         super(props);
         //state
-        this.state = {fullname: '', passwordlabel: "Please Choose New Password", phone: "",oldpassword: "", newpassword: ""};
+        this.state = {fullname: '', passwordlabel: "Change Password Field Only if you want to update it", phone: "",oldpassword: "", newpassword: ""};
         //methods
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +39,7 @@ class UserAcount extends React.Component {
             if(name == 'phone')
                 phonechanged = true;
 
-            if(name == "newpassword")
+            if(name == "oldpassword")
             {
                 changepassword = true;
             }
@@ -109,28 +109,18 @@ class UserAcount extends React.Component {
             console.log(this.state.newpassword);
             if(changepassword)
             {
-                Accounts.changePassword(this.state.oldpassword, this.state.newpassword, function (e, r) {
+                Accounts.changePassword(this.state.oldpassword, this.state.newpassword,  (e) => {
                     if (e) {
-                        console.log(e.reason);
+                        console.log(e);
+                        this.setState({passwordlabel: e.reason});
                     } else {
-                        // success
+                        this.setState({passwordlabel: "success"});
                     }
                 });
-                changepassword = false;
             }
             
             event.preventDefault();
           }
-          forgetPassword = () => {
-            let email = this.refs.email.value;
-            Accounts.forgotPassword({email: email}, function (e, r) {
-                if (e) {
-                    console.log(e.reason);
-                } else {
-                    // success
-                }
-            }); 
-        }
           
 
           //this.setState({name: Meteor.user().profile.name});
@@ -176,7 +166,7 @@ class UserAcount extends React.Component {
             <MDBRow left>
                 <MDBCol  className="form-inline" sm="12">
                     <MDBCol sm="6" md="4">
-                    <span className="font-weight-bold"><strong className="badge badge-danger text-wrap ">Change Password: {this.state.oldpassword} {this.state.newpassword} </strong></span>
+                    <span className="font-weight-bold" style={{fontSize: 'large'}}><strong className="badge badge-danger text-wrap ">Change Password:</strong></span>
                     </MDBCol>
                     <MDBCol  sm="6" md="4">
                         <MDBInput label="Old Password" size="lg" name='oldpassword' type="password" onChange={this.handleChange} />
@@ -184,8 +174,8 @@ class UserAcount extends React.Component {
                     <MDBCol  sm="6" md="4">
                         <MDBInput label="New Password" size="lg" name='newpassword' type="password" onChange={this.handleChange} />
                     </MDBCol>
-                    <MDBCol sm="6" md="12">
-                        <span>{this.state.passwordlabel}</span>
+                    <MDBCol center sm="6" md="12">
+                        <span className="badge badge-danger text-capitalize font-weight-bold text-wrap" style={{fontSize: 'large'}}>{this.state.passwordlabel}</span>
                     </MDBCol>
                 </MDBCol>
             </MDBRow>
