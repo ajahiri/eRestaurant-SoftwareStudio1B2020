@@ -133,7 +133,7 @@ class UserAcount extends React.Component {
     <MDBContainer>
         <form onSubmit={this.handleSubmit} >
             <MDBRow center>
-            <MDBTypography tag="h2" className="page-heading" >Welcome to Account details User {Meteor.user().profile.name}</MDBTypography>
+            <MDBTypography tag="h2" className="page-heading" >Welcome to Account details {Meteor.user().profile.name}</MDBTypography>
             </MDBRow>
             <MDBRow left>
             <MDBCol className="form-inline" sm="12">
@@ -191,7 +191,11 @@ class UserAcount extends React.Component {
             
             );
         else
-            return <div>hi</div>;
+            return( 
+        <MDBCol center sm="6" md="12">
+            <span className="badge badge-danger text-capitalize font-weight-bold text-wrap" style={{fontSize: 'xxx-large'}}>You Must Be Logged In TO View This Page</span>
+        </MDBCol>
+        );
     }
 };
 
