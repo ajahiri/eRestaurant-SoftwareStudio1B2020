@@ -27,6 +27,7 @@ class Header extends React.Component {
         Meteor.logout();
     }
 
+
     render() {
         return (
             <MDBNavbar className='navBar' color="indigo" dark expand="md">
@@ -36,30 +37,47 @@ class Header extends React.Component {
                 <MDBNavbarToggler onClick={this.toggleCollapse} />
                 <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                     <MDBNavbarNav left>
+                        
                         <MDBNavItem>
                             <MDBNavLink to="/">Home</MDBNavLink>
                         </MDBNavItem>
+                        
                         <MDBNavItem>
                             <MDBNavLink to="/contact">Contact</MDBNavLink>
                         </MDBNavItem>
+                        
                         <MDBNavItem>
                             <MDBNavLink to="/about">About</MDBNavLink>
                         </MDBNavItem>
+
                         <MDBNavItem>
                             <MDBNavLink to="/booking">Book</MDBNavLink>
                         </MDBNavItem>
-                        {this.props.isAdmin ?
+                        
+                        {
+                            this.props.isAdmin ?
                             <MDBNavItem>
                                 <MDBNavLink to="/admin">Admin</MDBNavLink>
-                            </MDBNavItem> : <div></div>}
+                            </MDBNavItem> : <div></div>
+                        }
+
+                        
+                    
                     </MDBNavbarNav>
 
                     <MDBNavbarNav right>
+                    {this.props.currentUser ?
+                            <MDBNavItem>
+                                <MDBNavLink to="/manageaccount">Manage Account</MDBNavLink>
+                            </MDBNavItem>
+                            : null }
+
                         {this.props.currentUser ?
                             <MDBNavItem>
-                                <span className="navWelcomeText navbar-text white-text">Welcome, {this.props.currentUser.profile.name}!   </span>
+                                <span className="navWelcomeText navbar-text white-text">Welcome, {this.props.currentUser.profile.name}! {console.log(this.props)}   </span>
                             </MDBNavItem>
                             : <LogIn/>}
+                            
                         {this.props.currentUser ?
                             <MDBNavItem>
                                 <a className="navbar-text white-text" onClick={this.logout}>Logout</a>

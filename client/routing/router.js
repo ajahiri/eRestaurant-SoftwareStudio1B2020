@@ -11,6 +11,7 @@ import FooterPage from "../ui/pages/home/footer_page";
 import ContactPage from "../ui/pages/contact/contact_page";
 import Booking from "../ui/pages/booking/booking";
 import Admin from "../ui/pages/admin/admin";
+import ManageAccount from "../ui/pages/manageaccount/manageaccount";
 
 // All routes should be defined here
 export default function App() {
@@ -39,6 +40,11 @@ export default function App() {
                     <Route exact path="/admin">
                         <Header />
                         <Admin />
+                    </Route>
+                    <Route exact path="/manageaccount">
+                        <Header />
+                        <ManageAccount />
+                        <FooterPage /> 
                     </Route>
                 </Switch>
             </div>
