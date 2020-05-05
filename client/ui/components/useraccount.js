@@ -53,15 +53,15 @@ class UserAcount extends React.Component {
     <MDBContainer>
         <form onSubmit={this.handleSubmit} >
             <MDBRow center>
-            <MDBTypography tag="h2 " className="page-heading " >Welcome to Account details User {Meteor.user().profile.name}</MDBTypography>
+            <MDBTypography tag="h2" className="page-heading" >Welcome to Account details User {Meteor.user().profile.name}</MDBTypography>
             </MDBRow>
             <MDBRow left>
             <MDBCol className="form-inline" sm="12">
                 <MDBCol sm="6" md="3">
-                    <span className="font-weight-bold "><strong className="badge badge-primary text-wrap ">Name:</strong> {Meteor.user().profile.name}</span>
+                    <span className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Name:</strong> {Meteor.user().profile.name}</span>
                 </MDBCol>
                 <MDBCol sm="6" md="3">
-                    <MDBInput label="Full Name " size="lg " name='fullname' type="text" onChange={this.handleChange} />
+                    <MDBInput label="Full Name" size="lg" name='fullname' type="text" onChange={this.handleChange} />
                 </MDBCol>
                 <MDBCol sm="6">
                     {namechanged ? <span>Change Fullname to {this.state.fullname}</span> : <span></span>}
