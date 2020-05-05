@@ -1,7 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
-import {MDBContainer} from "mdbreact";
+import {MDBContainer, MDBCol} from "mdbreact";
 import UserAcount from "../../components/useraccount";
 
 class ManageAccount extends React.Component {
@@ -10,11 +10,20 @@ class ManageAccount extends React.Component {
     }
 
     render() {
-        return (
-            <MDBContainer>
-                <UserAcount />
-            </MDBContainer>
+        if(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) )
+        { 
+            return (
+                <MDBContainer>
+                    <UserAcount />
+                </MDBContainer>
+            );
+        }else{ 
+            return( 
+        <MDBCol center sm="6" md="12">
+            <span className="badge badge-danger text-capitalize font-weight-bold text-wrap" style={{fontSize: 'xxx-large'}}>You Must Be Logged In TO View This Page</span>
+        </MDBCol>
         );
+        }
     }
 }
 
