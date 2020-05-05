@@ -24,6 +24,7 @@ class Admin extends React.Component {
         <MDBContainer> 
             <MDBCol center sm="6" md="12">
                 <span className="badge badge-danger text-capitalize font-weight-bold text-wrap" style={{fontSize: 'xxx-large'}}>You Must Be Admin and Logged In TO View This Page</span>
+                <span className="badge badge-primary text-capitalize font-weight-bold text-wrap" style={{fontSize: 'xxx-large'}}>Please Go to Main Page</span>
             </MDBCol>
         </MDBContainer>
         );
