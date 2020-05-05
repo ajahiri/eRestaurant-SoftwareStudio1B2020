@@ -1,15 +1,15 @@
 import React from 'react';
 import {withTracker} from "meteor/react-meteor-data";
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn,} from  "mdbreact";
-import { useCurrentUser } from 'react-meteor-hooks';
+import { Accounts } from 'meteor/accounts-base';
 
 
-var namechanged = false, addresschanged = false, emailchanged = false, phonechanged = false ;
+var namechanged = false, addresschanged = false, emailchanged = false, phonechanged = false, changepassword = false ;
 class UserAcount extends React.Component {
     constructor(props) {
         super(props);
         //state
-        this.state = {fullname: '', email: "",address: "", phone: ""};
+        this.state = {fullname: '', email: "",address: "", phone: "",oldpassword: "", newpassword: ""};
         //methods
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,9 +36,24 @@ class UserAcount extends React.Component {
 
         }
         
-          handleSubmit(event) {
-            Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.name": this.state.fullname}});
-            Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.phone": this.state.phone}});
+          handleSubmit(event) 
+          {
+            if(namechanged)
+            {
+                Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.name": this.state.fullname}});
+                namechanged = false;
+            }
+            if(phonechanged)
+            {
+                Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.phone": this.state.phone}});
+                phonechanged = false;
+            }
+            if(changepassword)
+            {
+                    Accounts.changePassword(oldPassword, newPassword, [callback])
+                    changepassword = false;
+            }
+            
             event.preventDefault();
           }
           
@@ -69,6 +84,19 @@ class UserAcount extends React.Component {
             </MDBCol>
             </MDBRow>
             
+            <MDBRow left>
+                <MDBCol  className="form-inline" sm="12">
+                    <MDBCol sm="6" md="3">
+                    <span className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Phone: </strong> {Meteor.user().profile.phone}</span>
+                    </MDBCol>
+                    <MDBCol sm="6" md="3">
+                        <MDBInput label="PhoneNumber" size="lg" name='phone' type="number" onChange={this.handleChange} />
+                    </MDBCol>
+                    <MDBCol sm="6" md="3">
+                        {phonechanged ? <span>Change Phone Number to {this.state.phone}</span> : <span></span>}
+                    </MDBCol>
+                </MDBCol>
+            </MDBRow>
             <MDBRow left>
                 <MDBCol  className="form-inline" sm="12">
                     <MDBCol sm="6" md="3">
