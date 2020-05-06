@@ -10,7 +10,7 @@ class ManageAccount extends React.Component {
     }
 
     render() {
-        if(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin']) )
+        if(Meteor.userId() )
         { 
             return (
                 <MDBContainer>
