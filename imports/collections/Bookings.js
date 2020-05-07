@@ -38,7 +38,4 @@ Meteor.methods({
         });
         console.log(Bookings.find().fetch());
     },
-    'bookings.get': function() {
-        console.log(Bookings.find().fetch());
-    }
 });

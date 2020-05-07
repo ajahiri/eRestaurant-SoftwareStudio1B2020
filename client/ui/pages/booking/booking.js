@@ -1,7 +1,10 @@
 import { Meteor } from 'meteor/meteor';
+import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
+import Select from 'react-select';
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
+import CustomDropdown from '../../components/CustomDropdown.js';
 import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
 import "./custom-flatpickr-theme.css";
@@ -226,14 +229,8 @@ class Booking extends React.Component {
     }
 
     handleBtnTest(event) {
-        const branchList = Meteor.call('getBranches.Names',
-            function(error){
-                if(error){
-                    console.log(error);
-                }
-            }
-        );
-        console.log(branchList);
+        const test = this.props.branches.map( (branch) => { return branch.name})
+        console.log(test);
     }   
 
     render() {
@@ -275,11 +272,17 @@ class Booking extends React.Component {
                                     Select Restaurant Location...
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu right basic>
-                                    <MDBDropdownItem>Test</MDBDropdownItem>
+                                    <MDBDropdownItem> </MDBDropdownItem>
                                     <MDBDropdownItem>Example Branch 1</MDBDropdownItem>
                                     <MDBDropdownItem>Example Branch 3</MDBDropdownItem>
                                 </MDBDropdownMenu>
                             </MDBDropdown>
+
+                            <CustomDropdown 
+                            label = "Branches"
+                            type = "text"
+                            options={ this.props.branch_names }/>
+                            
                     </MDBRow>
                     <MDBRow center>
                         <MDBCol sm="4" md="4" lg="4"><MDBInput type="number" label="Number of Guests" size="lg" hint="0" onChange={this.handleGuestNum} /></MDBCol>
@@ -357,4 +360,10 @@ class Booking extends React.Component {
     }
 }
 
-export default Booking;
+export default withTracker(() => {
+    Meteor.subscribe('branches');
+    Meteor.subscribe('branch_names');
+    return {
+        branches: Branches.find()
+    }
+})(Booking);

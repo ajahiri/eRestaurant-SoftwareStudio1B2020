@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bookings } from '../imports/collections/Bookings.js';
 import { Accounts } from 'meteor/accounts-base';
 import {Branches} from "../imports/collections/Branches";
+import { branchNames } from '../imports/collections/branchNames.js';
 
 //This publish is needed for the alanning:roles to work with client
 Meteor.publish(null, function () {
@@ -21,9 +22,19 @@ Meteor.publish('branches', function () {
     }
 });
 
+Meteor.publish('branch_names', function () {
+    Branches.find().map( (branch) => {  //fills the branchNames collection with the names and id's of each branch
+    Meteor.call('branchNames.fill', branch._id, branch.name);
+    });
+    return branchNames.find({});
+
+});
+
 Meteor.startup(() => {
+
     Roles.createRole('admin', {unlessExists: true});
     Roles.createRole('staff', {unlessExists: true});
     Roles.createRole('manager', {unlessExists: true});
 
+    
 });
