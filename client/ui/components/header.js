@@ -28,9 +28,6 @@ class Header extends React.Component {
         Meteor.logout();
     }
 
-   
-
-
     render() {
         return (
             <MDBNavbar className='navBar' color="indigo" dark expand="md">
@@ -60,7 +57,12 @@ class Header extends React.Component {
                         <MDBNavItem>
                             <MDBNavLink to="/cart">Cart <MDBIcon icon="shopping-cart" /> </MDBNavLink>
                         </MDBNavItem>
-                        
+                        {
+                            this.props.isStaff || this.props.isManager  ?
+                                <MDBNavItem>
+                                    <MDBNavLink to="/staff_dashboard">Dashboard </MDBNavLink>
+                                </MDBNavItem> : <div></div>
+                        }
                         {
                             this.props.isAdmin ?
                             <MDBNavItem>
@@ -68,8 +70,6 @@ class Header extends React.Component {
                             </MDBNavItem> : <div></div>
                         }
 
-                        
-                    
                     </MDBNavbarNav>
 
                     <MDBNavbarNav right>
@@ -85,20 +85,17 @@ class Header extends React.Component {
                             </MDBNavItem>
                             : <LogIn/>}
                             
-                        {this.props.currentUser ?
+                        {
+                            this.props.currentUser ?
                             <MDBNavItem>
                                 <a className="navbar-text white-text" onClick={this.logout}>Logout</a>
                             </MDBNavItem>
-                            : <SignUp />}
+                            : <SignUp />
+                        }
                         
                     </MDBNavbarNav>
-
-                    
                 </MDBCollapse>
             </MDBNavbar>
-
-            
-
         );
     }
 }
@@ -107,5 +104,7 @@ export default withTracker(() => {
     return {
         currentUser: Meteor.user(),
         isAdmin: Roles.userIsInRole(Meteor.userId(), ['admin']),
+        isManager: Roles.userIsInRole(Meteor.userId(), ['manager']),
+        isStaff: Roles.userIsInRole(Meteor.userId(), ['staff'])
     }
 })(Header);
