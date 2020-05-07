@@ -4,12 +4,13 @@
     "\\client",
     "\\client\\routing",
     "\\client\\ui",
-    "\\client\\ui\\components",
     "\\client\\ui\\pages",
+    "\\client\\ui\\pages\\foodmenu",
+    "\\client\\ui\\pages\\home",
     "\\client\\ui\\pages\\manageaccount",
     "\\imports",
     "\\server"
   ],
-  "SelectedNode": "\\server\\main.js",
+  "SelectedNode": "\\client\\ui\\pages\\foodmenu\\menu_items.js",
   "PreviewInSolutionExplorer": false
 }

@@ -29,23 +29,8 @@ class MenuPage extends React.Component {
                             </MDBCardBody>
                         </MDBCard>
                         
-
-                        
-                            
-                      
-                        
-
-                        <br/>
-
                     </MDBContainer>
-
-
                 </main>
-
-
-                <br></br>
-
-
             </div >
 
         );

@@ -30,7 +30,8 @@ export default function App() {
                     </Route>
                     <Route exact path="/about">
                         <Header />
-                        <MenuPage/>
+                        <MenuPage />
+                        <FooterPage/>
                     </Route>
                     <Route exact path="/cart">
                         <Header />
