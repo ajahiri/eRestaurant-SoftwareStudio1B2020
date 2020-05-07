@@ -50,7 +50,7 @@ class Header extends React.Component {
                         </MDBNavItem>
                         
                         <MDBNavItem>
-                            <MDBNavLink to="/about">About</MDBNavLink>
+                            <MDBNavLink to="/about">Menu</MDBNavLink>
                         </MDBNavItem>
 
                         <MDBNavItem>
