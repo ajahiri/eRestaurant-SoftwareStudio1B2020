@@ -45,7 +45,7 @@ Branches.schema = new SimpleSchema({
 if (Meteor.isServer) {
     Meteor.methods({
         'branches.insert': function(bName, bManager, bPhone, bAddress) {
-            console.log("attempting to add branch");
+            //DEBUG console.log("attempting to add branch");
             if (this.userId) {
                 if (Roles.userIsInRole(this.userId,'admin')) {
                     Branches.insert({
@@ -53,7 +53,7 @@ if (Meteor.isServer) {
                         manager: bManager,
                         phone: bPhone,
                         address: bAddress,
-                        staff: [{}]
+                        staff: []
                     });
                 } else {
                     throw new Meteor.Error('Insufficient permissions', "Must be of role 'ADMIN'");
@@ -67,6 +67,13 @@ if (Meteor.isServer) {
                 throw new Meteor.Error('Not logged in', "Must be logged in");
             } else if (!Roles.userIsInRole(this.userId,'admin')) {
                 throw new Meteor.Error('Insufficient permissions', "Must be of role 'ADMIN'");
+            }
+            //This next if block checks if managers (THAT ARE NOT ADMINS) have are assigning to their own branch.
+            //Managers should not be able to assign staff to a different branch than theirs.
+            if (Roles.userIsInRole(this.userId,'manager') && this.user.assignedBranch) {
+                if (!this.user.assignedBranch === branchID && !Roles.userIsInRole(this.userId,'admin')) {
+                    throw new Meteor.Error('Insufficient permissions', "Managers can only assign to their own branch.");
+                }
             }
             if (Branches.find({_id: branchID}).count() === 0) {
                 throw new Meteor.Error('Branch not found!', "Branch could not be found");

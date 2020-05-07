@@ -81,7 +81,7 @@ class Header extends React.Component {
 
                         {this.props.currentUser ?
                             <MDBNavItem>
-                                <span className="navWelcomeText navbar-text white-text">Welcome, {this.props.currentUser.profile.name}! {console.log(this.props)}   </span>
+                                <span className="navWelcomeText navbar-text white-text">Welcome, {this.props.currentUser.profile.name}!   </span>
                             </MDBNavItem>
                             : <LogIn/>}
                             

@@ -21,12 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/routing/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/routing/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/AddStaffForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddStaffForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/manageaccount/manageaccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/manageaccount/manageaccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Branches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +99,7 @@
       <workItem from="1588566761513" duration="18000" />
       <workItem from="1588566795086" duration="6538000" />
       <workItem from="1588860595533" duration="758000" />
-      <workItem from="1588865165396" duration="3591000" />
+      <workItem from="1588865165396" duration="8581000" />
     </task>
     <servers />
   </component>
