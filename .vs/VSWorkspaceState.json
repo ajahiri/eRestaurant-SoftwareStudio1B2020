@@ -4,10 +4,12 @@
     "\\client",
     "\\client\\routing",
     "\\client\\ui",
+    "\\client\\ui\\components",
     "\\client\\ui\\pages",
-    "\\client\\ui\\pages\\contact",
-    "\\client\\ui\\pages\\home"
+    "\\client\\ui\\pages\\manageaccount",
+    "\\imports",
+    "\\server"
   ],
-  "SelectedNode": "\\client\\ui\\pages\\home\\homepage.scss",
+  "SelectedNode": "\\server\\main.js",
   "PreviewInSolutionExplorer": false
 }

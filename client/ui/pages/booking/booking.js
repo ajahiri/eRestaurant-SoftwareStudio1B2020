@@ -12,6 +12,7 @@ class Booking extends React.Component {
     constructor(props) {
         super(props);
 
+        
         this.firstName = '';
         this.lastName = '';
 
@@ -245,6 +246,7 @@ class Booking extends React.Component {
         return (
             <form onSubmit={this.handleSubmit} >
                 <MDBContainer> 
+                    
                     <MDBRow>
                         <MDBTypography tag="h2" className="page-heading" >Create Booking</MDBTypography>
                     </MDBRow>

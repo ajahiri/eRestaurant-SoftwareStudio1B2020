@@ -9,9 +9,12 @@ import Header from "../ui/components/header";
 import HomePage from "../ui/pages/home/homeBody";
 import FooterPage from "../ui/pages/home/footer_page";
 import ContactPage from "../ui/pages/contact/contact_page";
+import MenuPage from '../ui/pages/foodmenu/menu_page';
 import Booking from "../ui/pages/booking/booking";
 import Admin from "../ui/pages/admin/admin";
 import ManageAccount from "../ui/pages/manageaccount/manageaccount";
+import Cart from '../ui/components/cart';
+
 
 // All routes should be defined here
 export default function App() {
@@ -27,9 +30,14 @@ export default function App() {
                     </Route>
                     <Route exact path="/about">
                         <Header />
+                        <MenuPage/>
+                    </Route>
+                    <Route exact path="/cart">
+                        <Header />
+                        <Cart />
                     </Route>
                     <Route exact path="/booking">
-                        <Header />
+                        <Header /> 
                         <Booking />
                     </Route>
                     <Route exact path="/contact">

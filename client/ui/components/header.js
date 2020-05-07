@@ -3,11 +3,12 @@ import {withTracker} from 'meteor/react-meteor-data';
 import React from 'react';
 import { useCurrentUser } from 'react-meteor-hooks';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBIcon
 } from "mdbreact";
 
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
+
 
 class Header extends React.Component {
     constructor(props) {
@@ -27,6 +28,8 @@ class Header extends React.Component {
         Meteor.logout();
     }
 
+   
+
 
     render() {
         return (
@@ -43,7 +46,7 @@ class Header extends React.Component {
                         </MDBNavItem>
                         
                         <MDBNavItem>
-                            <MDBNavLink to="/contact">Contact</MDBNavLink>
+                            <MDBNavLink to="/contact" >Contact</MDBNavLink>
                         </MDBNavItem>
                         
                         <MDBNavItem>
@@ -53,11 +56,15 @@ class Header extends React.Component {
                         <MDBNavItem>
                             <MDBNavLink to="/booking">Book</MDBNavLink>
                         </MDBNavItem>
+
+                        <MDBNavItem>
+                            <MDBNavLink to="/cart">Cart <MDBIcon icon="shopping-cart" /> </MDBNavLink>
+                        </MDBNavItem>
                         
                         {
                             this.props.isAdmin ?
                             <MDBNavItem>
-                                <MDBNavLink to="/admin">Admin</MDBNavLink>
+                                <MDBNavLink to="/admin">Admin </MDBNavLink>
                             </MDBNavItem> : <div></div>
                         }
 
@@ -82,10 +89,16 @@ class Header extends React.Component {
                             <MDBNavItem>
                                 <a className="navbar-text white-text" onClick={this.logout}>Logout</a>
                             </MDBNavItem>
-                            : <SignUp/> }
+                            : <SignUp />}
+                        
                     </MDBNavbarNav>
+
+                    
                 </MDBCollapse>
             </MDBNavbar>
+
+            
+
         );
     }
 }
