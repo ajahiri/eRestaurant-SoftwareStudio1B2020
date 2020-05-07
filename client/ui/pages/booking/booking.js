@@ -231,7 +231,16 @@ class Booking extends React.Component {
     handleBtnTest(event) {
         const test = this.props.branches.map( (branch) => { return branch.name})
         console.log(test);
-    }   
+    }
+
+    branchNames() {
+        let selectArray = [];
+        let x;
+        this.props.branch_names.forEach(function(branch) {
+            selectArray.push({value: branch._id, label: branch.name});
+        });
+        return selectArray;
+    }
 
     render() {
         const date = this.state.date;
@@ -278,10 +287,11 @@ class Booking extends React.Component {
                                 </MDBDropdownMenu>
                             </MDBDropdown>
 
-                            <CustomDropdown 
-                            label = "Branches"
-                            type = "text"
-                            options={ this.props.branch_names }/>
+                            <Select
+                                options={
+                                    this.branchNames()
+                                }
+                            />
                             
                     </MDBRow>
                     <MDBRow center>
@@ -361,9 +371,9 @@ class Booking extends React.Component {
 }
 
 export default withTracker(() => {
-    Meteor.subscribe('branches');
+    //Meteor.subscribe('branches');
     Meteor.subscribe('branch_names');
     return {
-        branches: Branches.find()
+        branch_names: Branches.find().fetch(),
     }
 })(Booking);

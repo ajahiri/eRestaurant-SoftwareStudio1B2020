@@ -23,11 +23,16 @@ Meteor.publish('branches', function () {
 });
 
 Meteor.publish('branch_names', function () {
-    Branches.find().map( (branch) => {  //fills the branchNames collection with the names and id's of each branch
+    /*Branches.find().map( (branch) => {  //fills the branchNames collection with the names and id's of each branch
     Meteor.call('branchNames.fill', branch._id, branch.name);
     });
-    return branchNames.find({});
-
+    return branchNames.find({});*/
+    return Branches.find({}, {
+        fields: {
+            _id: 1,
+            name: 1
+        }
+    });
 });
 
 Meteor.startup(() => {
