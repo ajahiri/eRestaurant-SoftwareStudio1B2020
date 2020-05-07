@@ -14,7 +14,7 @@ const ImageCorousel = () => {
 
         <div id="couresel">
             <div className="w-100 p3 h-25">
-                <MDBCarousel activeItem={1} length={3} showControls={true} showIndicators={true} className="z-depth-2" >
+                <MDBCarousel activeItem={1} length={3} showControls={true} showIndicators={true}  >
                     <MDBCarouselInner >
                         <MDBCarouselItem itemId="1" height="400px">
                             <MDBView hover zoom >

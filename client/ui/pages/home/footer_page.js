@@ -17,7 +17,7 @@ const FooterPage = () => {
 
                     <MDBCol md="3">
                         <h3>
-                            <a className="title" href="/about">About</a>
+                            <a className="title" href="/about">Menu</a>
 
                         </h3>
                     </MDBCol>
