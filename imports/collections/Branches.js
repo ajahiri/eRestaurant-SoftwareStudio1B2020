@@ -118,6 +118,9 @@ if (Meteor.isServer) {
             } else {
                 throw new Meteor.Error('User not found', "Could not find user of email " + staffEmail);
             }
+        },
+        "getBranches.Names": function() {
+            return Branches.find().map( (branch) => { console.log(branch.name); return branch.name; });
         }
     });
 }

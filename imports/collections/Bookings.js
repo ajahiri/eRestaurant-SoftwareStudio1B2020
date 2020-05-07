@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { Branches } from './Branches';
 
 export const Bookings = new Mongo.Collection('bookings');
 

@@ -226,13 +226,14 @@ class Booking extends React.Component {
     }
 
     handleBtnTest(event) {
-        Meteor.call('bookings.get',
+        const branchList = Meteor.call('getBranches.Names',
             function(error){
                 if(error){
                     console.log(error);
                 }
             }
         );
+        console.log(branchList);
     }   
 
     render() {
