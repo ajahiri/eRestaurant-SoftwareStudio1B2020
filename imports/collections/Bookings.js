@@ -5,7 +5,6 @@ import SimpleSchema from 'simpl-schema';
 export const Bookings = new Mongo.Collection('bookings');
 
 Bookings.schema = new SimpleSchema({
-    _id: {type: String},
     branch: {type: String},
     customerName: {type: String},
     email: {type: String},
@@ -36,6 +35,9 @@ Meteor.methods({
             time,
             specialRequest,
         });
+        console.log(Bookings.find().fetch());
+    },
+    'bookings.get': function() {
         console.log(Bookings.find().fetch());
     }
 });

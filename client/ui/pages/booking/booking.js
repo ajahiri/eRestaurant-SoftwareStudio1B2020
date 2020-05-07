@@ -2,7 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import React from "react";
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
-import { Bookings } from '../../../../imports/collections/Bookings.js'
+import { Bookings } from '../../../../imports/collections/Bookings.js';
+import { Branches } from '../../../../imports/collections/Branches.js';
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
 
@@ -51,6 +52,8 @@ class Booking extends React.Component {
         this.handleGuestNum = this.handleGuestNum.bind(this);
         this.handleSpecialRequest = this.handleSpecialRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.handleBtnTest = this.handleBtnTest.bind(this);
     }
     handleSubmit() {
         const state = this.state;
@@ -222,8 +225,17 @@ class Booking extends React.Component {
         this.setState({specialRequest: event.target.value});
     }
 
+    handleBtnTest(event) {
+        Meteor.call('bookings.get',
+            function(error){
+                if(error){
+                    console.log(error);
+                }
+            }
+        );
+    }   
+
     render() {
-        //const date = this.state.date; 
         const date = this.state.date;
         const defaultDateFormat = this.state.defaultDateFormat;
 
@@ -262,7 +274,7 @@ class Booking extends React.Component {
                                     Select Restaurant Location...
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu right basic>
-                                    <MDBDropdownItem>Example Branch 1</MDBDropdownItem>
+                                    <MDBDropdownItem>Test</MDBDropdownItem>
                                     <MDBDropdownItem>Example Branch 1</MDBDropdownItem>
                                     <MDBDropdownItem>Example Branch 3</MDBDropdownItem>
                                 </MDBDropdownMenu>
@@ -336,7 +348,7 @@ class Booking extends React.Component {
                     </MDBRow>
                     <MDBRow className='btn-confirm-padding'>
                     <MDBCol><MDBBtn color="indigo" size='lg' type='submit'>Confirm Booking</MDBBtn></MDBCol>
-                    <MDBCol><MDBBtn onClick={this.handleSubmit}>Test AddBooking</MDBBtn></MDBCol>
+                    <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test btn</MDBBtn></MDBCol>
                     </MDBRow>
                 </MDBContainer>
             </form>
