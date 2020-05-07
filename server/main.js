@@ -17,11 +17,13 @@ Meteor.publish('branches', function () {
     if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(),'admin')) {
         return Branches.find({});
     } else {
-        return [];
+        throw new Meteor.Error('Not logged in', "Must be logged in");
     }
 });
 
 Meteor.startup(() => {
-    //Roles.createRole('admin');
-    //Roles.addUsersToRoles("gB99P7WAaw6TrKynD", ['admin']);
+    Roles.createRole('admin', {unlessExists: true});
+    Roles.createRole('staff', {unlessExists: true});
+    Roles.createRole('manager', {unlessExists: true});
+
 });

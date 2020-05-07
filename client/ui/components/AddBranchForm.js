@@ -30,7 +30,11 @@ const AddBranchForm = () => {
             Meteor.call('branches.insert', values.branchName, values.branchManager,
                 values.branchPhone, values.branchAddress,
                 function(error) {
-                    console.log(error);
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Successfully added branch");
+                    }
                 }
             );
         }

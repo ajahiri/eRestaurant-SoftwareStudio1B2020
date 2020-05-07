@@ -1,0 +1,26 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: 'Checkout, Install Meteor and Deploy'
+    task:
+      jobs:
+        - name: Initialise and Deploy
+          commands:
+            - checkout
+            - meteor --version
+            - meteor npm i
+            - pwd
+            - ls
+            - export METEOR_SESSION_FILE=/home/semaphore/deployment_token.json
+            - export DEPLOY_HOSTNAME=ap-southeast-2.galaxy.meteor.com
+            - meteor deploy erestaurant.arianjahiri.com --settings /home/semaphore/settings.json
+      prologue:
+        commands:
+          - 'curl https://install.meteor.com/ | sh'
+      secrets:
+        - name: Deploy Files
+    dependencies: []
