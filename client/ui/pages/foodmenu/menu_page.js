@@ -21,12 +21,11 @@ class MenuPage extends React.Component {
                     <MDBContainer>
                         
                         <MDBCard>
-                            
-                                <TopPost />
+                            <TopPost />
                             <br />
-                            <MDBCardBody>
+                            <MDBContainer>
                                 <MenuItems />
-                            </MDBCardBody>
+                            </MDBContainer>
                         </MDBCard>
                         
                     </MDBContainer>
