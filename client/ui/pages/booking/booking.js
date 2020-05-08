@@ -20,7 +20,6 @@ class Booking extends React.Component {
         this.lastName = '';
 
         this.state = {
-        selectedOption: null,
         btnFour: 'indigo',
         btnFour_thirty: 'indigo',
         btnFive: 'indigo',
@@ -38,7 +37,7 @@ class Booking extends React.Component {
         
         // START Booking Details Attributes
         customerName: '',
-        branch: '',
+        branch: null,
         email: '',
         phone: '',
         guestNum: '',
@@ -64,7 +63,7 @@ class Booking extends React.Component {
         event.preventDefault();
         const state = this.state;
         const date = new Date(state.date).toDateString(); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
-        Meteor.call('bookings.insert', state.selectedOption.value, state.customerName, state.email,
+        Meteor.call('bookings.insert', state.branch.value, state.customerName, state.email,
             state.phone, state.guestNum, date, state.time, state.specialRequest,
             function(error) {
                 if (error) {
@@ -231,9 +230,8 @@ class Booking extends React.Component {
         this.setState({specialRequest: event.target.value});
     }
 
-    handleBranch(selectedOption) {
-        this.setState({selectedOption},
-            () => console.log(`Option selected:`, this.state.selectedOption));
+    handleBranch(branch) {
+        this.setState({branch});
     }
 
     handleBtnTest(event) {
@@ -253,6 +251,8 @@ class Booking extends React.Component {
     render() {
         const date = this.state.date;
         const defaultDateFormat = this.state.defaultDateFormat;
+
+        const branch = this.state.branch;
 
         const btnFour = this.state.btnFour;
         const btnFive = this.state.btnFive;
@@ -296,6 +296,7 @@ class Booking extends React.Component {
                             </MDBDropdown>
 
                             <Select
+                                value={branch}
                                 onChange={this.handleBranch}
                                 options={
                                     this.branchNames()
