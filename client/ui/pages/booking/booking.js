@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from "react";
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
-import { Bookings } from '../../../../imports/collections/Bookings.js'
+import { Bookings } from '../../../../imports/collections/Bookings.js';
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
 
