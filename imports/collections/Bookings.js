@@ -35,14 +35,14 @@ Meteor.methods({
             createdAt: Date(),
         });
         console.log(Bookings.find().fetch());
-
-        if (DateTimeBranch.find({date, time, branch} == null)) {
-        Meteor.call('date_time_branch.insert', date, time, branch,
-        function(error) {
-            if (error) {
-                console.log(error);
-            }
-        });
+        console.log(DateTimeBranch.findOne({date: date, time: time, branch: branch}));
+        if (DateTimeBranch.findOne({date: date, time: time, branch: branch}) == null) {
+            Meteor.call('date_time_branch.insert', date, time, branch,
+            function(error) {
+                if (error) {
+                    console.log(error);
+                }
+            });
         } else {
             Meteor.call('date_time_branch.update', date, time, branch,
             function(error) {

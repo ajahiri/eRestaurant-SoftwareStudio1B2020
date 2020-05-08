@@ -31,10 +31,6 @@ Meteor.publish('branch_names', function () {
     });
 });
 
-Meteor.publish('date_time_branch', function () {
-    return DateTimeBranch.find({})
-});
-
 Meteor.startup(() => {
 
     Roles.createRole('admin', {unlessExists: true});

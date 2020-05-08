@@ -21,18 +21,18 @@ Meteor.methods({
             time,
             branch,
         });
-        console.log('DTB counter = ' + counter);
+        console.log('inserted new DTB');
     },
 
     'date_time_branch.update': function(date, time, branch) {
         DateTimeBranch.update({date, time, branch}, {
-            $inc: { counter: 1},
+            $inc: { counter: 1 },
         });
-        if(counter >= 50) {
+        if(DateTimeBranch.findOne({date, time, branch},{fields:{counter:1}}) >= 50) {   // if counter is >= 50
             DateTimeBranch.update({date, time, branch}, {
                 $set: { available: false},
             });
         }
-        console.log('DTB counter = ' + counter);
+        console.log('updated DTB');
     },
 });
