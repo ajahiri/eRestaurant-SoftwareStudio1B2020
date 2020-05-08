@@ -241,7 +241,6 @@ class Booking extends React.Component {
 
     branchNames() {
         let selectArray = [];
-        let x;
         this.props.branch_names.forEach(function(branch) {
             selectArray.push({value: branch._id, label: branch.name});
         });
@@ -249,25 +248,31 @@ class Booking extends React.Component {
     }
 
     render() {
-        const date = this.state.date;
-        const defaultDateFormat = this.state.defaultDateFormat;
+        const { 
+            date, defaultDateFormat,
+            branch,
+            btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen, btnFour_thirty, btnFive_thirty, btnSix_thirty, btnSeven_thirty, btnEight_thirty, btnNine_thirty, btnTen_thirty
+        } = this.state;
 
-        const branch = this.state.branch;
+        // const date = this.state.date;
+        // const defaultDateFormat = this.state.defaultDateFormat;
 
-        const btnFour = this.state.btnFour;
-        const btnFive = this.state.btnFive;
-        const btnSix = this.state.btnSix;
-        const btnSeven = this.state.btnSeven;
-        const btnEight = this.state.btnEight;
-        const btnNine = this.state.btnNine;
-        const btnTen = this.state.btnTen;
-        const btnFour_thirty = this.state.btnFour_thirty;
-        const btnFive_thirty = this.state.btnFive_thirty;
-        const btnSix_thirty = this.state.btnSix_thirty;
-        const btnSeven_thirty = this.state.btnSeven_thirty;
-        const btnEight_thirty = this.state.btnEight_thirty;
-        const btnNine_thirty = this.state.btnNine_thirty;
-        const btnTen_thirty = this.state.btnTen_thirty;
+        // const branch = this.state.branch;
+
+        // const btnFour = this.state.btnFour;
+        // const btnFive = this.state.btnFive;
+        // const btnSix = this.state.btnSix;
+        // const btnSeven = this.state.btnSeven;
+        // const btnEight = this.state.btnEight;
+        // const btnNine = this.state.btnNine;
+        // const btnTen = this.state.btnTen;
+        // const btnFour_thirty = this.state.btnFour_thirty;
+        // const btnFive_thirty = this.state.btnFive_thirty;
+        // const btnSix_thirty = this.state.btnSix_thirty;
+        // const btnSeven_thirty = this.state.btnSeven_thirty;
+        // const btnEight_thirty = this.state.btnEight_thirty;
+        // const btnNine_thirty = this.state.btnNine_thirty;
+        // const btnTen_thirty = this.state.btnTen_thirty;
 
         return (
             <form onSubmit={this.handleSubmit} >
