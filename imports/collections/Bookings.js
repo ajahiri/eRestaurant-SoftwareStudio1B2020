@@ -22,9 +22,6 @@ Bookings.schema = new SimpleSchema({
 
 Meteor.methods({
     'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time, specialRequest) {
-        if (!this.userId) {
-            throw new Meteor.Error('Not logged in', "Must be logged in");
-        }
         console.log("attempting to add booking");
         Bookings.insert({
             branch,

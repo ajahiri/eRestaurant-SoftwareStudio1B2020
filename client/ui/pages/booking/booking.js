@@ -55,6 +55,7 @@ class Booking extends React.Component {
         this.handleGuestNum = this.handleGuestNum.bind(this);
         this.handleSpecialRequest = this.handleSpecialRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleBranch = this.handleBranch.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
@@ -228,6 +229,10 @@ class Booking extends React.Component {
         this.setState({specialRequest: event.target.value});
     }
 
+    handleBranch(event) {
+        this.setState({branch: event.target.value});
+    }
+
     handleBtnTest(event) {
         const test = this.props.branches.map( (branch) => { return branch.name})
         console.log(test);
@@ -288,6 +293,7 @@ class Booking extends React.Component {
                             </MDBDropdown>
 
                             <Select
+                                onChange={this.handleBranch}
                                 options={
                                     this.branchNames()
                                 }
