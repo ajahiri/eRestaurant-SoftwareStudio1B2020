@@ -20,6 +20,7 @@ class Booking extends React.Component {
         this.lastName = '';
 
         this.state = {
+        selectedOption: null,
         btnFour: 'indigo',
         btnFour_thirty: 'indigo',
         btnFive: 'indigo',
@@ -59,10 +60,11 @@ class Booking extends React.Component {
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
-    handleSubmit() {
+    handleSubmit(event) {
+        event.preventDefault();
         const state = this.state;
-        const date = new Date(state.date).toDateString(); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May 
-        Meteor.call('bookings.insert', state.branch, state.customerName, state.email, 
+        const date = new Date(state.date).toDateString(); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
+        Meteor.call('bookings.insert', state.selectedOption.value, state.customerName, state.email,
             state.phone, state.guestNum, date, state.time, state.specialRequest,
             function(error) {
                 if (error) {
@@ -229,8 +231,9 @@ class Booking extends React.Component {
         this.setState({specialRequest: event.target.value});
     }
 
-    handleBranch(event) {
-        this.setState({branch: event.target.value});
+    handleBranch(selectedOption) {
+        this.setState({selectedOption},
+            () => console.log(`Option selected:`, this.state.selectedOption));
     }
 
     handleBtnTest(event) {
