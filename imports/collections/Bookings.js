@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
-import { Branches } from './Branches';
+import { DateTimeBranch } from './DateTimeBranch.js';
 
 export const Bookings = new Mongo.Collection('bookings');
 
@@ -32,7 +32,24 @@ Meteor.methods({
             date,
             time,
             specialRequest,
+            createdAt: Date(),
         });
         console.log(Bookings.find().fetch());
+
+        if (DateTimeBranch.find({date, time, branch} == null)) {
+        Meteor.call('date_time_branch.insert', date, time, branch,
+        function(error) {
+            if (error) {
+                console.log(error);
+            }
+        });
+        } else {
+            Meteor.call('date_time_branch.update', date, time, branch,
+            function(error) {
+                if (error) {
+                    console.log(error);
+                }
+            });
+        }
     },
 });

@@ -4,7 +4,6 @@ import React from "react";
 import Select from 'react-select';
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
-import CustomDropdown from '../../components/CustomDropdown.js';
 import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
 import "./custom-flatpickr-theme.css";
@@ -229,22 +228,19 @@ class Booking extends React.Component {
     handleSpecialRequest(event) {
         this.setState({specialRequest: event.target.value});
     }
-
     handleBranch(branch) {
         this.setState({branch});
     }
-
-    handleBtnTest(event) {
-        const test = this.props.branches.map( (branch) => { return branch.name})
-        console.log(test);
-    }
-
-    branchNames() {
+    branchNames() { //builds an array of each branch name and id to be passed to the Selector component
         let selectArray = [];
         this.props.branch_names.forEach(function(branch) {
             selectArray.push({value: branch._id, label: branch.name});
         });
         return selectArray;
+    }
+
+    handleBtnTest(event) {
+        console.log('called')
     }
 
     render() {
@@ -253,26 +249,6 @@ class Booking extends React.Component {
             branch,
             btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen, btnFour_thirty, btnFive_thirty, btnSix_thirty, btnSeven_thirty, btnEight_thirty, btnNine_thirty, btnTen_thirty
         } = this.state;
-
-        // const date = this.state.date;
-        // const defaultDateFormat = this.state.defaultDateFormat;
-
-        // const branch = this.state.branch;
-
-        // const btnFour = this.state.btnFour;
-        // const btnFive = this.state.btnFive;
-        // const btnSix = this.state.btnSix;
-        // const btnSeven = this.state.btnSeven;
-        // const btnEight = this.state.btnEight;
-        // const btnNine = this.state.btnNine;
-        // const btnTen = this.state.btnTen;
-        // const btnFour_thirty = this.state.btnFour_thirty;
-        // const btnFive_thirty = this.state.btnFive_thirty;
-        // const btnSix_thirty = this.state.btnSix_thirty;
-        // const btnSeven_thirty = this.state.btnSeven_thirty;
-        // const btnEight_thirty = this.state.btnEight_thirty;
-        // const btnNine_thirty = this.state.btnNine_thirty;
-        // const btnTen_thirty = this.state.btnTen_thirty;
 
         return (
             <form onSubmit={this.handleSubmit} >

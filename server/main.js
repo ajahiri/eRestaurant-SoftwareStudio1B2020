@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bookings } from '../imports/collections/Bookings.js';
 import { Accounts } from 'meteor/accounts-base';
 import {Branches} from "../imports/collections/Branches";
-import { branchNames } from '../imports/collections/branchNames.js';
+import { DateTimeBranch } from '../imports/collections/DateTimeBranch'
 
 //This publish is needed for the alanning:roles to work with client
 Meteor.publish(null, function () {
@@ -23,16 +23,16 @@ Meteor.publish('branches', function () {
 });
 
 Meteor.publish('branch_names', function () {
-    /*Branches.find().map( (branch) => {  //fills the branchNames collection with the names and id's of each branch
-    Meteor.call('branchNames.fill', branch._id, branch.name);
-    });
-    return branchNames.find({});*/
     return Branches.find({}, {
         fields: {
             _id: 1,
             name: 1
         }
     });
+});
+
+Meteor.publish('date_time_branch', function () {
+    return DateTimeBranch.find({})
 });
 
 Meteor.startup(() => {
