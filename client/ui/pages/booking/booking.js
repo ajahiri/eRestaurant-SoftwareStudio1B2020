@@ -55,6 +55,7 @@ class Booking extends React.Component {
         this.handleSpecialRequest = this.handleSpecialRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleBranch = this.handleBranch.bind(this);
+        this.branchNames = this.branchNames.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
@@ -238,7 +239,7 @@ class Booking extends React.Component {
         });
         return selectArray;
     }
-
+    
     handleBtnTest(event) {
         console.log('called')
     }
@@ -264,26 +265,19 @@ class Booking extends React.Component {
                         <MDBCol sm="4" md="4" lg="4"><MDBInput label="Email" size="lg" onChange={this.handleEmail} /> </MDBCol>
                         <MDBCol sm="4" md="4" lg="4"><MDBInput label="Phone" size="lg" onChange={this.handlePhone} /> </MDBCol>
                     </MDBRow>
-                    <MDBRow center>
-                            <MDBDropdown>
-                                <MDBDropdownToggle caret color="primary">
-                                    Select Restaurant Location...
-                                </MDBDropdownToggle>
-                                <MDBDropdownMenu right basic>
-                                    <MDBDropdownItem> </MDBDropdownItem>
-                                    <MDBDropdownItem>Example Branch 1</MDBDropdownItem>
-                                    <MDBDropdownItem>Example Branch 3</MDBDropdownItem>
-                                </MDBDropdownMenu>
-                            </MDBDropdown>
-
+                    <MDBRow center >
+                        <MDBCol sm="8" md="8" lg="8">
+                        <MDBTypography className="element-heading" tag="h6" >Location:</MDBTypography>
                             <Select
+                                className="branch-selector"
+                                placeholder="Select Location..."
                                 value={branch}
                                 onChange={this.handleBranch}
                                 options={
                                     this.branchNames()
                                 }
                             />
-                            
+                        </MDBCol>
                     </MDBRow>
                     <MDBRow center>
                         <MDBCol sm="4" md="4" lg="4"><MDBInput type="number" label="Number of Guests" size="lg" hint="0" onChange={this.handleGuestNum} /></MDBCol>
@@ -303,12 +297,12 @@ class Booking extends React.Component {
                             onClose={() => {
                                 // Bug Fix: If backspace is used when input field is selected input field is blank
                                 if (date.length==0) {
-                                    this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." });
-                                    this.setState({ date: Date() }) //resets date to Date() -> returns todays date
+                                    this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." }); //resets placeholder value
+                                    this.setState({ date: new Date() }) //resets date to Date() -> returns todays date
                                 }
                             }}
                             options={{
-                                altInput: true, // altInput is teh human friendly format (April 22, 2020)
+                                altInput: true, // altInput is a "human friendly" format (April 22, 2020)
                                 altFormat: defaultDateFormat,
                                 dateFormat: "Y-m-d", //set altInput to false to use this format
                                 minDate:"today",
@@ -320,7 +314,7 @@ class Booking extends React.Component {
                     <MDBContainer>
                         <MDBRow center>
                             <MDBCol sm="8" md="8" lg="8">
-                                <MDBTypography className="table-heading" tag="h5" >Time:</MDBTypography>
+                                <MDBTypography className="element-heading" tag="h5" >Time:</MDBTypography>
                                 <table className="time-selector">
                                     <tbody>
                                         <tr>
