@@ -33,7 +33,6 @@ const AddStaffForm = ({staffUser}) => {
                 Meteor.call('branches.addStaff', values.staffEmail, values.branchID, values.staffRole.value,
                     function(error) {
                         if (error) {
-                            console.log(error);
                             actions.setStatus ({ apiError: error.message });
                         } else {
                             actions.setStatus ({ apiSuccess: "Successfully added staff member " +values.staffEmail });
@@ -41,7 +40,6 @@ const AddStaffForm = ({staffUser}) => {
                     }
                 );
             }}
-
         >
             { props => (
                 <Form>
@@ -73,7 +71,7 @@ const AddStaffForm = ({staffUser}) => {
                     />
                     <div className="text-center">
                         <MDBBtn type="submit" color="primary">
-                            Add Branch
+                            Assign Staff Member
                             <MDBIcon far icon="paper-plane" className="ml-1" />
                         </MDBBtn>
                     </div>

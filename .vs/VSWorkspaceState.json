@@ -5,9 +5,12 @@
     "\\client\\routing",
     "\\client\\ui",
     "\\client\\ui\\pages",
-    "\\client\\ui\\pages\\contact",
-    "\\client\\ui\\pages\\home"
+    "\\client\\ui\\pages\\foodmenu",
+    "\\client\\ui\\pages\\home",
+    "\\client\\ui\\pages\\manageaccount",
+    "\\imports",
+    "\\server"
   ],
-  "SelectedNode": "\\client\\ui\\pages\\home\\homepage.scss",
+  "SelectedNode": "\\client\\ui\\pages\\foodmenu\\menu_items.js",
   "PreviewInSolutionExplorer": false
 }

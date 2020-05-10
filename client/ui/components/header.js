@@ -3,11 +3,12 @@ import {withTracker} from 'meteor/react-meteor-data';
 import React from 'react';
 import { useCurrentUser } from 'react-meteor-hooks';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBIcon
 } from "mdbreact";
 
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
+
 
 class Header extends React.Component {
     constructor(props) {
@@ -27,7 +28,6 @@ class Header extends React.Component {
         Meteor.logout();
     }
 
-
     render() {
         return (
             <MDBNavbar className='navBar' color="indigo" dark expand="md">
@@ -43,26 +43,33 @@ class Header extends React.Component {
                         </MDBNavItem>
                         
                         <MDBNavItem>
-                            <MDBNavLink to="/contact">Contact</MDBNavLink>
+                            <MDBNavLink to="/contact" >Contact</MDBNavLink>
                         </MDBNavItem>
                         
                         <MDBNavItem>
-                            <MDBNavLink to="/about">About</MDBNavLink>
+                            <MDBNavLink to="/about">Menu</MDBNavLink>
                         </MDBNavItem>
 
                         <MDBNavItem>
                             <MDBNavLink to="/booking">Book</MDBNavLink>
                         </MDBNavItem>
-                        
+
+                        <MDBNavItem>
+                            <MDBNavLink to="/cart">Cart <MDBIcon icon="shopping-cart" /> </MDBNavLink>
+                        </MDBNavItem>
+                        {
+                            this.props.isStaff || this.props.isManager  ?
+                                <MDBNavItem>
+                                    <MDBNavLink to="/staff_dashboard">Dashboard </MDBNavLink>
+                                </MDBNavItem> : <div></div>
+                        }
                         {
                             this.props.isAdmin ?
                             <MDBNavItem>
-                                <MDBNavLink to="/admin">Admin</MDBNavLink>
+                                <MDBNavLink to="/admin">Admin </MDBNavLink>
                             </MDBNavItem> : <div></div>
                         }
 
-                        
-                    
                     </MDBNavbarNav>
 
                     <MDBNavbarNav right>
@@ -74,15 +81,18 @@ class Header extends React.Component {
 
                         {this.props.currentUser ?
                             <MDBNavItem>
-                                <span className="navWelcomeText navbar-text white-text">Welcome, {this.props.currentUser.profile.name}! {console.log(this.props)}   </span>
+                                <span className="navWelcomeText navbar-text white-text">Welcome, {this.props.currentUser.profile.name}!   </span>
                             </MDBNavItem>
                             : <LogIn/>}
                             
-                        {this.props.currentUser ?
+                        {
+                            this.props.currentUser ?
                             <MDBNavItem>
                                 <a className="navbar-text white-text" onClick={this.logout}>Logout</a>
                             </MDBNavItem>
-                            : <SignUp/> }
+                            : <SignUp />
+                        }
+                        
                     </MDBNavbarNav>
                 </MDBCollapse>
             </MDBNavbar>
@@ -94,5 +104,7 @@ export default withTracker(() => {
     return {
         currentUser: Meteor.user(),
         isAdmin: Roles.userIsInRole(Meteor.userId(), ['admin']),
+        isManager: Roles.userIsInRole(Meteor.userId(), ['manager']),
+        isStaff: Roles.userIsInRole(Meteor.userId(), ['staff'])
     }
 })(Header);
