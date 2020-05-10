@@ -46,9 +46,38 @@ Meteor.publish('branchStaff', function () {
     }
 });
 
-Meteor.publish('bookingsStaff', function() {
+Meteor.publish('bookingsStaff', function(dateRange) {
     if (Meteor.userId() && (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager'))) {
-        return Bookings.find({branch: Meteor.user().assignedBranch});
+        const currentDate = new Date();
+        currentDate.setHours(0,0,0,0); //Need the "current date" to be at 00:00
+        if (dateRange < 0) {
+            dateRange *= -1;
+            return Bookings.find(
+                {
+                    branch: Meteor.user().assignedBranch,
+                    "date":
+                        {
+                            //Get last dateRange booking (0 is current day) -1 is tomorow, 1 is yesterday, etc
+                            $gte: new Date((currentDate.getTime() - (dateRange * 24 * 60 * 60 * 1000))),
+                            $lte: new Date((currentDate.getTime())),
+                        }
+                }, { sort: {date: -1} }
+            );
+        } else {
+            return Bookings.find(
+                {
+                    branch: Meteor.user().assignedBranch,
+                    "date":
+                        {
+                            //Get last dateRange booking (0 is current day) -1 is tomorow, 1 is yesterday, etc
+                            $gte: new Date((currentDate.getTime())),
+                            $lte: new Date((currentDate.getTime() + (dateRange * 24 * 60 * 60 * 1000))),
+                        }
+                }, { sort: {date: -1} }
+            );
+        }
+
+
     } else {
         throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
     }

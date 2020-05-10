@@ -63,9 +63,10 @@ class Booking extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const state = this.state;
-        const date = new Date(this.state.date).toDateString(); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
+        const date = new Date(this.state.date); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
+        const dateNice = date.toDateString();
         Meteor.call('bookings.insert', state.branch.value, state.customerName, state.email,
-            state.phone, state.guestNum, date, state.time, state.specialRequest,
+            state.phone, state.guestNum, date, dateNice, state.time, state.specialRequest,
             function(error) {
                 if (error) {
                     console.log(error);

@@ -1,13 +1,14 @@
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
-import {MDBContainer, MDBCol, MDBTableHead, MDBTableBody, MDBTable, MDBBtn} from 'mdbreact';
+import {MDBContainer, MDBCol, MDBTableHead, MDBTableBody, MDBTable, MDBBtn, MDBSpinner, MDBRow} from 'mdbreact';
 import {Branches} from '../../../../imports/collections/Branches';
 import {Bookings} from "../../../../imports/collections/Bookings";
 
 class StaffDashboard extends React.Component {
     constructor(props) {
         super(props);
+        Session.set('bookingRange', 0);
     }
 
     renderRows() {
@@ -18,7 +19,7 @@ class StaffDashboard extends React.Component {
                     <td><a href="">{booking._id}</a></td>
                     <td>{booking.customerName}</td>
                     <td>{booking.email}</td>
-                    <td>{booking.date}</td>
+                    <td>{booking.dateNice}</td>
                     <td>{booking.time}</td>
                     <td>{booking.guestNum}</td>
                     <td>
@@ -43,6 +44,10 @@ class StaffDashboard extends React.Component {
         });
     };
 
+    rangeChange(event, amt) {
+        Session.set('bookingRange', amt);
+    };
+
     render() {
         if(!Meteor.userId() )
         {
@@ -54,7 +59,10 @@ class StaffDashboard extends React.Component {
                     </span>
                 </MDBCol>
             );
-        } else {
+        } else if (this.props.isReady) {
+            const address = this.props.branch.address;
+            const addressNice = address.streetNumber + " " + address.street + " " +
+                address.city + " " + address.postcode + " " + address.state;
             return (
                 <MDBContainer>
                     {
@@ -65,8 +73,9 @@ class StaffDashboard extends React.Component {
                                 <p>ID: {this.props.branch._id}</p>
                                 <p>Name: {this.props.branch.name}</p>
                                 <p>Phone: {this.props.branch.phone}</p>
-                                <p>Address: {JSON.stringify(this.props.branch.address, null, 2)}</p>
-                                <p>Date: {JSON.stringify(new Date())}</p>
+                                <p>Address: {addressNice}</p>
+                                <p>Date: {new Date().toDateString()}</p>
+                                <p>Viewing range: {Session.get('bookingRange')} Days</p>
                             </div>
                         : <div></div>
                     }
@@ -90,10 +99,21 @@ class StaffDashboard extends React.Component {
                         </MDBTableBody>
                     </MDBTable>
                     <h3>Viewing Range</h3>
-                    <MDBBtn>Today</MDBBtn>
-                    <MDBBtn>Last 7 Days</MDBBtn>
-                    <MDBBtn>Tomorrow</MDBBtn>
-                    <MDBBtn>Next 7 Days</MDBBtn>
+                    <MDBBtn onClick={(e) => {this.rangeChange(e, 0)}} >Today</MDBBtn>
+                    <MDBBtn onClick={(e) => {this.rangeChange(e, -7)}}>Last 7 Days</MDBBtn>
+                    <MDBBtn onClick={(e) => {this.rangeChange(e, 1)}}>Tomorrow</MDBBtn>
+                    <MDBBtn onClick={(e) => {this.rangeChange(e, 7)}}>Next 7 Days</MDBBtn>
+                    <MDBBtn onClick={(e) => {this.rangeChange(e, 30)}}>Next 30 Days</MDBBtn>
+                </MDBContainer>
+            );
+        } else {
+            return (
+                <MDBContainer>
+                    <MDBRow>
+                        <div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </MDBRow>
                 </MDBContainer>
             );
         }
@@ -101,10 +121,17 @@ class StaffDashboard extends React.Component {
 }
 
 export default withTracker(() => {
+    const subscriptions = {
+        branchStaff: Meteor.subscribe('branchStaff'),
+        bookingsStaff: Meteor.subscribe('bookingsStaff', Session.get('bookingRange'))
+    }
+    /*
     Meteor.subscribe('branchStaff');
-    Meteor.subscribe('bookingsStaff');
+    Meteor.subscribe('bookingsStaff', Session.get('bookingRange'));
+    */
     return {
         branch: Branches.findOne(),
-        bookings: Bookings.find().fetch()
+        bookings: Bookings.find({}, {sort: {date: 1, time: 1}}).fetch(),
+        isReady: subscriptions.branchStaff.ready()
     }
 })(StaffDashboard);

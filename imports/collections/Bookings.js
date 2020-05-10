@@ -21,7 +21,7 @@ Bookings.schema = new SimpleSchema({
 });
 
 Meteor.methods({
-    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time, specialRequest) {
+    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, dateNice, time, specialRequest) {
         console.log("attempting to add booking");
         Bookings.insert({
             branch,
@@ -30,8 +30,12 @@ Meteor.methods({
             phone,
             guestNum,
             date,
+            dateNice,
             time,
             specialRequest,
+            payed: false,
+            concluded: false,
+            cancelled: false,
             createdAt: Date(),
         });
         console.log(Bookings.find().fetch());
