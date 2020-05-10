@@ -4,6 +4,7 @@ import {
     MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
     MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardGroup, MDBView, MDBMask, MDBIcon
 } from "mdbreact";
+import ModalMakeOrder from "./modal_make_order";
 
 const MultiItemlLocations = () => {
     return (
@@ -39,7 +40,7 @@ const MultiItemlLocations = () => {
                         <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
                         <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
                         <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 12-3:30pm / 5-10:30pm </span></p>
-                        <MDBBtn href="/booking" color="primary"> Book Now</MDBBtn>
+                        <ModalMakeOrder/>
 
                         </MDBCol>
                     </MDBRow>
@@ -81,7 +82,7 @@ const MultiItemlLocations = () => {
                             <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
                             <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
                             <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 11-3pm / 6-10pm </span></p>
-                            <MDBBtn href="/booking" color="primary"> Book Now</MDBBtn>
+                            <ModalMakeOrder/>
                         </MDBCol>
                     </MDBRow>
                     
@@ -124,7 +125,7 @@ const MultiItemlLocations = () => {
                             <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
                             <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
                             <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 4pm-12am </span></p>
-                            <MDBBtn href="/booking" color="primary"> Book Now</MDBBtn>
+                            <ModalMakeOrder/>
                         </MDBCol>
                     </MDBRow>
                 </MDBCardBody>
