@@ -3,11 +3,45 @@ import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
 import {MDBContainer, MDBCol, MDBTableHead, MDBTableBody, MDBTable, MDBBtn} from 'mdbreact';
 import {Branches} from '../../../../imports/collections/Branches';
+import {Bookings} from "../../../../imports/collections/Bookings";
 
 class StaffDashboard extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    renderRows() {
+        return this.props.bookings.map(booking => {
+            const ad = booking.address;
+            return (
+                <tr key={booking._id}>
+                    <td><a href="">{booking._id}</a></td>
+                    <td>{booking.customerName}</td>
+                    <td>{booking.email}</td>
+                    <td>{booking.date}</td>
+                    <td>{booking.time}</td>
+                    <td>{booking.guestNum}</td>
+                    <td>
+                        Items go here
+                        {/*
+                        {branch.staff ?
+                            <ul className="staffInBranchList">
+                                {branch.staff.map(staff => {
+                                    return (
+                                        <li key={staff.name + staff.role}>{staff.name} | {staff.role}</li>
+                                    );
+                                })}
+                            </ul>
+                            :
+                            <p>No Staff</p>
+                        }
+                        */}
+                    </td>
+                    <td>{booking.specialRequest}</td>
+                </tr>
+            );
+        });
+    };
 
     render() {
         if(!Meteor.userId() )
@@ -42,6 +76,8 @@ class StaffDashboard extends React.Component {
                         <MDBTableHead color="primary-color" textWhite>
                             <tr>
                                 <th>#id</th>
+                                <th>Customer Name</th>
+                                <th>Customer Email</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Guests</th>
@@ -50,6 +86,7 @@ class StaffDashboard extends React.Component {
                             </tr>
                         </MDBTableHead>
                         <MDBTableBody>
+                            {this.renderRows()}
                         </MDBTableBody>
                     </MDBTable>
                     <h3>Viewing Range</h3>
@@ -65,7 +102,9 @@ class StaffDashboard extends React.Component {
 
 export default withTracker(() => {
     Meteor.subscribe('branchStaff');
+    Meteor.subscribe('bookingsStaff');
     return {
         branch: Branches.findOne(),
+        bookings: Bookings.find().fetch()
     }
 })(StaffDashboard);

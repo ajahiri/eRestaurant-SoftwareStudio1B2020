@@ -30,6 +30,7 @@ Meteor.publish('branch_names', function () {
             name: 1
         }
     });
+});
 Meteor.publish('branchStaff', function () {
     if (Meteor.userId() && (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager'))) {
         return Branches.find({_id: Meteor.user().assignedBranch}, {
@@ -40,6 +41,14 @@ Meteor.publish('branchStaff', function () {
                 address: 1
             }
         });
+    } else {
+        throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
+    }
+});
+
+Meteor.publish('bookingsStaff', function() {
+    if (Meteor.userId() && (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager'))) {
+        return Bookings.find({branch: Meteor.user().assignedBranch});
     } else {
         throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
     }
