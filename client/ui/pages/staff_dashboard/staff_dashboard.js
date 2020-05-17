@@ -4,6 +4,7 @@ import React from "react";
 import {MDBContainer, MDBCol, MDBTableHead, MDBTableBody, MDBTable, MDBBtn, MDBSpinner, MDBRow} from 'mdbreact';
 import {Branches} from '../../../../imports/collections/Branches';
 import {Bookings} from "../../../../imports/collections/Bookings";
+import {Link} from "react-router-dom";
 
 class StaffDashboard extends React.Component {
     constructor(props) {
@@ -14,9 +15,10 @@ class StaffDashboard extends React.Component {
     renderRows() {
         return this.props.bookings.map(booking => {
             const ad = booking.address;
+            const bookingURL = "/bookings/" + booking._id;
             return (
                 <tr key={booking._id}>
-                    <td><a href="">{booking._id}</a></td>
+                    <td><Link to={bookingURL}>{booking._id}</Link></td>
                     <td>{booking.customerName}</td>
                     <td>{booking.email}</td>
                     <td>{booking.dateNice}</td>
@@ -49,7 +51,7 @@ class StaffDashboard extends React.Component {
     };
 
     render() {
-        if(!Meteor.userId() )
+        if(!this.props.userID)
         {
             return (
                 <MDBCol center sm="6" md="12">
@@ -130,6 +132,7 @@ export default withTracker(() => {
     Meteor.subscribe('bookingsStaff', Session.get('bookingRange'));
     */
     return {
+        userID: Meteor.userId(),
         branch: Branches.findOne(),
         bookings: Bookings.find({}, {sort: {date: 1, time: 1}}).fetch(),
         isReady: subscriptions.branchStaff.ready()

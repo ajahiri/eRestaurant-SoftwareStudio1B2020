@@ -7,6 +7,7 @@ export const Bookings = new Mongo.Collection('bookings');
 
 Bookings.schema = new SimpleSchema({
     branch: {type: String},
+    owner: {type: String},
     customerName: {type: String},
     email: {type: String},
     phone: {type: String},
@@ -25,6 +26,7 @@ Meteor.methods({
         console.log("attempting to add booking");
         Bookings.insert({
             branch,
+            owner: Meteor.userId(),
             customerName,
             email,
             phone,

@@ -23,6 +23,7 @@ Meteor.publish('branchesAdmin', function () {
         throw new Meteor.Error('Not logged in', "Must be logged in");
     }
 });
+
 Meteor.publish('branch_names', function () {
     return Branches.find({}, {
         fields: {
@@ -31,6 +32,7 @@ Meteor.publish('branch_names', function () {
         }
     });
 });
+
 Meteor.publish('branchStaff', function () {
     if (Meteor.userId() && (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager'))) {
         return Branches.find({_id: Meteor.user().assignedBranch}, {
@@ -76,8 +78,29 @@ Meteor.publish('bookingsStaff', function(dateRange) {
                 }, { sort: {date: -1} }
             );
         }
+    } else {
+        throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
+    }
+});
 
+Meteor.publish('bookingData', function(bookingID) {
+    if (!Meteor.userId()) {
+        throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
+    }
+    console.log("Passed ID: " + bookingID);
+    const relevantBooking = Bookings.findOne({_id: bookingID}); //Get our booking, safe to do so before more authentication as we aren't returning it yet.
 
+    if (Meteor.userId() === relevantBooking.owner) {
+        //console.log("Has permissions for booking.");
+        return Bookings.find({_id: bookingID}); //If owner of booking, show the booking
+    } else if (Roles.userIsInRole(Meteor.userId(),'admin')) {
+        return Bookings.find({_id: bookingID}); //Admin is allowed to see all bookings
+    } else if (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager')) {
+        if (Meteor.user().assignedBranch !== relevantBooking.branch) {  //Ensure that for staff members, they can only see bookings relevant to their branch.
+            throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
+        } else {
+            return Bookings.find({_id: bookingID}); //If staff or manager of that branch, show the booking.
+        }
     } else {
         throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
     }
