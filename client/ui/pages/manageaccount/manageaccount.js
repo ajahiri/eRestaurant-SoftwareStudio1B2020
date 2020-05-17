@@ -10,7 +10,7 @@ class ManageAccount extends React.Component {
     }
 
     render() {
-        if(Meteor.userId() )
+        if(this.props.userID)
         { 
             return (
                 <MDBContainer>
@@ -19,15 +19,17 @@ class ManageAccount extends React.Component {
             );
         }else{ 
             return( 
-        <MDBCol center sm="6" md="12">
-            <span className="badge badge-danger text-capitalize font-weight-bold text-wrap" style={{fontSize: 'xxx-large'}}>You Must Be Logged In TO View This Page</span>
-        </MDBCol>
-        );
+                <MDBCol center sm="6" md="12">
+                    <span className="badge badge-danger text-capitalize font-weight-bold text-wrap"
+                          style={{fontSize: 'xxx-large'}}>You Must Be Logged In TO View This Page</span>
+                </MDBCol>
+            );
         }
     }
 }
 
 export default withTracker(() => {
     return {
+        userID: Meteor.userId(),
     }
 })(ManageAccount);

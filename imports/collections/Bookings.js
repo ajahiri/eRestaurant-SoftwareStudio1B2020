@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { DateTimeBranch } from './DateTimeBranch.js';
 
 export const Bookings = new Mongo.Collection('bookings');
 
 Bookings.schema = new SimpleSchema({
-    _id: {type: String},
     branch: {type: String},
+    owner: {type: String},
     customerName: {type: String},
     email: {type: String},
     phone: {type: String},
@@ -21,21 +22,40 @@ Bookings.schema = new SimpleSchema({
 });
 
 Meteor.methods({
-    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time, specialRequest) {
-        if (!this.userId) {
-            throw new Meteor.Error('Not logged in', "Must be logged in");
-        }
+    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, dateNice, time, specialRequest) {
         console.log("attempting to add booking");
         Bookings.insert({
             branch,
+            owner: Meteor.userId(),
             customerName,
             email,
             phone,
             guestNum,
             date,
+            dateNice,
             time,
             specialRequest,
+            payed: false,
+            concluded: false,
+            cancelled: false,
+            createdAt: Date(),
         });
         console.log(Bookings.find().fetch());
-    }
+        console.log(DateTimeBranch.findOne({date: date, time: time, branch: branch}));
+        if (DateTimeBranch.findOne({date: dateNice, time: time, branch: branch}) == null) {
+            Meteor.call('date_time_branch.insert', dateNice, time, branch,
+            function(error) {
+                if (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            Meteor.call('date_time_branch.update', dateNice, time, branch,
+            function(error) {
+                if (error) {
+                    console.log(error);
+                }
+            });
+        }
+    },
 });

@@ -14,6 +14,8 @@ import Booking from "../ui/pages/booking/booking";
 import Admin from "../ui/pages/admin/admin";
 import ManageAccount from "../ui/pages/manageaccount/manageaccount";
 import Cart from '../ui/components/cart';
+import StaffDashboard from "../ui/pages/staff_dashboard/staff_dashboard";
+import BookingViewContainer from "../ui/pages/bookingView/booking_view";
 
 
 // All routes should be defined here
@@ -54,6 +56,13 @@ export default function App() {
                         <Header />
                         <ManageAccount />
                         <FooterPage /> 
+                    </Route>
+                    <Route exact path="/staff_dashboard">
+                        <Header />
+                        <StaffDashboard />
+                        <FooterPage />
+                    </Route>
+                    <Route exact path="/bookings/:bookingID" component={BookingViewContainer}>
                     </Route>
                 </Switch>
             </div>

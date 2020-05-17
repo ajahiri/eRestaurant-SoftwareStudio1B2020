@@ -1,12 +1,15 @@
 import { Meteor } from 'meteor/meteor';
+import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
+import Select from 'react-select';
 import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
-import { Bookings } from '../../../../imports/collections/Bookings.js'
+import { Bookings } from '../../../../imports/collections/Bookings.js';
+import { Branches } from '../../../../imports/collections/Branches.js';
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
 
-{/* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */}
+/* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
 class Booking extends React.Component {  
     constructor(props) {
@@ -34,7 +37,7 @@ class Booking extends React.Component {
         
         // START Booking Details Attributes
         customerName: '',
-        branch: '',
+        branch: null,
         email: '',
         phone: '',
         guestNum: '',
@@ -52,12 +55,18 @@ class Booking extends React.Component {
         this.handleGuestNum = this.handleGuestNum.bind(this);
         this.handleSpecialRequest = this.handleSpecialRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleBranch = this.handleBranch.bind(this);
+        this.branchNames = this.branchNames.bind(this);
+
+        this.handleBtnTest = this.handleBtnTest.bind(this);
     }
-    handleSubmit() {
+    handleSubmit(event) {
+        event.preventDefault();
         const state = this.state;
-        const date = new Date(state.date).toDateString(); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May 
-        Meteor.call('bookings.insert', state.branch, state.customerName, state.email, 
-            state.phone, state.guestNum, date, state.time, state.specialRequest,
+        const date = new Date(this.state.date); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
+        const dateNice = date.toDateString();
+        Meteor.call('bookings.insert', state.branch.value, state.customerName, state.email,
+            state.phone, state.guestNum, date, dateNice, state.time, state.specialRequest,
             function(error) {
                 if (error) {
                     console.log(error);
@@ -222,26 +231,27 @@ class Booking extends React.Component {
     handleSpecialRequest(event) {
         this.setState({specialRequest: event.target.value});
     }
+    handleBranch(branch) {
+        this.setState({branch});
+    }
+    branchNames() { //builds an array of each branch name and id to be passed to the Selector component
+        let selectArray = [];
+        this.props.branch_names.forEach(function(branch) {
+            selectArray.push({value: branch._id, label: branch.name});
+        });
+        return selectArray;
+    }
+    
+    handleBtnTest(event) {
+        console.log('called')
+    }
 
     render() {
-        //const date = this.state.date; 
-        const date = this.state.date;
-        const defaultDateFormat = this.state.defaultDateFormat;
-
-        const btnFour = this.state.btnFour;
-        const btnFive = this.state.btnFive;
-        const btnSix = this.state.btnSix;
-        const btnSeven = this.state.btnSeven;
-        const btnEight = this.state.btnEight;
-        const btnNine = this.state.btnNine;
-        const btnTen = this.state.btnTen;
-        const btnFour_thirty = this.state.btnFour_thirty;
-        const btnFive_thirty = this.state.btnFive_thirty;
-        const btnSix_thirty = this.state.btnSix_thirty;
-        const btnSeven_thirty = this.state.btnSeven_thirty;
-        const btnEight_thirty = this.state.btnEight_thirty;
-        const btnNine_thirty = this.state.btnNine_thirty;
-        const btnTen_thirty = this.state.btnTen_thirty;
+        const { 
+            date, defaultDateFormat,
+            branch,
+            btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen, btnFour_thirty, btnFive_thirty, btnSix_thirty, btnSeven_thirty, btnEight_thirty, btnNine_thirty, btnTen_thirty
+        } = this.state;
 
         return (
             <form onSubmit={this.handleSubmit} >
@@ -258,17 +268,19 @@ class Booking extends React.Component {
                         <MDBCol sm="4" md="4" lg="4"><MDBInput label="Email" size="lg" onChange={this.handleEmail} /> </MDBCol>
                         <MDBCol sm="4" md="4" lg="4"><MDBInput label="Phone" size="lg" onChange={this.handlePhone} /> </MDBCol>
                     </MDBRow>
-                    <MDBRow center>
-                            <MDBDropdown>
-                                <MDBDropdownToggle caret color="primary">
-                                    Select Restaurant Location...
-                                </MDBDropdownToggle>
-                                <MDBDropdownMenu right basic>
-                                    <MDBDropdownItem>Example Branch 1</MDBDropdownItem>
-                                    <MDBDropdownItem>Example Branch 1</MDBDropdownItem>
-                                    <MDBDropdownItem>Example Branch 3</MDBDropdownItem>
-                                </MDBDropdownMenu>
-                            </MDBDropdown>
+                    <MDBRow center >
+                        <MDBCol sm="8" md="8" lg="8">
+                        <MDBTypography className="element-heading" tag="h6" >Location:</MDBTypography>
+                            <Select
+                                className="branch-selector"
+                                placeholder="Select Location..."
+                                value={branch}
+                                onChange={this.handleBranch}
+                                options={
+                                    this.branchNames()
+                                }
+                            />
+                        </MDBCol>
                     </MDBRow>
                     <MDBRow center>
                         <MDBCol sm="4" md="4" lg="4"><MDBInput type="number" label="Number of Guests" size="lg" hint="0" onChange={this.handleGuestNum} /></MDBCol>
@@ -288,12 +300,12 @@ class Booking extends React.Component {
                             onClose={() => {
                                 // Bug Fix: If backspace is used when input field is selected input field is blank
                                 if (date.length==0) {
-                                    this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." });
-                                    this.setState({ date: Date() }) //resets date to Date() -> returns todays date
+                                    this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." }); //resets placeholder value
+                                    this.setState({ date: new Date() }) //resets date to Date() -> returns todays date
                                 }
                             }}
                             options={{
-                                altInput: true, // altInput is teh human friendly format (April 22, 2020)
+                                altInput: true, // altInput is a "human friendly" format (April 22, 2020)
                                 altFormat: defaultDateFormat,
                                 dateFormat: "Y-m-d", //set altInput to false to use this format
                                 minDate:"today",
@@ -305,7 +317,7 @@ class Booking extends React.Component {
                     <MDBContainer>
                         <MDBRow center>
                             <MDBCol sm="8" md="8" lg="8">
-                                <MDBTypography className="table-heading" tag="h5" >Time:</MDBTypography>
+                                <MDBTypography className="element-heading" tag="h5" >Time:</MDBTypography>
                                 <table className="time-selector">
                                     <tbody>
                                         <tr>
@@ -338,7 +350,7 @@ class Booking extends React.Component {
                     </MDBRow>
                     <MDBRow className='btn-confirm-padding'>
                     <MDBCol><MDBBtn color="indigo" size='lg' type='submit'>Confirm Booking</MDBBtn></MDBCol>
-                    <MDBCol><MDBBtn onClick={this.handleSubmit}>Test AddBooking</MDBBtn></MDBCol>
+                    <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test btn</MDBBtn></MDBCol>
                     </MDBRow>
                 </MDBContainer>
             </form>
@@ -346,4 +358,10 @@ class Booking extends React.Component {
     }
 }
 
-export default Booking;
+export default withTracker(() => {
+    //Meteor.subscribe('branches');
+    Meteor.subscribe('branch_names');
+    return {
+        branch_names: Branches.find().fetch(),
+    }
+})(Booking);

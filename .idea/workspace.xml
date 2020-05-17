@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/booking_view.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/routing/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/routing/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/manageaccount/manageaccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/manageaccount/manageaccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imports/collections/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
     </list>
@@ -96,6 +99,10 @@
       <workItem from="1588223289125" duration="22537000" />
       <workItem from="1588566761513" duration="18000" />
       <workItem from="1588566795086" duration="6538000" />
+      <workItem from="1588875890138" duration="1399000" />
+      <workItem from="1589127391963" duration="391000" />
+      <workItem from="1589175972822" duration="1422000" />
+      <workItem from="1589727932345" duration="7199000" />
     </task>
     <servers />
   </component>
@@ -120,6 +127,10 @@
     </state>
     <state x="-1209" y="634" key="#com.intellij.fileTypes.FileTypeChooser/-1920.324.1920.1020/0.0.2560.1400@-1920.324.1920.1020" timestamp="1586776048090" />
     <state x="711" y="316" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586805270780" />
+    <state x="961" y="437" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588865130924">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="961" y="437" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1588865130924" />
     <state x="3300" y="555" width="786" height="745" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588225740572">
       <screen x="1920" y="0" width="3840" height="2160" />
     </state>
