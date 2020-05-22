@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { Promise } from 'meteor/promise';
 
 export const DateTimeBranch = new Mongo.Collection('date_time_branch');
 
@@ -28,11 +29,27 @@ Meteor.methods({
         DateTimeBranch.update({date, time, branch}, {
             $inc: { counter: 1 },
         });
-        if(DateTimeBranch.findOne({date, time, branch},{fields:{counter:1}}) >= 50) {   // if counter is >= 50
+        if(DateTimeBranch.findOne({date, time, branch}, {fields:{counter:1}}) >= 50) {   // if counter is >= 50 set available to false
             DateTimeBranch.update({date, time, branch}, {
                 $set: { available: false},
             });
         }
         console.log('updated DTB');
+    },
+
+    'date_time_branch.check': function (date, branch) {
+        console.log(branch + ' ' + date);
+        let unavailableTimes = [];
+            //returns the time for all DTB documents that match date and branch with a counter >= 50
+        let matches = DateTimeBranch.find({date: date, branch: branch}, {fields:{counter:1, time:1}}).fetch();
+        console.log(matches.length);
+        matches.forEach((match) => {
+            console.log(match.counter);
+            if (match.counter >= 4) {
+                console.log('unavailable time found:' + match.time);
+                unavailableTimes.push(match.time); // returns the time of all bookings for the selected date and branch if the counter of those booking are >=50
+            }
+        })
+        return unavailableTimes;
     },
 });

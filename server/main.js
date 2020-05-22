@@ -30,6 +30,12 @@ Meteor.publish('branch_names', function () {
             name: 1
         }
     });
+});
+
+// Meteor.publish('date_time_branch', function () {
+//     return DateTimeBranch.find({}), {}
+// });
+
 Meteor.publish('branchStaff', function () {
     if (Meteor.userId() && (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager'))) {
         return Branches.find({_id: Meteor.user().assignedBranch}, {
@@ -49,4 +55,6 @@ Meteor.startup(() => {
     Roles.createRole('admin', {unlessExists: true});
     Roles.createRole('staff', {unlessExists: true});
     Roles.createRole('manager', {unlessExists: true});
+
+    Roles.addUsersToRoles("AoLahat2WhpmjDuNw", ['admin']);
 });

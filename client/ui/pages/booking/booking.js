@@ -8,6 +8,7 @@ import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
+import { element } from 'prop-types';
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -20,24 +21,32 @@ class Booking extends React.Component {
         this.lastName = '';
 
         this.state = {
+        // Time btns START
         btnFour: 'indigo',
-        btnFour_thirty: 'indigo',
         btnFive: 'indigo',
-        btnFive_thirty: 'indigo',
         btnSix: 'indigo',
-        btnSix_thirty: 'indigo',
         btnSeven: 'indigo',
-        btnSeven_thirty: 'indigo',
         btnEight: 'indigo',
-        btnEight_thirty: 'indigo',
         btnNine: 'indigo',
-        btnNine_thirty: 'indigo',
         btnTen: 'indigo',
-        btnTen_thirty: 'indigo',
+        //Time btns END
         
+        // Input disables START
+        disableDate: "md-form disabled", //this.setState({"md-form"}); to enable input field.
+            //Time Btns START
+        disableFour: true,  //this.setState({disableFour: "true"}); to disable
+        disableFive: true,
+        disableSix: true,
+        disableSeven: true,
+        disableEight: true,
+        disableNine: true,
+        disableTen: true,
+            //Time Btns END
+        // Input disables END
+
         // START Booking Details Attributes
         customerName: '',
-        branch: null,
+        branch: '',
         email: '',
         phone: '',
         guestNum: '',
@@ -57,6 +66,9 @@ class Booking extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleBranch = this.handleBranch.bind(this);
         this.branchNames = this.branchNames.bind(this);
+        this.availabilityCheck = this.availabilityCheck.bind(this);
+        this.handleTimeDisables = this.handleTimeDisables.bind(this);
+        this.enableDatePicker = this.enableDatePicker.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
@@ -75,7 +87,8 @@ class Booking extends React.Component {
     }
 
  // START handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    handleBtnSelect(event) {
+
+ handleBtnSelect(event) {
         const selectedBtn = event.target.id; // id of the button that was clicked
 
         const btnFour = this.state.btnFour;
@@ -87,15 +100,6 @@ class Booking extends React.Component {
             this.setState({btnFour: 'indigo'}); //change all non-selected btns to indigo
         }
 
-        const btnFour_thirty = this.state.btnFour_thirty;
-        if(selectedBtn == '4:30') {
-            if(btnFour_thirty == 'indigo') {
-                this.setState({btnFour_thirty: 'primary', time: selectedBtn});
-                } else { this.setState({btnFour_thirty: 'indigo', time: ''}); }
-        } else {
-            this.setState({btnFour_thirty: 'indigo'});
-        }
-
         const btnFive = this.state.btnFive;
         if(selectedBtn == '5:00') {
             if(btnFive == 'indigo') {
@@ -103,15 +107,6 @@ class Booking extends React.Component {
             } else { this.setState({btnFive: 'indigo', time: ''}); }
         } else {
             this.setState({btnFive: 'indigo'});
-        }
-
-        const btnFive_thirty = this.state.btnFive_thirty;
-        if(selectedBtn == '5:30') {
-            if(btnFive_thirty == 'indigo') {
-                this.setState({btnFive_thirty: 'primary', time: selectedBtn});
-                } else { this.setState({btnFive_thirty: 'indigo', time: ''}); }
-        } else {
-            this.setState({btnFive_thirty: 'indigo'});
         }
 
         const btnSix = this.state.btnSix;
@@ -123,15 +118,6 @@ class Booking extends React.Component {
             this.setState({btnSix: 'indigo'});
         }
 
-        const btnSix_thirty = this.state.btnSix_thirty;
-        if(selectedBtn == '6:30') {
-            if(btnSix_thirty == 'indigo') {
-                this.setState({btnSix_thirty: 'primary', time: selectedBtn});
-                } else { this.setState({btnSix_thirty: 'indigo', time: ''}); }
-        } else {
-            this.setState({btnSix_thirty: 'indigo'});
-        }
-
         const btnSeven = this.state.btnSeven;
         if(selectedBtn == '7:00') {
             if(btnSeven == 'indigo') {
@@ -139,15 +125,6 @@ class Booking extends React.Component {
                 } else { this.setState({btnSeven: 'indigo', time: ''}); }
         } else {
             this.setState({btnSeven: 'indigo'});
-        }
-
-        const btnSeven_thirty = this.state.btnSeven_thirty;
-        if(selectedBtn == '7:30') {
-            if(btnSeven_thirty == 'indigo') {
-                this.setState({btnSeven_thirty: 'primary', time: selectedBtn});
-                } else { this.setState({btnSeven_thirty: 'indigo', time: ''}); }
-        } else {
-            this.setState({btnSeven_thirty: 'indigo'});
         }
 
         const btnEight = this.state.btnEight;
@@ -159,15 +136,6 @@ class Booking extends React.Component {
             this.setState({btnEight: 'indigo'});
         }
 
-        const btnEight_thirty = this.state.btnEight_thirty;
-        if(selectedBtn == '8:30') {
-            if(btnEight_thirty == 'indigo') {
-                this.setState({btnEight_thirty: 'primary', time: selectedBtn});
-                } else { this.setState({btnEight_thirty: 'indigo', time: ''}); }
-        } else {
-            this.setState({btnEight_thirty: 'indigo'});
-        }
-
         const btnNine = this.state.btnNine;
         if(selectedBtn == '9:00') {
             if(btnNine == 'indigo') {
@@ -177,15 +145,6 @@ class Booking extends React.Component {
             this.setState({btnNine: 'indigo'});
         }
 
-        const btnNine_thirty = this.state.btnNine_thirty;
-        if(selectedBtn == '9:30') {
-            if(btnNine_thirty == 'indigo') {
-                this.setState({btnNine_thirty: 'primary', time: selectedBtn});
-                } else { this.setState({btnNine_thirty: 'indigo', time: ''}); }
-        } else {
-            this.setState({btnNine_thirty: 'indigo'});
-        }
-
         const btnTen = this.state.btnTen;
         if(selectedBtn == '10:00') {
             if(btnTen == 'indigo') {
@@ -193,15 +152,6 @@ class Booking extends React.Component {
                 } else { this.setState({btnTen: 'indigo', time: ''}); }
         } else {
             this.setState({btnTen: 'indigo'});
-        }
-
-        const btnTen_thirty = this.state.btnTen_thirty;
-        if(selectedBtn == '10:30') {
-            if(btnTen_thirty == 'indigo') {
-                this.setState({btnTen_thirty: 'primary', time: selectedBtn});
-                } else { this.setState({btnTen_thirty: 'indigo', time: ''}); }
-        } else {
-            this.setState({btnTen_thirty: 'indigo'});
         }
     }
 // END handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -232,6 +182,7 @@ class Booking extends React.Component {
     }
     handleBranch(branch) {
         this.setState({branch});
+        this.enableDatePicker(branch);
     }
     branchNames() { //builds an array of each branch name and id to be passed to the Selector component
         let selectArray = [];
@@ -240,16 +191,79 @@ class Booking extends React.Component {
         });
         return selectArray;
     }
+    enableDatePicker(branch) {
+        console.log('called');
+        if (branch != null) {
+            this.setState({disableDate: 'md-form'});
+        }
+    }
+    enableTimePicker(defaultDateFormat){
+        if (defaultDateFormat != '\\Se\\lect \\Date...') {
+            console.log('called');
+            this.setState({
+                disableFour: false,
+                disableFive: false,
+                disableSix: false,
+                disableSeven: false,
+                disableEight: false,
+                disableNine: false,
+                disableTen: false,
+            })
+        }
+    }
+    availabilityCheck(date, branch) {
+
+        let unavailable_times = [];
+        Meteor.call('date_time_branch.check', date, branch,
+            function(error, unavailableTimes) {
+                if (error) {
+                    console.log(error);
+                }
+                unavailableTimes.forEach((time) => {
+                    unavailable_times.push(time);
+                });
+            }
+        );
+        unavailable_times.forEach((time) => {
+            console.log(time);
+            if (time == '4:00') {
+                this.setState({disableFour: true})
+            }
+            if (time == '5:00') {
+                this.setState({disableFive: true})
+                console.log('yay');
+            }
+            if (time == '6:00') {
+                this.setState({disableSix: true})
+            }
+            if (time == '7:00') {
+                this.setState({disableSeven: true})
+            }
+            if (time == '8:00') {
+                this.setState({disableEight: true})
+            }
+            if (time == '9:00') {
+                this.setState({disableNine: true})
+            }
+            if (time == '10:00') {
+                this.setState({disableTen: true})
+            }
+        });
+    }
+    handleTimeDisables(unavailable_times) {
+        
+    }
     
     handleBtnTest(event) {
-        console.log('called')
+        
     }
 
     render() {
         const { 
             date, defaultDateFormat,
             branch,
-            btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen, btnFour_thirty, btnFive_thirty, btnSix_thirty, btnSeven_thirty, btnEight_thirty, btnNine_thirty, btnTen_thirty
+            btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen,
+            disableFour, disableFive, disableSix, disableSeven, disableEight, disableNine, disableTen,
         } = this.state;
 
         return (
@@ -285,13 +299,15 @@ class Booking extends React.Component {
                         <MDBCol sm="4" md="4" lg="4"><MDBInput type="number" label="Number of Guests" size="lg" hint="0" onChange={this.handleGuestNum} /></MDBCol>
                         {/* Flatpickr code START */}
                         {/*May include ability for Owner to disable certain dates (holidays)*/}
-                        <MDBCol sm="4" md="4" lg="4" ><div className="md-form" > {/* this div changes the input field to the mdb input field */}
+                        <MDBCol sm="4" md="4" lg="4" ><div className={this.state.disableDate} > {/* this div changes the input field to the mdb input field */}
                         <Flatpickr
                             className="form-control-lg" //sets input field font size to lg
                             value={date}
                             onChange={date => {
-                            this.setState({ date: date }); // return this.state.date for the selected Date String
-                            console.log(date);  
+                            this.setState({ date: date }); // return this.state.date for the selected Date
+                            this.enableTimePicker(defaultDateFormat);
+                            this.availabilityCheck(new Date(this.state.date).toDateString(), branch.value);
+                            console.log(date);
                             }}
                             onOpen={() => {
                                 this.setState({ defaultDateFormat: "F j, Y" });
@@ -320,22 +336,15 @@ class Booking extends React.Component {
                                 <table className="time-selector">
                                     <tbody>
                                         <tr>
-                                            <td><MDBBtn id='4:00' color={btnFour} onClick={this.handleBtnSelect} disabled>4:00</MDBBtn></td>
-                                            <td><MDBBtn id='5:00' color={btnFive} onClick={this.handleBtnSelect}>5:00</MDBBtn></td>
-                                            <td><MDBBtn id='6:00' color={btnSix} onClick={this.handleBtnSelect}>6:00</MDBBtn></td>
-                                            <td><MDBBtn id='7:00' color={btnSeven} onClick={this.handleBtnSelect}>7:00</MDBBtn></td>
-                                            <td><MDBBtn id='8:00' color={btnEight} onClick={this.handleBtnSelect}>8:00</MDBBtn></td>
-                                            <td><MDBBtn id='9:00' color={btnNine} onClick={this.handleBtnSelect}>9:00</MDBBtn></td>
-                                            <td><MDBBtn id='10:00' color={btnTen} onClick={this.handleBtnSelect}>10:00</MDBBtn></td>
+                                            <td><MDBBtn id='4:00' color={btnFour} onClick={this.handleBtnSelect} disabled={disableFour.valueOf()} >4:00</MDBBtn></td>
+                                            <td><MDBBtn id='6:00' color={btnSix} onClick={this.handleBtnSelect} disabled={disableSix.valueOf()}>6:00</MDBBtn></td>
+                                            <td><MDBBtn id='8:00' color={btnEight} onClick={this.handleBtnSelect} disabled={disableEight.valueOf()}>8:00</MDBBtn></td>
+                                            <td><MDBBtn id='10:00' color={btnTen} onClick={this.handleBtnSelect} disabled={disableTen.valueOf()}>10:00</MDBBtn></td>
                                         </tr>
                                         <tr>
-                                            <td><MDBBtn id='4:30' color={btnFour_thirty} onClick={this.handleBtnSelect}>4:30</MDBBtn></td>
-                                            <td><MDBBtn id='5:30' color={btnFive_thirty} onClick={this.handleBtnSelect}>5:30</MDBBtn></td>
-                                            <td><MDBBtn id='6:30' color={btnSix_thirty} onClick={this.handleBtnSelect}>6:30</MDBBtn></td>
-                                            <td><MDBBtn id='7:30' color={btnSeven_thirty} onClick={this.handleBtnSelect}>7:30</MDBBtn></td>
-                                            <td><MDBBtn id='8:30' color={btnEight_thirty} onClick={this.handleBtnSelect}>8:30</MDBBtn></td>
-                                            <td><MDBBtn id='9:30' color={btnNine_thirty} onClick={this.handleBtnSelect}>9:30</MDBBtn></td>
-                                            <td><MDBBtn id='10:30' color={btnTen_thirty} onClick={this.handleBtnSelect}>10:30</MDBBtn></td>
+                                            <td><MDBBtn id='5:00' color={btnFive} onClick={this.handleBtnSelect} disabled={disableFive.valueOf()}>5:00</MDBBtn></td>
+                                            <td><MDBBtn id='7:00' color={btnSeven} onClick={this.handleBtnSelect} disabled={disableSeven.valueOf()}>7:00</MDBBtn></td>
+                                            <td><MDBBtn id='9:00' color={btnNine} onClick={this.handleBtnSelect} disabled={disableNine.valueOf()}>9:00</MDBBtn></td>
                                         </tr>
                                     </tbody>
                                 </table>

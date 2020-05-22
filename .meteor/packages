@@ -25,3 +25,4 @@ react-meteor-data
 accounts-base@1.6.0
 accounts-password@1.6.0
 alanning:roles
+promise
