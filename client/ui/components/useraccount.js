@@ -43,53 +43,6 @@ class UserAcount extends React.Component {
             {
                 changepassword = true;
             }
-
-            // if(name == 'oldpassword' || name == 'newpassword')       
-            // {
-            //     if(this.state.oldpassword != this.state.newpassword)
-            //     {
-            //         if(this.state.newpassword != null && this.state.newpassword !="" && this.state.newpassword != " ")
-            //         {
-            //             let str = this.state.newpassword;
-            //             if(str.length > 8)
-            //             {
-            //                 if(this.state.oldpassword != this.state.newpassword)
-            //                 {
-            //                     this.setState({
-            //                         passwordlabel: ""
-            //                     });
-            //                     changepassword = true;
-            //                 }else{
-            //                     this.setState({
-            //                         passwordlabel: "Please Choose Diffrent New Password as it matches with old one"
-            //                     });
-            //                 }
-                            
-            //             }else{
-            //                 this.setState({
-            //                     passwordlabel: "New Password must be more than 8 charachters"
-            //                 });
-            //             }
-            //         }else{
-            //             this.setState({
-            //                 passwordlabel: "New Password is Empty"
-            //             });
-            //         }
-            //     }else{
-            //         if(this.state.oldpassword != null && this.state.oldpassword !="" && this.state.oldpassword != " ")
-            //         {
-            //             this.setState({
-            //                 passwordlabel: "Please Choose Diffrent New Password as it matches with old one"
-            //             });
-            //         }else{
-            //             this.setState({
-            //                 passwordlabel: ""
-            //             });
-            //         }
-
-            //     }
-            // }
-
         }
         
           handleSubmit(event) 
