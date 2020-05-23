@@ -50,6 +50,6 @@ Meteor.methods({
                 unavailableTimes.push(match.time); // returns the time of all bookings for the selected date and branch if the counter of those booking are >=50
             }
         })
-        return unavailableTimes;
+        return Promise.await(unavailableTimes);
     },
 });

@@ -8,7 +8,7 @@ import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
-import { element } from 'prop-types';
+import Hello_world from '../../components/helloWorld.js';
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -21,6 +21,7 @@ class Booking extends React.Component {
         this.lastName = '';
 
         this.state = {
+        activeView: 'booking',
         // Time btns START
         btnFour: 'indigo',
         btnFive: 'indigo',
@@ -255,11 +256,12 @@ class Booking extends React.Component {
     }
     
     handleBtnTest(event) {
-        
+        this.setState({activeView: 'helloWorld'});
     }
 
     render() {
         const { 
+            activeView,
             date, defaultDateFormat,
             branch,
             btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen,
@@ -267,6 +269,8 @@ class Booking extends React.Component {
         } = this.state;
 
         return (
+            <div>
+            {activeView == 'booking' ?
             <form onSubmit={this.handleSubmit} >
                 <MDBContainer> 
                     
@@ -362,6 +366,10 @@ class Booking extends React.Component {
                     </MDBRow>
                 </MDBContainer>
             </form>
+            : null
+            }
+            {activeView == 'helloWorld' ? <Hello_world /> : null}
+            </div>
         );
     }
 }
