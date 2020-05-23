@@ -87,7 +87,7 @@ Meteor.publish('bookingData', function(bookingID) {
     if (!Meteor.userId()) {
         throw new Meteor.Error('Insufficient permissions', "Insufficient permissions to sub this content.");
     }
-    console.log("Passed ID: " + bookingID);
+    //console.log("Passed ID: " + bookingID);
     const relevantBooking = Bookings.findOne({_id: bookingID}); //Get our booking, safe to do so before more authentication as we aren't returning it yet.
 
     if (Meteor.userId() === relevantBooking.owner) {
