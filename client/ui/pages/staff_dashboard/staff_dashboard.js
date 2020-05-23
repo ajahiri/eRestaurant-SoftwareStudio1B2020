@@ -18,7 +18,7 @@ class StaffDashboard extends React.Component {
             const bookingURL = "/bookings/" + booking._id;
             return (
                 <tr key={booking._id}>
-                    <td><Link to={bookingURL}>{booking._id}</Link></td>
+                    <td><Link to={bookingURL} className="text-primary">{booking._id}</Link></td>
                     <td>{booking.customerName}</td>
                     <td>{booking.email}</td>
                     <td>{booking.dateNice}</td>
