@@ -27,7 +27,8 @@ Meteor.methods({
         DateTimeBranch.update({date, time, branch}, {
             $inc: { counter: 1 },
         });
-        if(DateTimeBranch.findOne({date, time, branch}, {fields:{counter:1}}) >= 50) {   // if counter is >= 50 set available to false
+        let matches = DateTimeBranch.findOne({date, time, branch}, {fields:{counter:1}}).fetch();
+        if(matches.counter == 50) {   // if counter is = 50 set available to false
             DateTimeBranch.update({date, time, branch}, {
                 $set: { available: false},
             });
@@ -35,20 +36,20 @@ Meteor.methods({
         console.log('updated DTB');
     },
 
-    'date_time_branch.check': function (date, branch) {
+    'date_time_branch.check': function (date, branch, requestedSeats) {
         console.log(branch + ' ' + date);
         let unavailableTimes = [];
             //returns the time for all DTB documents that match date and branch with a counter >= 50
-        let matches = DateTimeBranch.find({date: date, branch: branch}, {fields:{counter:1, time:1}}).fetch();
-        console.log(matches.length);
+        let matches = DateTimeBranch.find({date: date, branch: branch}, {fields:{counter:1, available:1, time:1}}).fetch();
         matches.forEach((match) => {
-            console.log(match.counter);
-            if (match.counter >= 4) {
+            let totalSeats = match.counter + requestedSeats;
+            console.log("counter + requestedSeats: " + match.counter + ' + ' + requestedSeats + ' = ' + totalSeats);
+            if (totalSeats > 5 || !match.available) {
                 console.log('unavailable time found:' + match.time);
                 unavailableTimes.push(match.time); // returns the time of all bookings for the selected date and branch if the counter of those booking are >=50
             }
         })
-        return Promise.await(unavailableTimes);
+        return unavailableTimes;
     },
     
     'date_time_branch.count': function (date, time, branch) {

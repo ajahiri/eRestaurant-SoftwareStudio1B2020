@@ -9,7 +9,7 @@ Bookings.schema = new SimpleSchema({
     customerName: {type: String},
     email: {type: String},
     phone: {type: String},
-    guestNum: {type: String},
+    guestNum: {type: Number},
     date: {type: String},
     time: {type: String},
     specialRequest: {type: String},

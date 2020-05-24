@@ -34,6 +34,8 @@ class Booking extends React.Component {
         
         // Input disables START
         disableDate: "md-form disabled", //this.setState({"md-form"}); to enable input field.
+        disableGuestNum: true,
+        disableBtnNext: true,
             //Time Btns START
         disableFour: true,  //this.setState({disableFour: "true"}); to disable
         disableFive: true,
@@ -50,7 +52,7 @@ class Booking extends React.Component {
         branch: '',
         email: '',
         phone: '',
-        guestNum: '',
+        guestNum: 0,
         time: '',
         date: new Date(),
         specialRequest: '',
@@ -62,6 +64,7 @@ class Booking extends React.Component {
         this.handleCustomerName = this.handleCustomerName.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
         this.handleGuestNum = this.handleGuestNum.bind(this);
         this.handleSpecialRequest = this.handleSpecialRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -95,8 +98,8 @@ class Booking extends React.Component {
         const btnFour = this.state.btnFour;
         if(selectedBtn == '4:00') {
             if(btnFour == 'indigo') { //deselect: toggle between primary and indigo
-                this.setState({btnFour: 'primary', time: selectedBtn}); //selected
-                } else { this.setState({btnFour: 'indigo', time: ''}); } //deselected
+                this.setState({btnFour: 'primary', time: selectedBtn, disableBtnNext: false}); //selected
+                } else { this.setState({btnFour: 'indigo', time: '', disableBtnNext: true}); } //deselected
         } else {
             this.setState({btnFour: 'indigo'}); //change all non-selected btns to indigo
         }
@@ -104,8 +107,8 @@ class Booking extends React.Component {
         const btnFive = this.state.btnFive;
         if(selectedBtn == '5:00') {
             if(btnFive == 'indigo') {
-            this.setState({btnFive: 'primary', time: selectedBtn});
-            } else { this.setState({btnFive: 'indigo', time: ''}); }
+            this.setState({btnFive: 'primary', time: selectedBtn, disableBtnNext: false});
+            } else { this.setState({btnFive: 'indigo', time: '', disableBtnNext: true}); }
         } else {
             this.setState({btnFive: 'indigo'});
         }
@@ -113,8 +116,8 @@ class Booking extends React.Component {
         const btnSix = this.state.btnSix;
         if(selectedBtn == '6:00') {
             if(btnSix == 'indigo') {
-                this.setState({btnSix: 'primary', time: selectedBtn});
-                } else { this.setState({btnSix: 'indigo', time: ''}); }
+                this.setState({btnSix: 'primary', time: selectedBtn, disableBtnNext: false});
+                } else { this.setState({btnSix: 'indigo', time: '', disableBtnNext: true}); }
         } else {
             this.setState({btnSix: 'indigo'});
         }
@@ -122,8 +125,8 @@ class Booking extends React.Component {
         const btnSeven = this.state.btnSeven;
         if(selectedBtn == '7:00') {
             if(btnSeven == 'indigo') {
-                this.setState({btnSeven: 'primary', time: selectedBtn});
-                } else { this.setState({btnSeven: 'indigo', time: ''}); }
+                this.setState({btnSeven: 'primary', time: selectedBtn, disableBtnNext: false});
+                } else { this.setState({btnSeven: 'indigo', time: '', disableBtnNext: true}); }
         } else {
             this.setState({btnSeven: 'indigo'});
         }
@@ -131,8 +134,8 @@ class Booking extends React.Component {
         const btnEight = this.state.btnEight;
         if(selectedBtn == '8:00') {
             if(btnEight == 'indigo') {
-                this.setState({btnEight: 'primary', time: selectedBtn});
-                } else { this.setState({btnEight: 'indigo', time: ''}); }
+                this.setState({btnEight: 'primary', time: selectedBtn, disableBtnNext: false});
+                } else { this.setState({btnEight: 'indigo', time: '', disableBtnNext: true}); }
         } else {
             this.setState({btnEight: 'indigo'});
         }
@@ -140,8 +143,8 @@ class Booking extends React.Component {
         const btnNine = this.state.btnNine;
         if(selectedBtn == '9:00') {
             if(btnNine == 'indigo') {
-                this.setState({btnNine: 'primary', time: selectedBtn});
-                } else { this.setState({btnNine: 'indigo', time: ''}); }
+                this.setState({btnNine: 'primary', time: selectedBtn, disableBtnNext: false});
+                } else { this.setState({btnNine: 'indigo', time: '', disableBtnNext: true}); }
         } else {
             this.setState({btnNine: 'indigo'});
         }
@@ -149,8 +152,8 @@ class Booking extends React.Component {
         const btnTen = this.state.btnTen;
         if(selectedBtn == '10:00') {
             if(btnTen == 'indigo') {
-                this.setState({btnTen: 'primary', time: selectedBtn});
-                } else { this.setState({btnTen: 'indigo', time: ''}); }
+                this.setState({btnTen: 'primary', time: selectedBtn, disableBtnNext: false});
+                } else { this.setState({btnTen: 'indigo', time: '', disableBtnNext: true}); }
         } else {
             this.setState({btnTen: 'indigo'});
         }
@@ -178,8 +181,12 @@ class Booking extends React.Component {
         this.setState({phone: event.target.value});
     }
 
+    handleDateChange(date){
+        this.setState({ date: date, disableGuestNum: false}); // return this.state.date for the selected Date
+    }
+
     handleGuestNum(event) {
-        this.setState({guestNum: event.target.value});
+        this.setState({guestNum: Number(event.target.value)});
     }
 
     handleSpecialRequest(event) {
@@ -221,55 +228,50 @@ class Booking extends React.Component {
         }
     }
 
-    async availabilityCheck(date, branch) {
-        let fourCount = await Meteor.callPromise('date_time_branch.count', date, "4:00", branch);
-        if (fourCount >= 4) {
-            this.setState({disableFour: true});
-        } else {
-            this.setState({disableFour: false});
-        }
+    disabelDatePicker(){
+        this.setState({
+            disableFour: true,
+            disableFive: true,
+            disableSix: true,
+            disableSeven: true,
+            disableEight: true,
+            disableNine: true,
+            disableTen: true,
+        })
+    }
 
-        let fiveCount = await Meteor.callPromise('date_time_branch.count', date, "5:00", branch);
-        console.log("CHECKING FOR TIME 5:00. Res: " + fiveCount);
-        if (fiveCount >= 4) {
-            this.setState({disableFive: true});
+    async availabilityCheck(date, branch, guestNum) {
+        if (guestNum > 0) {
+            let unavailable_times = await Meteor.callPromise('date_time_branch.check', date, branch, guestNum);
+            if (unavailable_times.length > 0) {
+                unavailable_times.map((time) => {
+                    if (time == "4:00") {
+                        this.setState({disableFour: true})
+                    }
+                    if (time == "5:00") {
+                        this.setState({disableFive: true})
+                    }
+                    if (time == "6:00") {
+                        this.setState({disableSix: true})
+                    }
+                    if (time == "7:00") {
+                        this.setState({disableSeven: true})
+                    }
+                    if (time == "8:00") {
+                        this.setState({disableEight: true})
+                    }
+                    if (time == "9:00") {
+                        this.setState({disableNine: true})
+                    }
+                    if (time == "10:00") {
+                        this.setState({disableTen: true})
+                    }
+                });
+            } else {
+                this.enableTimePicker();
+            }
         } else {
-            this.setState({disableFive: false});
-        }
-
-        let sixCount = await Meteor.callPromise('date_time_branch.count', date, "6:00", branch);
-        if (sixCount >= 4) {
-            this.setState({disableSix: true});
-        } else {
-            this.setState({disableSix: false});
-        }
-
-        let sevenCount = await Meteor.callPromise('date_time_branch.count', date, "7:00", branch);
-        if (sevenCount >= 4) {
-            this.setState({disableSeven: true});
-        } else {
-            this.setState({disableSeven: false});
-        }
-
-        let eightCount = await Meteor.callPromise('date_time_branch.count', date, "8:00", branch);
-        if (eightCount >= 4) {
-            this.setState({disableEight: true});
-        } else {
-            this.setState({disableEight: false});
-        }
-
-        let nineCount = await Meteor.callPromise('date_time_branch.count', date, "9:00", branch);
-        if (nineCount >= 4) {
-            this.setState({disableNine: true});
-        } else {
-            this.setState({disableNine: false});
-        }
-
-        let tenCount = await Meteor.callPromise('date_time_branch.count', date, "10:00", branch);
-        if (tenCount >= 4) {
-            this.setState({disableTen: true});
-        } else {
-            this.setState({disableTen: false});
+            this.disableTimePicker();
         }
     }
 
@@ -285,7 +287,7 @@ class Booking extends React.Component {
         const { 
             activeView,
             date, defaultDateFormat,
-            branch,
+            branch, disableGuestNum,
             btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen,
             disableFour, disableFive, disableSix, disableSeven, disableEight, disableNine, disableTen,
         } = this.state;
@@ -297,7 +299,7 @@ class Booking extends React.Component {
                 <MDBContainer> 
                     
                     <MDBRow>
-                        <h2>Create Booking</h2>
+                        <h2>Make a Booking</h2>
                     </MDBRow>
                     <MDBRow center>
                         <MDBCol sm="4" md="4" lg="4"><MDBInput label="First Name" size="lg" value={this.state.value} onChange={this.handleCustomerName} name='firstName' /> </MDBCol> { /* value={this.state.value} is already the default value */}
@@ -322,7 +324,6 @@ class Booking extends React.Component {
                         </MDBCol>
                     </MDBRow>
                     <MDBRow center>
-                        <MDBCol sm="4" md="4" lg="4"><MDBInput type="number" label="Number of Guests" size="lg" hint="0" onChange={this.handleGuestNum} /></MDBCol>
                         {/* Flatpickr code START */}
                         {/*May include ability for Owner to disable certain dates (holidays)*/}
                         <MDBCol sm="4" md="4" lg="4" ><div className={this.state.disableDate} > {/* this div changes the input field to the mdb input field */}
@@ -330,10 +331,7 @@ class Booking extends React.Component {
                             className="form-control-lg" //sets input field font size to lg
                             value={date}
                             onChange={date => {
-                            this.setState({ date: date }); // return this.state.date for the selected Date
-                            this.enableTimePicker(defaultDateFormat);
-                            this.availabilityCheck(new Date(this.state.date).toDateString(), branch.value);
-                            //console.log(date);
+                            this.handleDateChange(date);
                             }}
                             onOpen={() => {
                                 this.setState({ defaultDateFormat: "F j, Y" });
@@ -354,6 +352,13 @@ class Booking extends React.Component {
                         />
                         </div></MDBCol>
                         {/* Flatpickr code END */}
+                        <MDBCol sm="4" md="4" lg="4">
+                            <MDBInput type="number" label="Number of Guests" size="lg" hint="0" disabled={disableGuestNum.valueOf()}
+                                onChange={ () => {
+                                    this.handleGuestNum(event);
+                                    this.availabilityCheck(new Date(date).toDateString(), branch.value, Number(event.target.value) /*guestNum*/);
+                                }} />
+                        </MDBCol>
                     </MDBRow>
                     <MDBContainer>
                         <MDBRow center>
