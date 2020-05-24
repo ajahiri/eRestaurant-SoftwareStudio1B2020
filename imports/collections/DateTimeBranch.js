@@ -1,8 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
-import { Promise } from 'meteor/promise';
-
 export const DateTimeBranch = new Mongo.Collection('date_time_branch');
 
 DateTimeBranch.schema = new SimpleSchema({
@@ -51,5 +49,15 @@ Meteor.methods({
             }
         })
         return Promise.await(unavailableTimes);
+    },
+    
+    'date_time_branch.count': function (date, time, branch) {
+        if (DateTimeBranch.findOne({date: date, time: time, branch: branch})) {
+            let result = DateTimeBranch.findOne({date: date, time: time, branch: branch}).counter;
+            console.log("Combination Method result: " + result)
+            return result;
+        } else {
+            return 0;
+        }
     },
 });

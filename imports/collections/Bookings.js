@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { DateTimeBranch } from './DateTimeBranch.js';
-
 export const Bookings = new Mongo.Collection('bookings');
 
 Bookings.schema = new SimpleSchema({

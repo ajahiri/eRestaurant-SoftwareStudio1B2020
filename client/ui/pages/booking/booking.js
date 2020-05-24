@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
 import Select from 'react-select';
-import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem} from  "mdbreact";
+import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
 import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
@@ -155,7 +155,7 @@ class Booking extends React.Component {
             this.setState({btnTen: 'indigo'});
         }
     }
-// END handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // END handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////
 
     handleCustomerName(event) {
         const target = event.target;
@@ -169,22 +169,28 @@ class Booking extends React.Component {
         const fullName = this.firstName + ' ' + this.lastName;
         this.setState({customerName: fullName});     
     }
+
     handleEmail(event) {
         this.setState({email: event.target.value});
     }
+
     handlePhone(event) {
         this.setState({phone: event.target.value});
     }
+
     handleGuestNum(event) {
         this.setState({guestNum: event.target.value});
     }
+
     handleSpecialRequest(event) {
         this.setState({specialRequest: event.target.value});
     }
+
     handleBranch(branch) {
         this.setState({branch});
         this.enableDatePicker(branch);
     }
+
     branchNames() { //builds an array of each branch name and id to be passed to the Selector component
         let selectArray = [];
         this.props.branch_names.forEach(function(branch) {
@@ -192,14 +198,16 @@ class Booking extends React.Component {
         });
         return selectArray;
     }
+
     enableDatePicker(branch) {
         console.log('called');
         if (branch != null) {
             this.setState({disableDate: 'md-form'});
         }
     }
+
     enableTimePicker(defaultDateFormat){
-        if (defaultDateFormat != '\\Se\\lect \\Date...') {
+        if (defaultDateFormat !== '\\Se\\lect \\Date...') {
             console.log('called');
             this.setState({
                 disableFour: false,
@@ -212,45 +220,59 @@ class Booking extends React.Component {
             })
         }
     }
-    availabilityCheck(date, branch) {
 
-        let unavailable_times = [];
-        Meteor.call('date_time_branch.check', date, branch,
-            function(error, unavailableTimes) {
-                if (error) {
-                    console.log(error);
-                }
-                unavailableTimes.forEach((time) => {
-                    unavailable_times.push(time);
-                });
-            }
-        );
-        unavailable_times.forEach((time) => {
-            console.log(time);
-            if (time == '4:00') {
-                this.setState({disableFour: true})
-            }
-            if (time == '5:00') {
-                this.setState({disableFive: true})
-                console.log('yay');
-            }
-            if (time == '6:00') {
-                this.setState({disableSix: true})
-            }
-            if (time == '7:00') {
-                this.setState({disableSeven: true})
-            }
-            if (time == '8:00') {
-                this.setState({disableEight: true})
-            }
-            if (time == '9:00') {
-                this.setState({disableNine: true})
-            }
-            if (time == '10:00') {
-                this.setState({disableTen: true})
-            }
-        });
+    async availabilityCheck(date, branch) {
+        let fourCount = await Meteor.callPromise('date_time_branch.count', date, "4:00", branch);
+        if (fourCount >= 4) {
+            this.setState({disableFour: true});
+        } else {
+            this.setState({disableFour: false});
+        }
+
+        let fiveCount = await Meteor.callPromise('date_time_branch.count', date, "5:00", branch);
+        console.log("CHECKING FOR TIME 5:00. Res: " + fiveCount);
+        if (fiveCount >= 4) {
+            this.setState({disableFive: true});
+        } else {
+            this.setState({disableFive: false});
+        }
+
+        let sixCount = await Meteor.callPromise('date_time_branch.count', date, "6:00", branch);
+        if (sixCount >= 4) {
+            this.setState({disableSix: true});
+        } else {
+            this.setState({disableSix: false});
+        }
+
+        let sevenCount = await Meteor.callPromise('date_time_branch.count', date, "7:00", branch);
+        if (sevenCount >= 4) {
+            this.setState({disableSeven: true});
+        } else {
+            this.setState({disableSeven: false});
+        }
+
+        let eightCount = await Meteor.callPromise('date_time_branch.count', date, "8:00", branch);
+        if (eightCount >= 4) {
+            this.setState({disableEight: true});
+        } else {
+            this.setState({disableEight: false});
+        }
+
+        let nineCount = await Meteor.callPromise('date_time_branch.count', date, "9:00", branch);
+        if (nineCount >= 4) {
+            this.setState({disableNine: true});
+        } else {
+            this.setState({disableNine: false});
+        }
+
+        let tenCount = await Meteor.callPromise('date_time_branch.count', date, "10:00", branch);
+        if (tenCount >= 4) {
+            this.setState({disableTen: true});
+        } else {
+            this.setState({disableTen: false});
+        }
     }
+
     handleTimeDisables(unavailable_times) {
         
     }
@@ -275,7 +297,7 @@ class Booking extends React.Component {
                 <MDBContainer> 
                     
                     <MDBRow>
-                        <MDBTypography tag="h2" className="page-heading" >Create Booking</MDBTypography>
+                        <h2>Create Booking</h2>
                     </MDBRow>
                     <MDBRow center>
                         <MDBCol sm="4" md="4" lg="4"><MDBInput label="First Name" size="lg" value={this.state.value} onChange={this.handleCustomerName} name='firstName' /> </MDBCol> { /* value={this.state.value} is already the default value */}
@@ -287,7 +309,7 @@ class Booking extends React.Component {
                     </MDBRow>
                     <MDBRow center >
                         <MDBCol sm="8" md="8" lg="8">
-                        <MDBTypography className="element-heading" tag="h6" >Location:</MDBTypography>
+                        <h6>Location:</h6>
                             <Select
                                 className="branch-selector"
                                 placeholder="Select Location..."
@@ -311,7 +333,7 @@ class Booking extends React.Component {
                             this.setState({ date: date }); // return this.state.date for the selected Date
                             this.enableTimePicker(defaultDateFormat);
                             this.availabilityCheck(new Date(this.state.date).toDateString(), branch.value);
-                            console.log(date);
+                            //console.log(date);
                             }}
                             onOpen={() => {
                                 this.setState({ defaultDateFormat: "F j, Y" });
@@ -336,7 +358,7 @@ class Booking extends React.Component {
                     <MDBContainer>
                         <MDBRow center>
                             <MDBCol sm="8" md="8" lg="8">
-                                <MDBTypography className="element-heading" tag="h5" >Time:</MDBTypography>
+                                <h5>Time:</h5>
                                 <table className="time-selector">
                                     <tbody>
                                         <tr>
