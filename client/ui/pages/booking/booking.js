@@ -207,7 +207,6 @@ class Booking extends React.Component {
     }
 
     enableDatePicker(branch) {
-        console.log('called');
         if (branch != null) {
             this.setState({disableDate: 'md-form'});
         }
@@ -215,7 +214,6 @@ class Booking extends React.Component {
 
     enableTimePicker(defaultDateFormat){
         if (defaultDateFormat !== '\\Se\\lect \\Date...') {
-            console.log('called');
             this.setState({
                 disableFour: false,
                 disableFive: false,

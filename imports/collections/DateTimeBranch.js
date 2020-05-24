@@ -37,13 +37,13 @@ Meteor.methods({
     },
 
     'date_time_branch.check': function (date, branch, requestedSeats) {
-        console.log(branch + ' ' + date);
+        //console.log(branch + ' ' + date);
         let unavailableTimes = [];
             //returns the time for all DTB documents that match date and branch with a counter >= 50
         let matches = DateTimeBranch.find({date: date, branch: branch}, {fields:{counter:1, available:1, time:1}}).fetch();
         matches.forEach((match) => {
             let totalSeats = match.counter + requestedSeats;
-            console.log("counter + requestedSeats: " + match.counter + ' + ' + requestedSeats + ' = ' + totalSeats);
+            //console.log("counter + requestedSeats: " + match.counter + ' + ' + requestedSeats + ' = ' + totalSeats);
             if (totalSeats > 5 || !match.available) {
                 console.log('unavailable time found:' + match.time);
                 unavailableTimes.push(match.time); // returns the time of all bookings for the selected date and branch if the counter of those booking are >=50
