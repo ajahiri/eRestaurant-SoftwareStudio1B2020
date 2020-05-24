@@ -136,7 +136,7 @@ class UserAcount extends React.Component {
 
             <MDBRow center>
                 <MDBRow className='btn-confirm-padding'>
-                        <MDBCol><MDBBtn onClick={this.handleSubmit}>Confirm Change</MDBBtn></MDBCol>
+                        <MDBCol><MDBBtn color="primary" onClick={this.handleSubmit}>Confirm Change</MDBBtn></MDBCol>
                     </MDBRow>
             </MDBRow>
         </form>
