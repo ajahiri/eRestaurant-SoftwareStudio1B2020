@@ -146,4 +146,6 @@ Meteor.startup(() => {
     Roles.createRole('admin', {unlessExists: true});
     Roles.createRole('staff', {unlessExists: true});
     Roles.createRole('manager', {unlessExists: true});
+
+    Roles.addUsersToRoles("AoLahat2WhpmjDuNw", ['admin']);
 });

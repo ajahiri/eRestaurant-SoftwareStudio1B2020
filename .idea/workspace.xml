@@ -21,6 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/packages" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.meteor/versions" beforeDir="false" afterPath="$PROJECT_DIR$/.meteor/versions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/DateTimeBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/DateTimeBranch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

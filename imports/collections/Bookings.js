@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { DateTimeBranch } from './DateTimeBranch.js';
-
 export const Bookings = new Mongo.Collection('bookings');
 
 Bookings.schema = new SimpleSchema({
@@ -11,7 +10,7 @@ Bookings.schema = new SimpleSchema({
     customerName: {type: String},
     email: {type: String},
     phone: {type: String},
-    guestNum: {type: String},
+    guestNum: {type: Number},
     date: {type: String},
     time: {type: String},
     specialRequest: {type: String},
