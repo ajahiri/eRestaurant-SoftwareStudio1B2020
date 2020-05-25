@@ -43,7 +43,7 @@ Branches.schema = new SimpleSchema({
 
 if (Meteor.isServer) {
     Meteor.methods({
-        'branches.insert': function(bName, bManager, bPhone, bAddress) {
+        'branches.insert': function(bName, bManager, bPhone, bAddress, bCapacity) {
             //DEBUG console.log("attempting to add branch");
             if (this.userId) {
                 if (Roles.userIsInRole(this.userId,'admin')) {
@@ -52,6 +52,7 @@ if (Meteor.isServer) {
                         manager: bManager,
                         phone: bPhone,
                         address: bAddress,
+                        capacity: bCapacity,
                         staff: []
                     });
                 } else {

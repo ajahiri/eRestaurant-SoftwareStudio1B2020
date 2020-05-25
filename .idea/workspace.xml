@@ -20,14 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/booking_view.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/routing/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/routing/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/manageaccount/manageaccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/manageaccount/manageaccount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/collections/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +97,7 @@
       <workItem from="1589127391963" duration="391000" />
       <workItem from="1589175972822" duration="1422000" />
       <workItem from="1589727932345" duration="7199000" />
+      <workItem from="1590373301108" duration="2657000" />
     </task>
     <servers />
   </component>
@@ -131,10 +126,11 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="961" y="437" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1588865130924" />
-    <state x="3300" y="555" width="786" height="745" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588225740572">
-      <screen x="1920" y="0" width="3840" height="2160" />
+    <state x="920" y="360" width="786" height="745" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590237053628">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586804591941" />
+    <state x="920" y="360" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1590237053628" />
     <state x="3300" y="555" width="786" height="745" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.3840.2160/0.498.1920.1080@1920.0.3840.2160" timestamp="1588225740572" />
     <state x="3588" y="902" width="494" height="296" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1587576591041">
       <screen x="1920" y="0" width="3840" height="2160" />

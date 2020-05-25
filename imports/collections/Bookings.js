@@ -58,4 +58,7 @@ Meteor.methods({
             });
         }
     },
+    'bookings.markLeft': function (bookingID) {
+        Bookings.update({_id: bookingID}, { $set: {concluded: true} });
+    }
 });

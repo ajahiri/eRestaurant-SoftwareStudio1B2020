@@ -2,11 +2,15 @@ import React from "react";
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from "meteor/react-meteor-data";
 import {Bookings} from "../../../../imports/collections/Bookings";
-import {MDBCol, MDBContainer, MDBRow, MDBTable, MDBTableBody, MDBTableHead} from "mdbreact";
+import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTable, MDBTableBody, MDBTableHead} from "mdbreact";
 
 class BookingContents extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    handleLeave() {
+        Meteor.call('bookings.markLeft', this.props.bookingID);
     }
 
     render() {
@@ -56,6 +60,15 @@ class BookingContents extends React.Component {
                             </tr>
                         </MDBTableBody>
                     </MDBTable>
+                    { this.props.isStaff && !this.props.bookingData.concluded ?
+                        <MDBBtn onClick={() => {
+                            this.handleLeave()
+                        }} color="secondary">
+                            Mark as Complete
+                        </MDBBtn>
+                        :
+                        <div></div>
+                    }
                 </MDBContainer>
             );
         } else {
@@ -83,6 +96,7 @@ export default withTracker(({bookingID}) => {
     return {
         userID: Meteor.userId(),
         bookingData: Bookings.findOne({_id: bookingID}),
-        isReady: subscriptions.bookingData.ready()
+        isReady: subscriptions.bookingData.ready(),
+        isStaff: Roles.userIsInRole(Meteor.userId(),['admin', 'manager', 'staff'])
     }
 })(BookingContents);
