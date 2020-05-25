@@ -76,7 +76,7 @@ class AddNewBranch extends React.Component {
 
 export default withTracker(() => {
     //Taken from https://guide.meteor.com/react.html#data
-    Meteor.subscribe('branches');
+    Meteor.subscribe('branchesAdmin');
     return {
         branches: Branches.find().fetch(),
     }
