@@ -14,11 +14,10 @@ const TopPost = () => {
             }} >
             <div className="text-white text-center d-flex align-items-center rgba-red-accent py-5 px-4">
             <MDBCardBody>
-                <MDBCardTitle>
-                        <h4 className="title"><strong> <MDBIcon icon="utensils" /> Menu </strong></h4>
-                        <h5 className="white-text"><strong>flavoursome varieties of authentic Italian food</strong></h5>
+                <MDBCardTitle> <MDBIcon icon="utensils" /> Menu 
+                        
                 </MDBCardTitle>
-                
+                    <h5 className="white-text"> flavoursome varieties of authentic Italian food </h5>
                 
                 </MDBCardBody>
             </div>

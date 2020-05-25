@@ -10,7 +10,7 @@ class ManageAccount extends React.Component {
     }
 
     render() {
-        if(Meteor.userId() )
+        if(this.props.userID)
         { 
             return (
                 <MDBContainer>
@@ -30,5 +30,6 @@ class ManageAccount extends React.Component {
 
 export default withTracker(() => {
     return {
+        userID: Meteor.userId(),
     }
 })(ManageAccount);

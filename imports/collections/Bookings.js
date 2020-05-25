@@ -6,6 +6,7 @@ export const Bookings = new Mongo.Collection('bookings');
 
 Bookings.schema = new SimpleSchema({
     branch: {type: String},
+    owner: {type: String},
     customerName: {type: String},
     email: {type: String},
     phone: {type: String},
@@ -20,30 +21,35 @@ Bookings.schema = new SimpleSchema({
 });
 
 Meteor.methods({
-    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, time, specialRequest) {
+    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, dateNice, time, specialRequest) {
         console.log("attempting to add booking");
         Bookings.insert({
             branch,
+            owner: Meteor.userId(),
             customerName,
             email,
             phone,
             guestNum,
             date,
+            dateNice,
             time,
             specialRequest,
+            payed: false,
+            concluded: false,
+            cancelled: false,
             createdAt: Date(),
         });
         console.log(Bookings.find().fetch());
         console.log(DateTimeBranch.findOne({date: date, time: time, branch: branch}));
-        if (DateTimeBranch.findOne({date: date, time: time, branch: branch}) == null) {
-            Meteor.call('date_time_branch.insert', date, time, branch, guestNum,
+        if (DateTimeBranch.findOne({date: dateNice, time: time, branch: branch}) == null) {
+            Meteor.call('date_time_branch.insert', dateNice, time, branch,
             function(error) {
                 if (error) {
                     console.log(error);
                 }
             });
         } else {
-            Meteor.call('date_time_branch.update', date, time, branch, guestNum,
+            Meteor.call('date_time_branch.update', dateNice, time, branch,
             function(error) {
                 if (error) {
                     console.log(error);
@@ -51,4 +57,7 @@ Meteor.methods({
             });
         }
     },
+    'bookings.markLeft': function (bookingID) {
+        Bookings.update({_id: bookingID}, { $set: {concluded: true} });
+    }
 });
