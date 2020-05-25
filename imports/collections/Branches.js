@@ -38,6 +38,7 @@ Branches.schema = new SimpleSchema({
     "address.postCode": {
         type: Number              //Australian postal codes are always numbers
     },
+    capacity: {type: Number},
     createdAt: {type: Date},
 });
 
@@ -129,6 +130,10 @@ if (Meteor.isServer) {
         },
         "getBranches.Names": function() {
             return Branches.find().map( (branch) => { console.log(branch.name); return branch.name; });
+        },
+        'getBranches.Capacity': function(branch) {
+            let capacity = Branches.find({_id: branch}, {fields:{capacity:1,}}).fetch();
+            return capacity[0].capacity;
         }
     });
 }

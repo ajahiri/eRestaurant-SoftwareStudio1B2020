@@ -42,14 +42,14 @@ Meteor.methods({
         console.log(Bookings.find().fetch());
         console.log(DateTimeBranch.findOne({date: date, time: time, branch: branch}));
         if (DateTimeBranch.findOne({date: dateNice, time: time, branch: branch}) == null) {
-            Meteor.call('date_time_branch.insert', dateNice, time, branch,
+            Meteor.call('date_time_branch.insert', dateNice, time, branch, guestNum,
             function(error) {
                 if (error) {
                     console.log(error);
                 }
             });
         } else {
-            Meteor.call('date_time_branch.update', dateNice, time, branch,
+            Meteor.call('date_time_branch.update', dateNice, time, branch, guestNum,
             function(error) {
                 if (error) {
                     console.log(error);

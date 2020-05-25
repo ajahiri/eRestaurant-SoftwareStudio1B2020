@@ -55,7 +55,7 @@ const AddBranchForm = () => {
                               id="branchPhone" name="branchPhone" label="Phone Number" group
                               validate error="wrong" success="right" type="number" />
                     <MDBInput value={formik.values.branchCapacity} onChange={formik.handleChange}
-                              id="branchPhone" name="branchPhone" label="Branch Seating Capacity" group
+                              id="branchCapacity" name="branchCapacity" label="Branch Seating Capacity" group
                               validate error="wrong" success="right" type="number" />
                 </MDBCol>
                 <MDBCol>

@@ -239,7 +239,13 @@ class Booking extends React.Component {
 
     async availabilityCheck(date, branch, guestNum) {
         if (this.state.defaultDateFormat != '\\Se\\lect \\Date...' && guestNum > 0) {
-            let unavailable_times = await Meteor.callPromise('date_time_branch.check', date, branch, guestNum);
+            let unavailable_times = await Meteor.callPromise('date_time_branch.check', date, branch, guestNum,
+                function(error) {
+                    if (error) {
+                        console.log(error);
+                    }
+                }
+            );
             if (unavailable_times.length > 0) {
                 unavailable_times.map((time) => {
                     if (time == "4:00") {
@@ -262,6 +268,9 @@ class Booking extends React.Component {
                     }
                     if (time == "10:00") {
                         this.setState({disableTen: true})
+                    }
+                    if (time == "All Times") {
+                        this.disableTimePicker();
                     }
                 });
             } else {
@@ -291,7 +300,6 @@ class Booking extends React.Component {
             {activeView == 'booking' ?
             <form onSubmit={this.handleSubmit} >
                 <MDBContainer> 
-                    
                     <MDBRow>
                         <h2>Make a Booking</h2>
                     </MDBRow>
