@@ -6,11 +6,8 @@ import {
 } from "mdbreact";
 
 import TopPost from './top_post_image';
-import MenuItems from './menu_items';
-
-
-
-
+import MenuList from './menu_list';
+import AddMenuItem from './addMenuItem';
 
 class MenuPage extends React.Component {
     render() {
@@ -24,7 +21,8 @@ class MenuPage extends React.Component {
                             <TopPost />
                             <br />
                             <MDBContainer>
-                                <MenuItems />
+                                <MenuList />
+                                <AddMenuItem/>
                             </MDBContainer>
                         </MDBCard>
                         
