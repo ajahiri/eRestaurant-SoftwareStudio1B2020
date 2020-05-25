@@ -8,6 +8,7 @@ import {
 import TopPost from './top_post_image';
 import MenuList from './menu_list';
 import AddMenuItem from './addMenuItem';
+import ManageCategory from './manageCategory';
 
 class MenuPage extends React.Component {
     render() {
@@ -23,6 +24,7 @@ class MenuPage extends React.Component {
                             <MDBContainer>
                                 <MenuList />
                                 <AddMenuItem/>
+                                <ManageCategory/>
                             </MDBContainer>
                         </MDBCard>
                         
