@@ -23,7 +23,7 @@ import {
 import { Menu } from "../../../imports/collections/Menu";
 import {withTracker} from 'meteor/react-meteor-data';
 
-var currentcategory = "null";
+var currentcategory = "FR62qpdmvYNLFnT6B";
 var length = 0;
 
 class MenuItem extends React.Component {
@@ -43,7 +43,7 @@ class MenuItem extends React.Component {
     return filtered.map((menu) => {
       return (
        
-        <MDBCol className="mb-2 d-flex col-md-4">
+        <MDBCol id={menu.title} className="mb-2 d-flex col-md-4">
           <MDBCard className="hoverable">
             <MDBCardImage className="img-fluid" src={menu.image} />
             <MDBCardBody>

@@ -11,7 +11,7 @@ class AddMenuItem extends React.Component {
     constructor(props) {
         super(props);
         //state
-        this.state = {title: "", category: '', label: "Insert New Menu item", cost: "", image: "https://www.cookeatblog.com/wp-content/uploads/2020/01/LambMansaf3.jpg", ingrediants: "" };
+        this.state = {title: "",number: 0, category: '', label: "Insert New Menu item", cost: "", image: "https://www.cookeatblog.com/wp-content/uploads/2020/01/LambMansaf3.jpg", ingrediants: "" };
         //methods
 
         this.handleChange = this.handleChange.bind(this);
@@ -22,7 +22,7 @@ class AddMenuItem extends React.Component {
     renderCategories() {
         return this.props.menucategories.map((category) => {
             return (
-                <option value={category.category} >{category.category}</option>
+                <option value={category._id} >{category.category}</option>
             );
         });
 
@@ -44,7 +44,12 @@ class AddMenuItem extends React.Component {
         if (name == 'title')
             titlechanged = true;
         if (name == 'category')
+        {
             categorychanged = true;
+            // this.setState({
+            //     [number]: value
+            // });
+        }
         if (name == 'cost')
             costchanged = true;
         if (name == 'ingrediants')
@@ -52,15 +57,22 @@ class AddMenuItem extends React.Component {
     }
 
     handleSubmit(event) {
-    if(Meteor.user() && Roles.userIsInRole(this.userId,'admin'))
+        // console.log("menucategories");
+        // console.log(this.props.menucategories);
+    if(Meteor.user() && Roles.userIsInRole(Meteor.userId(), 'admin'))
     {
         if (titlechanged)
         {
             if(categorychanged)
             {
+                var result = this.props.menucategories.find(obj => {
+                    return obj._id == this.state.category
+                  });
+                //   console.log("result");
+                //   console.log(result.categoryitems);
                 if(ingrediantschanged)
                 {
-                    if(costchanged)
+                    if(costchanged && this.state.cost > 0)
                     {
                         Meteor.call('menu.insert',
                         this.state.category,
@@ -80,6 +92,22 @@ class AddMenuItem extends React.Component {
                         }
                         );
 
+                        Meteor.call('menucategory.updateplus',
+                        this.state.category,
+                        result.categoryitems+=1,
+                        function (error) {
+                            if (error) {
+                                // this.setState({label: e.reason});
+                                console.log(error);
+                            } else {
+    
+                                // this.setState({label: "success"});
+                                console.log("Successfully added category");
+                            }
+                        }
+                        );
+
+                        this.setState({label: "Success"});
                     }else{
                         this.setState({label: "Please check cost field"});
                     }
