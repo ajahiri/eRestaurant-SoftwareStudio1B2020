@@ -72,6 +72,8 @@ class Booking extends React.Component {
         this.branchNames = this.branchNames.bind(this);
         this.availabilityCheck = this.availabilityCheck.bind(this);
         this.enableDatePicker = this.enableDatePicker.bind(this);
+        this.enableTimePicker = this.enableTimePicker.bind(this);
+        this.disableTimePicker = this.disableTimePicker.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
@@ -194,7 +196,6 @@ class Booking extends React.Component {
 
     handleBranch(branch) {
         this.setState({branch});
-        this.enableDatePicker(branch);
     }
 
     branchNames() { //builds an array of each branch name and id to be passed to the Selector component
@@ -205,10 +206,8 @@ class Booking extends React.Component {
         return selectArray;
     }
 
-    enableDatePicker(branch) {
-        if (branch != null) {
-            this.setState({disableDate: 'md-form'});
-        }
+    enableDatePicker() {
+        this.setState({disableDate: 'md-form'});
     }
 
     enableTimePicker(defaultDateFormat){
@@ -225,7 +224,7 @@ class Booking extends React.Component {
         }
     }
 
-    disabelDatePicker(){
+    disableTimePicker(){
         this.setState({
             disableFour: true,
             disableFive: true,
@@ -238,7 +237,7 @@ class Booking extends React.Component {
     }
 
     async availabilityCheck(date, branch, guestNum) {
-        if (guestNum > 0) {
+        if (this.state.defaultDateFormat != '\\Se\\lect \\Date...' && guestNum > 0) {
             let unavailable_times = await Meteor.callPromise('date_time_branch.check', date, branch, guestNum);
             if (unavailable_times.length > 0) {
                 unavailable_times.map((time) => {
@@ -273,14 +272,16 @@ class Booking extends React.Component {
     }
     
     handleBtnTest(event) {
-        this.setState({activeView: 'helloWorld'});
+        //this.setState({activeView: 'helloWorld'});
+        console.log(this.state.branch);
     }
 
     render() {
         const { 
             activeView,
             date, defaultDateFormat,
-            branch, disableGuestNum,
+            branch, guestNum,
+            disableGuestNum,
             btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen,
             disableFour, disableFive, disableSix, disableSeven, disableEight, disableNine, disableTen,
         } = this.state;
@@ -309,7 +310,11 @@ class Booking extends React.Component {
                                 className="branch-selector"
                                 placeholder="Select Location..."
                                 value={branch}
-                                onChange={this.handleBranch}
+                                onChange={(branch) => {
+                                    this.handleBranch(branch);
+                                    this.enableDatePicker();
+                                    this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum)
+                                }}
                                 options={
                                     this.branchNames()
                                 }
@@ -325,6 +330,7 @@ class Booking extends React.Component {
                             value={date}
                             onChange={date => {
                             this.handleDateChange(date);
+                            this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
                             }}
                             onOpen={() => {
                                 this.setState({ defaultDateFormat: "F j, Y" });
