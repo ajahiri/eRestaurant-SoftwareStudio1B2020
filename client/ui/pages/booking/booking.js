@@ -273,8 +273,7 @@ class Booking extends React.Component {
     }
     
     handleBtnTest(event) {
-        //this.setState({activeView: 'helloWorld'});
-        console.log(this.state.branch);
+        this.setState({activeView: 'helloWorld'});
     }
 
     render() {
@@ -387,7 +386,7 @@ class Booking extends React.Component {
                     </MDBRow>
                     <MDBRow className='btn-confirm-padding'>
                     <MDBCol><MDBBtn color="indigo" size='lg' type='submit'>Confirm Booking</MDBBtn></MDBCol>
-                    <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test btn</MDBBtn></MDBCol>
+                    <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
                     </MDBRow>
                 </MDBContainer>
             </form>
