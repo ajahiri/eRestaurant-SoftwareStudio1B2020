@@ -71,7 +71,6 @@ class Booking extends React.Component {
         this.handleBranch = this.handleBranch.bind(this);
         this.branchNames = this.branchNames.bind(this);
         this.availabilityCheck = this.availabilityCheck.bind(this);
-        this.handleTimeDisables = this.handleTimeDisables.bind(this);
         this.enableDatePicker = this.enableDatePicker.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
@@ -272,10 +271,6 @@ class Booking extends React.Component {
             this.disableTimePicker();
         }
     }
-
-    handleTimeDisables(unavailable_times) {
-        
-    }
     
     handleBtnTest(event) {
         this.setState({activeView: 'helloWorld'});
@@ -366,14 +361,12 @@ class Booking extends React.Component {
                                     <tbody>
                                         <tr>
                                             <td><MDBBtn id='4:00' color={btnFour} onClick={this.handleBtnSelect} disabled={disableFour.valueOf()} >4:00</MDBBtn></td>
-                                            <td><MDBBtn id='6:00' color={btnSix} onClick={this.handleBtnSelect} disabled={disableSix.valueOf()}>6:00</MDBBtn></td>
-                                            <td><MDBBtn id='8:00' color={btnEight} onClick={this.handleBtnSelect} disabled={disableEight.valueOf()}>8:00</MDBBtn></td>
-                                            <td><MDBBtn id='10:00' color={btnTen} onClick={this.handleBtnSelect} disabled={disableTen.valueOf()}>10:00</MDBBtn></td>
-                                        </tr>
-                                        <tr>
                                             <td><MDBBtn id='5:00' color={btnFive} onClick={this.handleBtnSelect} disabled={disableFive.valueOf()}>5:00</MDBBtn></td>
+                                            <td><MDBBtn id='6:00' color={btnSix} onClick={this.handleBtnSelect} disabled={disableSix.valueOf()}>6:00</MDBBtn></td>
                                             <td><MDBBtn id='7:00' color={btnSeven} onClick={this.handleBtnSelect} disabled={disableSeven.valueOf()}>7:00</MDBBtn></td>
+                                            <td><MDBBtn id='8:00' color={btnEight} onClick={this.handleBtnSelect} disabled={disableEight.valueOf()}>8:00</MDBBtn></td>
                                             <td><MDBBtn id='9:00' color={btnNine} onClick={this.handleBtnSelect} disabled={disableNine.valueOf()}>9:00</MDBBtn></td>
+                                            <td><MDBBtn id='10:00' color={btnTen} onClick={this.handleBtnSelect} disabled={disableTen.valueOf()}>10:00</MDBBtn></td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -12,9 +12,9 @@ DateTimeBranch.schema = new SimpleSchema({
 });
 
 Meteor.methods({
-    'date_time_branch.insert': function(date, time, branch) {
+    'date_time_branch.insert': function(date, time, branch, guestNum,) { //incriment by guestNum !!!!!!!!!!!!!!!!!!!!!!!!!!
         DateTimeBranch.insert({
-            counter: 1,
+            counter: guestNum,
             available: true,
             date,
             time,
@@ -23,20 +23,20 @@ Meteor.methods({
         console.log('inserted new DTB');
     },
 
-    'date_time_branch.update': function(date, time, branch) {
+    'date_time_branch.update': function(date, time, branch, guestNum,) { //incriment by guestNum !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         DateTimeBranch.update({date, time, branch}, {
-            $inc: { counter: 1 },
+            $inc: { counter: guestNum },
         });
         let matches = DateTimeBranch.findOne({date, time, branch}, {fields:{counter:1}}).fetch();
         if(matches.counter == 50) {   // if counter is = 50 set available to false
             DateTimeBranch.update({date, time, branch}, {
-                $set: { available: false},
+                $set: { available: false },
             });
         }
         console.log('updated DTB');
     },
 
-    'date_time_branch.check': function (date, branch, requestedSeats) {
+    'date_time_branch.check': function (date, branch, requestedSeats,) {
         //console.log(branch + ' ' + date);
         let unavailableTimes = [];
             //returns the time for all DTB documents that match date and branch with a counter >= 50
@@ -44,7 +44,7 @@ Meteor.methods({
         matches.forEach((match) => {
             let totalSeats = match.counter + requestedSeats;
             //console.log("counter + requestedSeats: " + match.counter + ' + ' + requestedSeats + ' = ' + totalSeats);
-            if (totalSeats > 5 || !match.available) {
+            if (totalSeats > 50 || !match.available) {
                 console.log('unavailable time found:' + match.time);
                 unavailableTimes.push(match.time); // returns the time of all bookings for the selected date and branch if the counter of those booking are >=50
             }
