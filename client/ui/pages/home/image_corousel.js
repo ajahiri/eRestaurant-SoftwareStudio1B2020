@@ -20,7 +20,7 @@ const ImageCorousel = () => {
                             <MDBView hover zoom >
                                 <img
                                     className="d-block w-100" height="400px"
-                                    src="https://mdbootstrap.com/img/Others/documentation/img%20(136)-mini.jpg"
+                                    src="https://unsplash.com/photos/RKJElwIyCQw"
                                     alt="First slide" />
                                 <MDBMask overlay="black-strong" />
                             </MDBView>
