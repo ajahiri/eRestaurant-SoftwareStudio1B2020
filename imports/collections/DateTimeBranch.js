@@ -43,7 +43,7 @@ Meteor.methods({
         let unavailableTimes = [];
         let branchCap = Meteor.call('getBranches.Capacity', branch);
         //let branchCap = 50;
-        if (requestedSeats < branchCap) {
+        if (requestedSeats <= branchCap) {
             //return the times for the matched DTB documents where capacity is exceeded.
             let matches = DateTimeBranch.find({date: date, branch: branch}, {fields:{seatsTaken:1, available:1, time:1}}).fetch();  //returns the time for all DTB documents that match date and branch with seatsTaken >= branchCap
             matches.forEach((match) => {
