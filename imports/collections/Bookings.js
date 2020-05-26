@@ -17,13 +17,13 @@ Bookings.schema = new SimpleSchema({
     payed: {type: Boolean},
     concluded: {type: Boolean}, // Have the customers left the restaurant after dining. The staff member will check them out by changing this to true when the customers leave.
     cancelled: {type: Boolean}, // Has the booking been cancelled?
-    createdAt: {type: Date()},
+    createdAt: {type: Date},
 });
 
 Meteor.methods({
     'bookings.insert': function(branch, customerName, email, phone, guestNum, date, dateNice, time, specialRequest) {
         console.log("attempting to add booking");
-        Bookings.insert({
+        let boooking_id = Bookings.insert({
             branch,
             owner: Meteor.userId(),
             customerName,
@@ -56,7 +56,12 @@ Meteor.methods({
                 }
             });
         }
+        return boooking_id;
     },
+    'getBookingID': function () {
+
+    },
+
     'bookings.markLeft': function (bookingID) {
         Bookings.update({_id: bookingID}, { $set: {concluded: true} });
     }

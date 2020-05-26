@@ -10,6 +10,7 @@ import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
 import Hello_world from '../../components/helloWorld.js';
 import ModalMakeOrder from '../../components/modal_make_order.js';
+import BookingSummary from '../../components/booking_summary.js';
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -19,11 +20,13 @@ class Booking extends React.Component {
 
         this.firstName = '';
         this.lastName = '';
+        this.submittedBookingID = '';
 
         this.state = {
-        activeView: 'Booking_Form',
-        modal: true,
+        activeView: 'Booking_Form', //other views are 'Booking_Summary', 'Menu', 'Order/Booking_Summary', 'Checkout', 'Invoice/Order/Booking_Summary'
         order_online: false,
+        btnNextType: '', 
+
         // Time btns START
         btnFour: 'indigo',
         btnFive: 'indigo',
@@ -76,18 +79,19 @@ class Booking extends React.Component {
         this.enableDatePicker = this.enableDatePicker.bind(this);
         this.enableTimePicker = this.enableTimePicker.bind(this);
         this.disableTimePicker = this.disableTimePicker.bind(this);
-        //this.toggleModal = this.toggleModal.bind(this);
         this.handleModal_Result = this.handleModal_Result.bind(this);
         this.handleBooking_Next = this.handleBooking_Next.bind(this);
+        this.Booking_Summary_branchAddressNice = this.Booking_Summary_branchAddressNice.bind(this);
+        this.Booking_Summary_branchPhone = this.Booking_Summary_branchPhone.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         const state = this.state;
         const date = new Date(this.state.date); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
         const dateNice = date.toDateString();
-        Meteor.call('bookings.insert', state.branch.value, state.customerName, state.email,
+        this.submittedBookingID = await Meteor.callPromise('bookings.insert', state.branch.value, state.customerName, state.email,
             state.phone, state.guestNum, date, dateNice, state.time, state.specialRequest,
             function(error) {
                 if (error) {
@@ -95,7 +99,10 @@ class Booking extends React.Component {
                 }
             }
         );
+        //this.setState({submittedBookingID: booking_id});
+        console.log(this.submittedBookingID);
     }
+
 
  // START handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,163 +293,174 @@ class Booking extends React.Component {
         }
     }
 
-    // toggleModal() {
-    //     this.setState({modal: !this.state.modal});
-    // }
-
     handleModal_Result(result) {
-        //this.toggleModal();
-        console.log(result);
         this.setState({order_online: result});
+        if (!result) {
+            this.setState({btnNextType: 'submit'});
+        }
     }
 
     handleBooking_Next() {
         if (this.state.order_online) {
-            this.setState({disableBtnNext: true, activeView: 'Menu'})
+            this.setState({disableBtnNext: true, activeView: 'Menu'});
         } else {
-            this.setState({disableBtnNext: true, activeView: 'Booking_Summary'})
+            this.setState({disableBtnNext: true, activeView: 'Booking_Summary'});
         }
     }
+
+    async Booking_Summary_branchAddressNice() {
+        let branchAddressNice = await Meteor.callPromise('getBranches.AddressNice', this.state.branch.value);
+        return branchAddressNice;
+    }
     
+    async Booking_Summary_branchPhone() {
+        let branchPhone = await Meteor.callPromise('getBranches.Phone', this.state.branch.value);
+        return branchPhone;
+    }
+
     handleBtnTest(event) {
         if (this.state.order_online) {
-            this.setState({activeView: 'Menu'})
+            this.setState({activeView: 'Menu'});
         } else {
-            this.setState({activeView: 'Booking_Summary'})
+            this.setState({activeView: 'Booking_Summary'});
         }
     }
 
     render() {
         const { 
-            activeView,
+            activeView, btnNextType,
             date, defaultDateFormat,
+            time, customerName,
             branch, guestNum,
-            disableGuestNum,
+            disableGuestNum, disableBtnNext,
             btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen,
             disableFour, disableFive, disableSix, disableSeven, disableEight, disableNine, disableTen,
         } = this.state;
 
         return (
             <div>
-            {/* Booking_Form START ///////////////////////////////////////////////////////////////////////////////////*/}
-            {activeView == 'Booking_Form' ?
-            <form onSubmit={this.handleSubmit} >
-                <ModalMakeOrder Modal_Result={this.handleModal_Result}/>
-                <MDBContainer> 
-                    <MDBRow>
-                        <h2>Make a Booking</h2>
-                    </MDBRow>
-                    <MDBRow center>
-                        <MDBCol sm="4" md="4" lg="4"><MDBInput label="First Name" size="lg" value={this.state.value} onChange={this.handleCustomerName} name='firstName' /> </MDBCol> { /* value={this.state.value} is already the default value */}
-                        <MDBCol sm="4" md="4" lg="4"><MDBInput label="Last Name" size="lg" onChange={this.handleCustomerName} name='lastName' /> </MDBCol>
-                    </MDBRow>
-                    <MDBRow center>
-                        <MDBCol sm="4" md="4" lg="4"><MDBInput label="Email" size="lg" onChange={this.handleEmail} /> </MDBCol>
-                        <MDBCol sm="4" md="4" lg="4"><MDBInput label="Phone" size="lg" onChange={this.handlePhone} /> </MDBCol>
-                    </MDBRow>
-                    <MDBRow center >
-                        <MDBCol sm="8" md="8" lg="8">
-                        <h6>Location:</h6>
-                            <Select
-                                className="branch-selector"
-                                placeholder="Select Location..."
-                                value={branch}
-                                onChange={(branch) => {
-                                    this.handleBranch(branch);
-                                    this.enableDatePicker();
-                                    this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum)
-                                }}
-                                options={
-                                    this.branchNames()
-                                }
-                            />
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow center>
-                        {/* Flatpickr code START */}
-                        {/*May include ability for Owner to disable certain dates (holidays)*/}
-                        <MDBCol sm="4" md="4" lg="4" ><div className={this.state.disableDate} > {/* this div changes the input field to the mdb input field */}
-                        <Flatpickr
-                            className="form-control-lg" //sets input field font size to lg
-                            value={date}
-                            onChange={date => {
-                            this.handleDateChange(date);
-                            this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
-                            }}
-                            onOpen={() => {
-                                this.setState({ defaultDateFormat: "F j, Y" });
-                            }}  
-                            onClose={() => {
-                                // Bug Fix: If backspace is used when input field is selected input field is blank
-                                if (date.length==0) {
-                                    this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." }); //resets placeholder value
-                                    this.setState({ date: new Date() }) //resets date to Date() -> returns todays date
-                                }
-                            }}
-                            options={{
-                                altInput: true, // altInput is a "human friendly" format (April 22, 2020)
-                                altFormat: defaultDateFormat,
-                                dateFormat: "Y-m-d", //set altInput to false to use this format
-                                minDate:"today",
-                            }}
+                <form onSubmit={this.handleSubmit} >
+                    {/* Booking_Form START ///////////////////////////////////////////////////////////////////////////////////*/}
+                    {activeView == 'Booking_Form' ?
+                        <div>
+                            <ModalMakeOrder Modal_Result={this.handleModal_Result}/>
+                            <MDBContainer> 
+                                <MDBRow>
+                                    <h2>Make a Booking</h2>
+                                </MDBRow>
+                                <MDBRow center>
+                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="First Name" size="lg" value={this.state.value} onChange={this.handleCustomerName} name='firstName' /> </MDBCol> { /* value={this.state.value} is already the default value */}
+                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="Last Name" size="lg" onChange={this.handleCustomerName} name='lastName' /> </MDBCol>
+                                </MDBRow>
+                                <MDBRow center>
+                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="Email" size="lg" onChange={this.handleEmail} /> </MDBCol>
+                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="Phone" size="lg" onChange={this.handlePhone} /> </MDBCol>
+                                </MDBRow>
+                                <MDBRow center >
+                                    <MDBCol sm="8" md="8" lg="8">
+                                    <h6>Location:</h6>
+                                        <Select
+                                            className="branch-selector"
+                                            placeholder="Select Location..."
+                                            value={branch}
+                                            onChange={(branch) => {
+                                                this.handleBranch(branch);
+                                                this.enableDatePicker();
+                                                this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum)
+                                            }}
+                                            options={
+                                                this.branchNames()
+                                            }
+                                        />
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow center>
+                                    {/* Flatpickr code START */}
+                                    {/*May include ability for Owner to disable certain dates (holidays)*/}
+                                    <MDBCol sm="4" md="4" lg="4" ><div className={this.state.disableDate} > {/* this div changes the input field to the mdb input field */}
+                                    <Flatpickr
+                                        className="form-control-lg" //sets input field font size to lg
+                                        value={date}
+                                        onChange={date => {
+                                        this.handleDateChange(date);
+                                        this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
+                                        }}
+                                        onOpen={() => {
+                                            this.setState({ defaultDateFormat: "F j, Y" });
+                                        }}  
+                                        onClose={() => {
+                                            // Bug Fix: If backspace is used when input field is selected input field is blank
+                                            if (date.length==0) {
+                                                this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." }); //resets placeholder value
+                                                this.setState({ date: new Date() }) //resets date to Date() -> returns todays date
+                                            }
+                                        }}
+                                        options={{
+                                            altInput: true, // altInput is a "human friendly" format (April 22, 2020)
+                                            altFormat: defaultDateFormat,
+                                            dateFormat: "Y-m-d", //set altInput to false to use this format
+                                            minDate:"today",
+                                        }}
+                                    />
+                                    </div></MDBCol>
+                                    {/* Flatpickr code END */}
+                                    <MDBCol sm="4" md="4" lg="4">
+                                        <MDBInput type="number" label="Number of Guests" size="lg" hint="0" disabled={disableGuestNum.valueOf()}
+                                            onChange={ () => {
+                                                this.handleGuestNum(event);
+                                                this.availabilityCheck(new Date(date).toDateString(), branch.value, Number(event.target.value) /*guestNum*/);
+                                            }} />
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBContainer>
+                                    <MDBRow center>
+                                        <MDBCol sm="8" md="8" lg="8">
+                                            <h5>Time:</h5>
+                                            <table className="time-selector">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><MDBBtn id='4:00' color={btnFour} onClick={this.handleBtnSelect} disabled={disableFour.valueOf()} >4:00</MDBBtn></td>
+                                                        <td><MDBBtn id='5:00' color={btnFive} onClick={this.handleBtnSelect} disabled={disableFive.valueOf()}>5:00</MDBBtn></td>
+                                                        <td><MDBBtn id='6:00' color={btnSix} onClick={this.handleBtnSelect} disabled={disableSix.valueOf()}>6:00</MDBBtn></td>
+                                                        <td><MDBBtn id='7:00' color={btnSeven} onClick={this.handleBtnSelect} disabled={disableSeven.valueOf()}>7:00</MDBBtn></td>
+                                                        <td><MDBBtn id='8:00' color={btnEight} onClick={this.handleBtnSelect} disabled={disableEight.valueOf()}>8:00</MDBBtn></td>
+                                                        <td><MDBBtn id='9:00' color={btnNine} onClick={this.handleBtnSelect} disabled={disableNine.valueOf()}>9:00</MDBBtn></td>
+                                                        <td><MDBBtn id='10:00' color={btnTen} onClick={this.handleBtnSelect} disabled={disableTen.valueOf()}>10:00</MDBBtn></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBContainer>
+                                <MDBRow center>
+                                    <MDBCol sm="8" md="8" lg="8" className="text-area-padding">
+                                        <MDBInput type="textarea" label="Special Request" hint="Let us know if you have any special event requests!" outline size="lg" onChange={this.handleSpecialRequest}/>
+                                    </MDBCol>
+                                </MDBRow>
+                                <MDBRow className='btn-confirm-padding'>
+                                <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleBooking_Next} disabled={disableBtnNext.valueOf()} type={btnNextType.valueOf()} >Next</MDBBtn></MDBCol>
+                                <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
+                                </MDBRow>
+                            </MDBContainer>
+                        </div>
+                    : null}
+                    {/* Booking_Form END ///////////////////////////////////////////////////////////////////////////////////*/}
+                    {activeView == 'Booking_Summary' ?
+                        <BookingSummary 
+                            bookingID = {this.submittedBookingID}
+                            guests = {guestNum}
+                            date = {new Date(date).toDateString()}
+                            time = {time}
+                            fullName = {customerName}
+                            branch = {branch}
+                            // branchName = {branch.label}
+                            // branchAddressNice = {this.Booking_Summary_branchAddressNice}
+                            // branchPhone = {this.Booking_Summary_branchPhone}
                         />
-                        </div></MDBCol>
-                        {/* Flatpickr code END */}
-                        <MDBCol sm="4" md="4" lg="4">
-                            <MDBInput type="number" label="Number of Guests" size="lg" hint="0" disabled={disableGuestNum.valueOf()}
-                                onChange={ () => {
-                                    this.handleGuestNum(event);
-                                    this.availabilityCheck(new Date(date).toDateString(), branch.value, Number(event.target.value) /*guestNum*/);
-                                }} />
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBContainer>
-                        <MDBRow center>
-                            <MDBCol sm="8" md="8" lg="8">
-                                <h5>Time:</h5>
-                                <table className="time-selector">
-                                    <tbody>
-                                        <tr>
-                                            <td><MDBBtn id='4:00' color={btnFour} onClick={this.handleBtnSelect} disabled={disableFour.valueOf()} >4:00</MDBBtn></td>
-                                            <td><MDBBtn id='5:00' color={btnFive} onClick={this.handleBtnSelect} disabled={disableFive.valueOf()}>5:00</MDBBtn></td>
-                                            <td><MDBBtn id='6:00' color={btnSix} onClick={this.handleBtnSelect} disabled={disableSix.valueOf()}>6:00</MDBBtn></td>
-                                            <td><MDBBtn id='7:00' color={btnSeven} onClick={this.handleBtnSelect} disabled={disableSeven.valueOf()}>7:00</MDBBtn></td>
-                                            <td><MDBBtn id='8:00' color={btnEight} onClick={this.handleBtnSelect} disabled={disableEight.valueOf()}>8:00</MDBBtn></td>
-                                            <td><MDBBtn id='9:00' color={btnNine} onClick={this.handleBtnSelect} disabled={disableNine.valueOf()}>9:00</MDBBtn></td>
-                                            <td><MDBBtn id='10:00' color={btnTen} onClick={this.handleBtnSelect} disabled={disableTen.valueOf()}>10:00</MDBBtn></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </MDBCol>
-                        </MDBRow>
-                    </MDBContainer>
-                    <MDBRow center>
-                        <MDBCol sm="8" md="8" lg="8" className="text-area-padding">
-                            <MDBInput type="textarea" label="Special Request" hint="Let us know if you have any special event requests!" outline size="lg" onChange={this.handleSpecialRequest}/>
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow className='btn-confirm-padding'>
-                    <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleBooking_Next} /*type='submit'*/ >Next</MDBBtn></MDBCol>
-                    <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
-                    </MDBRow>
-                </MDBContainer>
-            </form>
-            : null}
-            {/* Booking_Form END ///////////////////////////////////////////////////////////////////////////////////*/}
-            {/* Booking_Summary START //////////////////////////////////////////////////////////////////////////////*/}
-            {activeView == 'Booking_Summary' ? 
-                <MDBContainer>
-                    <MDBRow>
-                        <MDBCol>
-                        <h2>Booking Summary</h2>
-                        </MDBCol>
-                    </MDBRow>
-                </MDBContainer>
-            : null}
-            {/* Booking_Summary END ////////////////////////////////////////////////////////////////////////////////*/}
-            {/* Menu START /////////////////////////////////////////////////////////////////////////////////////////*/}
-            {activeView == 'Menu' ? <Hello_world /> : null}
-            {/* Menu END ///////////////////////////////////////////////////////////////////////////////////////////*/}
+                    : null}
+                    
+                    {activeView == 'Menu' ? <Hello_world /> : null}
+                </form>
             </div>
         );
     }

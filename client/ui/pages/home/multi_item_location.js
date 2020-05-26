@@ -9,8 +9,6 @@ import ModalMakeOrder from "../../components/modal_make_order";
 const MultiItemlLocations = () => {
     return (
         <MDBContainer>
-
-
             <MDBCard >
                 <MDBCardBody>
                     <MDBRow>
@@ -30,18 +28,14 @@ const MultiItemlLocations = () => {
                             <span> Address: Grimmond Ave, Ashfield NSW 2131</span>
                             <br></br>
                             <span> Phone: 02 446 668</span>
-
-                            
                         </MDBCol>
-
                         <MDBCol>
-                        <br/>
-                        <hr />
-                        <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
-                        <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
-                        <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 12-3:30pm / 5-10:30pm </span></p>
-                        <MDBBtn color= "primary" href="/booking">Book now</MDBBtn>
-
+                            <br/>
+                            <hr />
+                            <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
+                            <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
+                            <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 12-3:30pm / 5-10:30pm </span></p>
+                            <MDBBtn color= "primary" href="/booking">Book now</MDBBtn>
                         </MDBCol>
                     </MDBRow>
                 </MDBCardBody>
