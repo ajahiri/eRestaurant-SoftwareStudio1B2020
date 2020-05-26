@@ -2,13 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
 import Select from 'react-select';
-import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn} from  "mdbreact";
+import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter,} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
 import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
 import "./custom-flatpickr-theme.css";
 import '../../../main.scss';
 import Hello_world from '../../components/helloWorld.js';
+import ModalMakeOrder from '../../components/modal_make_order.js';
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -16,12 +17,13 @@ class Booking extends React.Component {
     constructor(props) {
         super(props);
 
-        
         this.firstName = '';
         this.lastName = '';
 
         this.state = {
-        activeView: 'booking',
+        activeView: 'Booking_Form',
+        modal: true,
+        order_online: false,
         // Time btns START
         btnFour: 'indigo',
         btnFive: 'indigo',
@@ -74,6 +76,9 @@ class Booking extends React.Component {
         this.enableDatePicker = this.enableDatePicker.bind(this);
         this.enableTimePicker = this.enableTimePicker.bind(this);
         this.disableTimePicker = this.disableTimePicker.bind(this);
+        //this.toggleModal = this.toggleModal.bind(this);
+        this.handleModal_Result = this.handleModal_Result.bind(this);
+        this.handleBooking_Next = this.handleBooking_Next.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
@@ -280,9 +285,31 @@ class Booking extends React.Component {
             this.disableTimePicker();
         }
     }
+
+    // toggleModal() {
+    //     this.setState({modal: !this.state.modal});
+    // }
+
+    handleModal_Result(result) {
+        //this.toggleModal();
+        console.log(result);
+        this.setState({order_online: result});
+    }
+
+    handleBooking_Next() {
+        if (this.state.order_online) {
+            this.setState({disableBtnNext: true, activeView: 'Menu'})
+        } else {
+            this.setState({disableBtnNext: true, activeView: 'Booking_Summary'})
+        }
+    }
     
     handleBtnTest(event) {
-        this.setState({activeView: 'helloWorld'});
+        if (this.state.order_online) {
+            this.setState({activeView: 'Menu'})
+        } else {
+            this.setState({activeView: 'Booking_Summary'})
+        }
     }
 
     render() {
@@ -297,8 +324,10 @@ class Booking extends React.Component {
 
         return (
             <div>
-            {activeView == 'booking' ?
+            {/* Booking_Form START ///////////////////////////////////////////////////////////////////////////////////*/}
+            {activeView == 'Booking_Form' ?
             <form onSubmit={this.handleSubmit} >
+                <ModalMakeOrder Modal_Result={this.handleModal_Result}/>
                 <MDBContainer> 
                     <MDBRow>
                         <h2>Make a Booking</h2>
@@ -393,14 +422,27 @@ class Booking extends React.Component {
                         </MDBCol>
                     </MDBRow>
                     <MDBRow className='btn-confirm-padding'>
-                    <MDBCol><MDBBtn color="indigo" size='lg' type='submit'>Confirm Booking</MDBBtn></MDBCol>
+                    <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleBooking_Next} /*type='submit'*/ >Next</MDBBtn></MDBCol>
                     <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
                     </MDBRow>
                 </MDBContainer>
             </form>
-            : null
-            }
-            {activeView == 'helloWorld' ? <Hello_world /> : null}
+            : null}
+            {/* Booking_Form END ///////////////////////////////////////////////////////////////////////////////////*/}
+            {/* Booking_Summary START //////////////////////////////////////////////////////////////////////////////*/}
+            {activeView == 'Booking_Summary' ? 
+                <MDBContainer>
+                    <MDBRow>
+                        <MDBCol>
+                        <h2>Booking Summary</h2>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+            : null}
+            {/* Booking_Summary END ////////////////////////////////////////////////////////////////////////////////*/}
+            {/* Menu START /////////////////////////////////////////////////////////////////////////////////////////*/}
+            {activeView == 'Menu' ? <Hello_world /> : null}
+            {/* Menu END ///////////////////////////////////////////////////////////////////////////////////////////*/}
             </div>
         );
     }
