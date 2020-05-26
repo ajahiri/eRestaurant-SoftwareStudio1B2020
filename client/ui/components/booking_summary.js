@@ -10,14 +10,11 @@ import {MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MD
 class BookingSummary extends React.Component{
     constructor(props) {
         super(props);
-    
+      
     }
 
     render(){
-      const branch = this.props.branch;
-      const branchName = branch.label;
-      const branchAddressNice = Meteor.call('getBranches.AddressNice', branch.value);
-      const branchPhone = Meteor.call('getBranches.Phone', branch.value);
+      const {bookingID, guests, date, time, fullName, branchName, branchAddressNice, branchPhone} = this.props;
         return(
           <MDBContainer>
             <MDBCol>
@@ -33,9 +30,9 @@ class BookingSummary extends React.Component{
                       <h6 className=" mb-4 p-0">
                         Thank you for using eRestaurant !
                       </h6>
-                      <h5 className="font-weight-bold mb-4 p-0">Order#: {this.props.bookingID}</h5>
-                      <h5 className="font-weight-bold mb-4 p-0">Table for {this.props.guests} on {this.props.date} at {this.props.time}</h5>
-                      <h6 className=" mb-4 p-0"> {this.props.fullName} </h6>
+                      <h5 className="font-weight-bold mb-4 p-0">Order#: {bookingID}</h5>
+                      <h5 className="font-weight-bold mb-4 p-0">Table for {guests} on {date} at {time}</h5>
+                      <h6 className=" mb-4 p-0"> {fullName} </h6>
                       
                       <hr />    
 

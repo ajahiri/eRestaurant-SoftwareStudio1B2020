@@ -20,12 +20,14 @@ class Booking extends React.Component {
 
         this.firstName = '';
         this.lastName = '';
-        this.submittedBookingID = '';
 
         this.state = {
         activeView: 'Booking_Form', //other views are 'Booking_Summary', 'Menu', 'Order/Booking_Summary', 'Checkout', 'Invoice/Order/Booking_Summary'
         order_online: false,
-        btnNextType: '', 
+        submittedBookingID: '',
+        branchAddressNice: '',
+        branchPhone: '',
+        payOnline: false,
 
         // Time btns START
         btnFour: 'indigo',
@@ -61,6 +63,7 @@ class Booking extends React.Component {
         time: '',
         date: new Date(),
         specialRequest: '',
+        payed: false,
         // END Booking Details Attributes
         defaultDateFormat: "\\Se\\lect \\Date...", //Workaround: Used to display placeholder in date picker input field.
         };                                                    // altFormat is then set to the proper date format using the Flatpickr onOpen function.
@@ -86,21 +89,28 @@ class Booking extends React.Component {
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
-    async handleSubmit(event) {
-        event.preventDefault();
+    async handleSubmit() {
+        const {order_online, payOnline, payed} = this.state;
+        if (order_online && payed){    // finish user jounrey at Invoice with Order & Booking Summary
+            //do something...
+        } else if (order_online && !payOnline) { // finish user jounrey at Order & Booking Summary
+            //do soemthing...
+        } else {    // finish user journey at Booking Summary
         const state = this.state;
         const date = new Date(this.state.date); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
         const dateNice = date.toDateString();
-        this.submittedBookingID = await Meteor.callPromise('bookings.insert', state.branch.value, state.customerName, state.email,
+        this.setState({submittedBookingID: await Meteor.callPromise('bookings.insert', state.branch.value, state.customerName, state.email,
             state.phone, state.guestNum, date, dateNice, state.time, state.specialRequest,
             function(error) {
                 if (error) {
                     console.log(error);
                 }
             }
-        );
-        //this.setState({submittedBookingID: booking_id});
-        console.log(this.submittedBookingID);
+        )});
+        this.setState({branchAddressNice: await Meteor.callPromise('getBranches.AddressNice', state.branch.value)});
+        this.setState({branchPhone: await Meteor.callPromise('getBranches.Phone', state.branch.value)});
+        this.handleBooking_Next();
+        }
     }
 
 
@@ -295,9 +305,6 @@ class Booking extends React.Component {
 
     handleModal_Result(result) {
         this.setState({order_online: result});
-        if (!result) {
-            this.setState({btnNextType: 'submit'});
-        }
     }
 
     handleBooking_Next() {
@@ -328,18 +335,18 @@ class Booking extends React.Component {
 
     render() {
         const { 
-            activeView, btnNextType,
+            activeView,
             date, defaultDateFormat,
             time, customerName,
             branch, guestNum,
             disableGuestNum, disableBtnNext,
             btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen,
             disableFour, disableFive, disableSix, disableSeven, disableEight, disableNine, disableTen,
+            order_online,
         } = this.state;
 
         return (
             <div>
-                <form onSubmit={this.handleSubmit} >
                     {/* Booking_Form START ///////////////////////////////////////////////////////////////////////////////////*/}
                     {activeView == 'Booking_Form' ?
                         <div>
@@ -438,8 +445,12 @@ class Booking extends React.Component {
                                     </MDBCol>
                                 </MDBRow>
                                 <MDBRow className='btn-confirm-padding'>
-                                <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleBooking_Next} disabled={disableBtnNext.valueOf()} type={btnNextType.valueOf()} >Next</MDBBtn></MDBCol>
-                                <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
+                                    {order_online ? 
+                                        <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleBooking_Next} disabled={disableBtnNext.valueOf()} >Next</MDBBtn></MDBCol>
+                                    :
+                                        <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleSubmit} disabled={disableBtnNext.valueOf()} >Confirm Booking</MDBBtn></MDBCol>
+                                    }
+                                    <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
                                 </MDBRow>
                             </MDBContainer>
                         </div>
@@ -447,20 +458,18 @@ class Booking extends React.Component {
                     {/* Booking_Form END ///////////////////////////////////////////////////////////////////////////////////*/}
                     {activeView == 'Booking_Summary' ?
                         <BookingSummary 
-                            bookingID = {this.submittedBookingID}
+                            bookingID = {this.state.submittedBookingID}
                             guests = {guestNum}
                             date = {new Date(date).toDateString()}
                             time = {time}
                             fullName = {customerName}
-                            branch = {branch}
-                            // branchName = {branch.label}
-                            // branchAddressNice = {this.Booking_Summary_branchAddressNice}
-                            // branchPhone = {this.Booking_Summary_branchPhone}
+                            branchName = {branch.label}
+                            branchAddressNice = {this.state.branchAddressNice}
+                            branchPhone = {this.state.branchPhone}
                         />
                     : null}
                     
                     {activeView == 'Menu' ? <Hello_world /> : null}
-                </form>
             </div>
         );
     }
