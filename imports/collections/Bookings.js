@@ -39,8 +39,7 @@ Meteor.methods({
             cancelled: false,
             createdAt: Date(),
         });
-        console.log(Bookings.find().fetch());
-        console.log(DateTimeBranch.findOne({date: date, time: time, branch: branch}));
+        //console.log(Bookings.find().fetch());
         if (DateTimeBranch.findOne({date: dateNice, time: time, branch: branch}) == null) {
             Meteor.call('date_time_branch.insert', dateNice, time, branch, guestNum,
             function(error) {
