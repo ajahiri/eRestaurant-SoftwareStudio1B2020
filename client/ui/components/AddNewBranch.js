@@ -35,6 +35,7 @@ class AddNewBranch extends React.Component {
                     </td>
                     <td>{branch.phone}</td>
                     <td>{addressNice}</td>
+                    <td>{branch.capacity}</td>
                 </tr>
             );
         });
@@ -44,41 +45,58 @@ class AddNewBranch extends React.Component {
     * Note: Need to work on getting list of staff belonging to every branch.
     * */
     render() {
-        return (
-            <>
-                <MDBRow>
-                    <MDBCol>
-                        <h2>Branch Management</h2>
-                        <h3>Current Branches</h3>
-                        <MDBTable responsive striped>
-                            <MDBTableHead color="primary-color" textWhite>
-                                <tr>
-                                    <th>#id</th>
-                                    <th>Name</th>
-                                    <th>Manager</th>
-                                    <th>Staff</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                </tr>
-                            </MDBTableHead>
-                            <MDBTableBody>
-                                {this.renderRows()}
-                            </MDBTableBody>
-                        </MDBTable>
-                    </MDBCol>
-                </MDBRow>
-                <AddBranchForm/>
-            </>
-        );
+        if (this.props.isReady) {
+            return (
+                <>
+                    <MDBRow>
+                        <MDBCol>
+                            <h2>Branch Management</h2>
+                            <h3>Current Branches</h3>
+                            <MDBTable responsive striped>
+                                <MDBTableHead color="primary-color" textWhite>
+                                    <tr>
+                                        <th>#id</th>
+                                        <th>Name</th>
+                                        <th>Manager</th>
+                                        <th>Staff</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Seating Cap.</th>
+                                    </tr>
+                                </MDBTableHead>
+                                <MDBTableBody>
+                                    {this.renderRows()}
+                                </MDBTableBody>
+                            </MDBTable>
+                        </MDBCol>
+                    </MDBRow>
+                    <AddBranchForm/>
+                </>
+            );
+        } else {
+            return (
+                <MDBContainer>
+                    <MDBRow>
+                        <div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </MDBRow>
+                </MDBContainer>
+            );
+        }
     }
-};
+}
 
 
 export default withTracker(() => {
     //Taken from https://guide.meteor.com/react.html#data
-    Meteor.subscribe('branchesAdmin');
+    const subscriptions = {
+        branchesAdmin: Meteor.subscribe('branchesAdmin'),
+    }
+
     return {
         branches: Branches.find().fetch(),
+        isReady: subscriptions.branchesAdmin.ready(),
     }
 })(AddNewBranch);
 

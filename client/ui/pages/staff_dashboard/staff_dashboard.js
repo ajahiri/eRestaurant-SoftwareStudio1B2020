@@ -61,6 +61,16 @@ class StaffDashboard extends React.Component {
                     </span>
                 </MDBCol>
             );
+        } else if (!this.props.user.assignedBranch) {
+            return (
+                <MDBCol center sm="6" md="12">
+                    <span className="badge badge-danger text-capitalize font-weight-bold text-wrap"
+                          style={{fontSize: 'xxx-large'}}>
+                        You must be assigned a branch explicitly before accessing dashboard.
+                    </span>
+                    <p>Please speak to your manager/administrator.</p>
+                </MDBCol>
+            );
         } else if (this.props.isReady) {
             const address = this.props.branch.address;
             const addressNice = address.streetNumber + " " + address.street + " " +
@@ -133,6 +143,7 @@ export default withTracker(() => {
     */
     return {
         userID: Meteor.userId(),
+        user: Meteor.user(),
         branch: Branches.findOne(),
         bookings: Bookings.find({}, {sort: {date: 1, time: 1}}).fetch(),
         isReady: subscriptions.branchStaff.ready()
