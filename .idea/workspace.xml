@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +98,7 @@
       <workItem from="1589175972822" duration="1422000" />
       <workItem from="1589727932345" duration="7199000" />
       <workItem from="1590373301108" duration="2657000" />
-      <workItem from="1590464055934" duration="1574000" />
+      <workItem from="1590464055934" duration="2407000" />
     </task>
     <servers />
   </component>

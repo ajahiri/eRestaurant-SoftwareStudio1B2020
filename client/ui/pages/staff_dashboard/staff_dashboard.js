@@ -51,7 +51,7 @@ class StaffDashboard extends React.Component {
     };
 
     render() {
-        if(!this.props.userID)
+        if(!this.props.user)
         {
             return (
                 <MDBCol center sm="6" md="12">
@@ -61,12 +61,12 @@ class StaffDashboard extends React.Component {
                     </span>
                 </MDBCol>
             );
-        } else if (!this.props.user.assignedBranch) {
+        } else if (!this.props.branch) {
             return (
                 <MDBCol center sm="6" md="12">
                     <span className="badge badge-danger text-capitalize font-weight-bold text-wrap"
                           style={{fontSize: 'xxx-large'}}>
-                        You must be assigned a branch explicitly before accessing dashboard.
+                        You must be assigned a branch before accessing dashboard.
                     </span>
                     <p>Please speak to your manager/administrator.</p>
                 </MDBCol>
