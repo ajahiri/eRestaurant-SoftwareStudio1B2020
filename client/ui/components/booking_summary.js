@@ -17,7 +17,7 @@ class BookingSummary extends React.Component{
       const {bookingID, guests, date, time, fullName, branchName, branchAddressNice, branchPhone} = this.props;
         return(
           <MDBContainer>
-            <MDBCol>
+            <MDBCol >
             <MDBCard center style={{ width: "45rem" }}>  
               <MDBCardBody>
                 <MDBCardTitle tag="h2" className="page-heading, font-weight-bold text-center mb-3 p-3">Booking Summary</MDBCardTitle>           

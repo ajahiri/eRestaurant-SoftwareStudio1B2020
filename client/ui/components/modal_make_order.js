@@ -25,7 +25,7 @@ handleResult(result) {
 render() {
   return (
     <MDBContainer>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Make a Booking</MDBModalHeader>
         <MDBModalBody>
           Before proceeding to the booking, would you like to make an order now ? It will be ready once you arrive at the restaurant.

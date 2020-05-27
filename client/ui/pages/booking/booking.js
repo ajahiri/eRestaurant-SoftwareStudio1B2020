@@ -11,6 +11,7 @@ import '../../../main.scss';
 import Hello_world from '../../components/helloWorld.js';
 import ModalMakeOrder from '../../components/modal_make_order.js';
 import BookingSummary from '../../components/booking_summary.js';
+import MenuPage from '../foodmenu/menu_page.js';
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -78,8 +79,6 @@ class Booking extends React.Component {
         this.disableTimePicker = this.disableTimePicker.bind(this);
         this.handleModal_Result = this.handleModal_Result.bind(this);
         this.handleBooking_Next = this.handleBooking_Next.bind(this);
-        this.Booking_Summary_branchAddressNice = this.Booking_Summary_branchAddressNice.bind(this);
-        this.Booking_Summary_branchPhone = this.Booking_Summary_branchPhone.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
@@ -93,7 +92,7 @@ class Booking extends React.Component {
         const state = this.state;
         const date = new Date(this.state.date); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
         const dateNice = date.toDateString();
-        this.setState({submittedBookingID: await Meteor.callPromise('bookings.insert', state.branch.value, this.props.user.profile.name, this.props.user.email[0].address,
+        this.setState({submittedBookingID: await Meteor.callPromise('bookings.insert', state.branch.value, this.props.user.profile.name, this.props.user.emails[0].address,
                 this.props.user.profile.phone, state.guestNum, date, dateNice, state.time, state.specialRequest,
             function(error) {
                 if (error) {
@@ -179,7 +178,7 @@ class Booking extends React.Component {
     // END handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////
     
     handleDateChange(date){
-        this.setState({ date: date, disableGuestNum: false}); // return this.state.date for the selected Date
+        this.setState({ date: date, disableGuestNum: false});
     }
 
     handleGuestNum(event) {
@@ -206,8 +205,8 @@ class Booking extends React.Component {
         this.setState({disableDate: 'md-form'});
     }
 
-    enableTimePicker(defaultDateFormat){
-        if (defaultDateFormat !== '\\Se\\lect \\Date...') {
+    enableTimePicker(){
+        if (this.state.guestNum > 0) {
             this.setState({
                 disableFour: false,
                 disableFive: false,
@@ -288,16 +287,6 @@ class Booking extends React.Component {
         }
     }
 
-    async Booking_Summary_branchAddressNice() {
-        let branchAddressNice = await Meteor.callPromise('getBranches.AddressNice', this.state.branch.value);
-        return branchAddressNice;
-    }
-    
-    async Booking_Summary_branchPhone() {
-        let branchPhone = await Meteor.callPromise('getBranches.Phone', this.state.branch.value);
-        return branchPhone;
-    }
-
     handleBtnTest(event) {
         if (this.state.order_online) {
             this.setState({activeView: 'Menu'});
@@ -310,7 +299,7 @@ class Booking extends React.Component {
         const {
             activeView,
             date, defaultDateFormat,
-            time, customerName, email, phone,
+            time,
             branch, guestNum,
             disableGuestNum, disableBtnNext,
             btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnTen,
@@ -351,11 +340,11 @@ class Booking extends React.Component {
                                     <h2>Make a Booking</h2>
                                 </MDBRow>
                                 <MDBRow center>
-                                    <MDBCol sm="8"><MDBInput label="Full Name" size="lg" value={this.props.user.profile.name} name='fullName' /> </MDBCol> { /* value={this.state.value} is already the default value */}
+                                    <MDBCol sm="8"><MDBInput label="Full Name" size="lg" value={this.props.user.profile.name} name='fullName' disabled /> </MDBCol>
                                 </MDBRow>
                                 <MDBRow center>
-                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="Email" size="lg" value={this.props.user.emails[0].address} /> </MDBCol>
-                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="Phone" size="lg" value={this.props.user.profile.phone} /> </MDBCol>
+                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="Email" size="lg" value={this.props.user.emails[0].address} disabled /> </MDBCol>
+                                    <MDBCol sm="4" md="4" lg="4"><MDBInput label="Phone" size="lg" value={this.props.user.profile.phone} disabled /> </MDBCol>
                                 </MDBRow>
                                 <MDBRow center >
                                     <MDBCol sm="8" md="8" lg="8">
@@ -387,7 +376,8 @@ class Booking extends React.Component {
                                                 this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
                                             }}
                                             onOpen={() => {
-                                                this.setState({ defaultDateFormat: "F j, Y" });
+                                                this.setState({ defaultDateFormat: "F j, Y", disableGuestNum: false});
+                                                
                                             }}
                                             onClose={() => {
                                                 // Bug Fix: If backspace is used when input field is selected input field is blank
@@ -456,14 +446,18 @@ class Booking extends React.Component {
                             guests = {guestNum}
                             date = {new Date(date).toDateString()}
                             time = {time}
-                            fullName = {customerName}
+                            fullName = {this.props.user.profile.name}
                             branchName = {branch.label}
                             branchAddressNice = {this.state.branchAddressNice}
                             branchPhone = {this.state.branchPhone}
                         />
                         : null}
 
-                    {activeView == 'Menu' ? <Hello_world /> : null}
+                    {activeView == 'Menu' ? 
+                    <MenuPage 
+                    
+                    /> 
+                    : null}
                 </div>
             );
         }
