@@ -84,6 +84,10 @@ Meteor.publish('branchStaff', function () {
     }
 });
 
+Meteor.publish('bookingsUser', function() {
+   return Bookings.find({owner: Meteor.userId()}, { sort: {date: -1} });
+});
+
 Meteor.publish('bookingsStaff', function(dateRange) {
     if (Meteor.userId() && (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager'))) {
         const currentDate = new Date();
