@@ -88,7 +88,7 @@ class BookingOrderSummary extends React.Component{
                                     <div className="form-check">
                                     <label>
                                         <input
-                                        type="radio"
+                                        type="checkbox"
                                         name="react-tips"
                                         value="option1"
                                         checked={this.state.selectedOption === "option1"}
@@ -104,25 +104,6 @@ class BookingOrderSummary extends React.Component{
                                     </label>
                                     </div>                                    
                                        
-                                    <div className="form-check">
-                                    <label>
-                                        <input
-                                        type="radio"
-                                        name="react-tips"
-                                        value="option2"
-                                        checked={this.state.selectedOption === "option2"}
-                                        onChange={this.handleOptionChange}
-                                        className="form-check-input"
-                                        onClick={() => {
-                                          this.handleRadioBtn(false)
-                                        }
-                                        }                                        
-                                        />                                    
-                                        Pay in Store
-                                    </label>
-                                    
-                                    </div>
-
                                 </form>
                           
                             </MDBCol>
@@ -158,4 +139,3 @@ class BookingOrderSummary extends React.Component{
 }
 
 export default BookingOrderSummary;
-
