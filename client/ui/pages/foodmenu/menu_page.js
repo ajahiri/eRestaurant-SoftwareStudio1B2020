@@ -12,27 +12,50 @@ import ManageCategory from './manageCategory';
 
 class MenuPage extends React.Component {
     render() {
-        return (
+        if (Meteor.user() && Roles.userIsInRole(Meteor.userId(), 'admin')) 
+        {
+            return (
 
-            <div>
-                <main role="main" className="inner cover">
-                    <MDBContainer>
-                        
-                        <MDBCard>
-                            <TopPost />
-                            <br />
-                            <MDBContainer>
-                                <MenuList />
-                                <AddMenuItem/>
-                                <ManageCategory/>
-                            </MDBContainer>
-                        </MDBCard>
-                        
-                    </MDBContainer>
-                </main>
-            </div >
+                <div>
+                    <main role="main" className="inner cover">
+                        <MDBContainer>
 
-        );
+                            <MDBCard>
+                                <TopPost />
+                                <br />
+                                <MDBContainer>
+                                    <MenuList />
+                                    <AddMenuItem />
+                                    <ManageCategory />
+                                </MDBContainer>
+                            </MDBCard>
+
+                        </MDBContainer>
+                    </main>
+                </div >
+
+            );
+        }else {
+            return (
+
+                <div>
+                    <main role="main" className="inner cover">
+                        <MDBContainer>
+
+                            <MDBCard>
+                                <TopPost />
+                                <br />
+                                <MDBContainer>
+
+                                </MDBContainer>
+                            </MDBCard>
+
+                        </MDBContainer>
+                    </main>
+                </div >
+
+            );
+        }
     }
 }
 

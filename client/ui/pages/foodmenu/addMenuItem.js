@@ -4,7 +4,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, } from "
 import { Menu } from "../../../../imports/collections/Menu";
 import { MenuCategory } from "../../../../imports/collections/MenuCategory";
 
-var titlechanged = false, categorychanged = false, costchanged = false, ingrediantschanged = false;
+var titlechanged = false, categorychanged = false, costchanged = false, ingrediantschanged = false,imagechanged = false;
 
 
 class AddMenuItem extends React.Component {
@@ -54,6 +54,8 @@ class AddMenuItem extends React.Component {
             costchanged = true;
         if (name == 'ingrediants')
             ingrediantschanged = true;
+        if (name == 'image')
+            imagechanged = true;
     }
 
     handleSubmit(event) {
@@ -186,8 +188,22 @@ class AddMenuItem extends React.Component {
                         <textarea placeholder="Ingrediants" name='ingrediants' class="purple-border md-textarea form-control exampleFormControlTextarea4" onChange={this.handleChange}rows="4" cols="50" ></textarea>
                     </div>
                 </MDBCol>
-                <MDBCol sm="6">
+                {/* <MDBCol sm="6">
                     {ingrediantschanged ? <span>New title Is {this.state.ingrediants}</span> : <span></span>}
+                </MDBCol> */}
+            </MDBCol>
+        </MDBRow>
+
+        <MDBRow left>
+            <MDBCol className="form-inline" sm="12">
+                <MDBCol sm="6" md="3">
+                    <span style={{fontSize: 'xxx-large'}} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Item image: </strong></span>
+                </MDBCol>
+                <MDBCol sm="6" md="3">
+                    <MDBInput label="New image" size="lg" name='image' type="text" onChange={this.handleChange} />
+                </MDBCol>
+                <MDBCol sm="6">
+                    {imagechanged ? <span>selected image Is {this.state.image}</span> : <span></span>}
                 </MDBCol>
             </MDBCol>
         </MDBRow>
@@ -205,9 +221,9 @@ class AddMenuItem extends React.Component {
                         {this.renderCategories()}
                     </select>
                 </MDBCol>
-                <MDBCol sm="6" md="3">
+                {/* <MDBCol sm="6" md="3">
                     {categorychanged ? <span>New Category Is {this.state.category}</span> : <span></span>}
-                </MDBCol>
+                </MDBCol> */}
             </MDBCol>
         </MDBRow>
 
