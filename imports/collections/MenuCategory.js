@@ -37,5 +37,13 @@ Meteor.methods({
         MenuCategory.update({_id : category},{$set:{categoryitems : num}});
         console.log(MenuCategory.find().fetch());
     },
+    'menucategory.update': function (categoryid, categoryname) {
+        // if (!this.userId) {
+        //     throw new Meteor.Error('Not logged in', "Must be logged in");
+        // }
+        console.log("attempting to update category");
+        MenuCategory.update({_id : categoryid},{$set:{category : categoryname}});
+        console.log(MenuCategory.find().fetch());
+    }
 
 });

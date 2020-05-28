@@ -9,32 +9,64 @@ import TopPost from './top_post_image';
 import MenuList from './menu_list';
 import AddMenuItem from './addMenuItem';
 import ManageCategory from './manageCategory';
+import {withTracker} from 'meteor/react-meteor-data';
+
 
 class MenuPage extends React.Component {
     render() {
-        return (
+        if (this.props.user && this.props.role) 
+        {
+            return (
 
-            <div>
-                <main role="main" className="inner cover">
-                    <MDBContainer>
-                        
-                        <MDBCard>
-                            <TopPost />
-                            <br />
-                            <MDBContainer>
-                                <MenuList />
-                                <AddMenuItem/>
-                                <ManageCategory/>
-                            </MDBContainer>
-                        </MDBCard>
-                        
-                    </MDBContainer>
-                </main>
-            </div >
+                <div>
+                    <main role="main" className="inner cover">
+                        <MDBContainer>
 
-        );
+                            <MDBCard>
+                                <TopPost />
+                                <br />
+                                <MDBContainer>
+                                    <MenuList />
+                                    <AddMenuItem />
+                                    <ManageCategory />
+                                </MDBContainer>
+                            </MDBCard>
+
+                        </MDBContainer>
+                    </main>
+                </div >
+
+            );
+        }else {
+            return (
+
+                <div>
+                    <main role="main" className="inner cover">
+                        <MDBContainer>
+
+                            <MDBCard>
+                                <TopPost />
+                                <br />
+                                <MDBContainer>
+                                    <MenuList />
+                                </MDBContainer>
+                            </MDBCard>
+
+                        </MDBContainer>
+                    </main>
+                </div >
+
+            );
+        }
     }
 }
 
 //export
-export default MenuPage;
+export default withTracker(() => {
+    //Taken from https://guide.meteor.com/react.html#data
+    Meteor.subscribe("menucategory");
+    return {
+        user: Meteor.user(),
+        role: Roles.userIsInRole(Meteor.userId(), 'admin')
+    };
+  })(MenuPage);
