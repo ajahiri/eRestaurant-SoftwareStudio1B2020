@@ -26,9 +26,9 @@ class MenuPage extends React.Component {
                                 <TopPost />
                                 <br />
                                 <MDBContainer>
-                                    <MenuList />
-                                    <AddMenuItem />
-                                    <ManageCategory />
+                                    <MenuList id="23456789"/>
+                                    <AddMenuItem id="9876567876545678"/>
+                                    <ManageCategory id="432179643121648329"/>
                                 </MDBContainer>
                             </MDBCard>
 
@@ -48,7 +48,7 @@ class MenuPage extends React.Component {
                                 <TopPost />
                                 <br />
                                 <MDBContainer>
-                                    <MenuList />
+                                    <MenuList id="923197321793219" />
                                 </MDBContainer>
                             </MDBCard>
 

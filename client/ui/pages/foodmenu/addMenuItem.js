@@ -161,8 +161,8 @@ class AddMenuItem extends React.Component {
             if (typeof result !== 'undefined') {
                 return (
                     <tr key={menuitem._id}  >
-                        <td categoryitem={menuitem.category} menuitem={menuitem._id} onClick={e => this.deleteItem(e)}><p class="text-danger">Delete Item</p></td>
-                        <td categoryitem={menuitem.category} menuitem={menuitem._id} onClick={e => this.updateitem(e)}><p class="text-primary">Update Item</p></td>
+                        <td categoryitem={menuitem.category} menuitem={menuitem._id} onClick={e => this.deleteItem(e)}><p className="text-danger">Delete Item</p></td>
+                        <td categoryitem={menuitem.category} menuitem={menuitem._id} onClick={e => this.updateitem(e)}><p className="text-primary">Update Item</p></td>
                         <td>{menuitem.title}</td>
                         <td>{menuitem.cost}</td>
                         <td>{result.category}</td>
@@ -267,7 +267,7 @@ class AddMenuItem extends React.Component {
                     <MDBRow left>
                         <MDBCol className="form-inline" sm="12">
                             <MDBCol sm="6" md="3">
-                                <span style={{ fontSize: 'xxx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Item Title: </strong></span>
+                                <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Item Title: </strong></span>
                             </MDBCol>
                             <MDBCol sm="6" md="3">
                                 <MDBInput label="New Title" size="lg" value={this.state.title} name='title' type="text" onChange={this.handleChange} />
@@ -295,11 +295,11 @@ class AddMenuItem extends React.Component {
                     <MDBRow left>
                         <MDBCol className="form-inline" sm="12">
                             <MDBCol sm="6" md="3">
-                                <span style={{ fontSize: 'xxx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Ingrediants: </strong></span>
+                                <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Ingrediants: </strong></span>
                             </MDBCol>
                             <MDBCol sm="6" md="6">
                                 <div class="form-group purple-border ">
-                                    <textarea placeholder="Ingrediants" name='ingrediants' value={this.state.ingrediants} class="purple-border md-textarea form-control exampleFormControlTextarea4" onChange={this.handleChange} rows="4" cols="50" ></textarea>
+                                    <textarea placeholder="Ingrediants" name='ingrediants' value={this.state.ingrediants} className="purple-border md-textarea form-control exampleFormControlTextarea4" onChange={this.handleChange} rows="4" cols="50" ></textarea>
                                 </div>
                             </MDBCol>
                             {/* <MDBCol sm="6">
@@ -311,14 +311,14 @@ class AddMenuItem extends React.Component {
                     <MDBRow left>
                         <MDBCol className="form-inline" sm="12">
                             <MDBCol sm="6" md="3">
-                                <span style={{ fontSize: 'xxx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Item image: </strong></span>
+                                <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Item image: </strong></span>
                             </MDBCol>
                             <MDBCol sm="6" md="3">
                             <MDBInput label="New image" size="lg" name='image' type="text" value={this.state.image} onChange={this.handleChange} />
                             </MDBCol>
-                            <MDBCol sm="6">
+                            {/* <MDBCol sm="6">
                                 {imagechanged ? <span>selected image Is {this.state.image}</span> : <span></span>}
-                            </MDBCol>
+                            </MDBCol> */}
                         </MDBCol>
                     </MDBRow>
 
@@ -330,7 +330,7 @@ class AddMenuItem extends React.Component {
                                 <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Select Category: </strong></span>
                             </MDBCol>
                             <MDBCol sm="6" md="3">
-                                <select onChange={this.handleChange} name="category" size="lg" id="category" class="browser-default custom-select">
+                                <select onChange={this.handleChange} name="category" size="lg" id="category" className="browser-default custom-select">
                                     <option selected>Choose Category</option>
                                     {this.renderCategories()}
                                 </select>
