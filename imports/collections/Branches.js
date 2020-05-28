@@ -55,7 +55,7 @@ if (Meteor.isServer) {
                         phone: bPhone,
                         address: bAddress,
                         capacity: bCapacity,
-                        promoImage: bPromo,
+                        branchPromo: bPromo,
                         staff: []
                     });
                 } else {
