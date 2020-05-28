@@ -27,19 +27,19 @@ class MenuList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {category: "arabian"};
-    console.log(props.category);
+    // console.log(props.category);
   }
 
   renderMenu() {
-    return this.props.wholemenu.map(menulist => {
-      console.log("menulist");
-      console.log(menulist);
+    return this.props.menucategories.map(menuitem => {
+      // console.log("menuitem");
+      // console.log(menuitem);
       return (
         <>
           <h3 className="h1-responsive font-weight-bold text-center my-5">
-            {menulist.category}
+            {menuitem.category}
           </h3> 
-          <MenuItem id={menulist.title} category={menulist._id} />
+          <MenuItem id={menuitem._id} category={menuitem._id} />
         </>
         
         );
@@ -63,7 +63,7 @@ export default withTracker(() => {
   Meteor.subscribe("menucategory");
   console.log(MenuCategory.find().fetch());
   return {
-    wholemenu: MenuCategory.find().fetch(), //{ category: "arabian" }
+    menucategories: MenuCategory.find().fetch(), //{ category: "arabian" }
   };
 })(MenuList);
 

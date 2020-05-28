@@ -30,7 +30,8 @@ class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {category: "arabian"};
-    console.log(props.category);
+    // console.log("props.category");
+    // console.log(props.category);
   }
 
   renderRows() {
@@ -84,8 +85,7 @@ class MenuItem extends React.Component {
   render() {
     return(
 
-        <section className="my-5">
-            
+        <section id={this.props.wholemenu._id} className="my-5">
             <MDBCardGroup>
                 {this.renderRows()}
             </MDBCardGroup>
