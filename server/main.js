@@ -84,6 +84,10 @@ Meteor.publish('branchStaff', function () {
     }
 });
 
+Meteor.publish('bookingsUser', function() {
+   return Bookings.find({owner: Meteor.userId()}, { sort: {date: -1} });
+});
+
 Meteor.publish('bookingsStaff', function(dateRange) {
     if (Meteor.userId() && (Roles.userIsInRole(Meteor.userId(),'staff') || Roles.userIsInRole(Meteor.userId(),'manager'))) {
         const currentDate = new Date();
@@ -147,5 +151,5 @@ Meteor.startup(() => {
     Roles.createRole('staff', {unlessExists: true});
     Roles.createRole('manager', {unlessExists: true});
 
-    Roles.addUsersToRoles("AoLahat2WhpmjDuNw", ['admin']);
+    Roles.addUsersToRoles("qGfWqjEiccGRwZHcw", ['admin']);
 });

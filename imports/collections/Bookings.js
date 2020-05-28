@@ -22,6 +22,9 @@ Bookings.schema = new SimpleSchema({
 
 Meteor.methods({
     'bookings.insert': function(branch, customerName, email, phone, guestNum, date, dateNice, time, specialRequest) {
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('Insufficient permissions', "User must be logged in.");
+        }
         console.log("attempting to add booking");
         let boooking_id = Bookings.insert({
             branch,
@@ -62,6 +65,29 @@ Meteor.methods({
     },
 
     'bookings.markLeft': function (bookingID) {
+        if (!Meteor.userId()) throw new Meteor.Error('Insufficient permissions', "User must be logged in.");
+
+        const relevantBooking = Bookings.findOne({_id: bookingID});
+
+        if (!relevantBooking) throw new Meteor.Error('Error querying booking', "Could not find booking.");
+
+        if ((relevantBooking.owner !== Meteor.userId()) && !Roles.userIsInRole(Meteor.userId(),['admin', 'manager', 'staff'])) throw new Meteor.Error('Insufficient permissions', "User must be staff or owner of booking.");
+
         Bookings.update({_id: bookingID}, { $set: {concluded: true} });
+    },
+    'bookings.cancel': function(bookingID) {
+        if (!Meteor.userId()) throw new Meteor.Error('Insufficient permissions', "User must be logged in.");
+
+        const relevantBooking = Bookings.findOne({_id: bookingID});
+
+        if (!relevantBooking) throw new Meteor.Error('Error querying booking', "Could not find booking.");
+
+        if ((relevantBooking.owner !== Meteor.userId()) && !Roles.userIsInRole(Meteor.userId(),['admin', 'manager', 'staff'])) throw new Meteor.Error('Insufficient permissions', "User must be staff or owner of booking.");
+
+        const decrement = relevantBooking.guestNum * -1;
+
+        DateTimeBranch.update({date: relevantBooking.dateNice, time: relevantBooking.time, branch: relevantBooking.branch}, { $inc: { seatsTaken: decrement } });
+
+        Bookings.update({_id: bookingID}, { $set: {cancelled: true} });
     }
 });
