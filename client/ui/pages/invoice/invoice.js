@@ -14,6 +14,7 @@ class Invoice extends React.Component{
 
     render(){
         return(
+          <MDBContainer>
           <MDBCol>
           <MDBCard style={{ width: "45rem" }}>  
             <MDBCardBody>
@@ -38,6 +39,8 @@ class Invoice extends React.Component{
                           
                             
                           </MDBRow>
+
+                          <h6 className="font-weight-bold mb-4 p-0">Table for 2 on May 15, 2020 at 7:00pm</h6>
                          
                           <MDBTable>
                                   <MDBTableHead>
@@ -80,11 +83,13 @@ class Invoice extends React.Component{
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
+          </MDBContainer>
+
         )
     }
 }
 
-
 export default Invoice;
+
 
 
