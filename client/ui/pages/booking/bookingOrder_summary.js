@@ -4,20 +4,39 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import {MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
   MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardGroup, MDBView, MDBMask, MDBIcon, MDBTable, MDBTableBody} from  "mdbreact";
-import ic_print from "./ic_print_24px.png"
+
 
 class BookingOrderSummary extends React.Component{
     constructor(props) {
         super(props);
+
+        this.state = { 
+          error: '', 
+          status: '',
+          payOnline: null
+        };
     
     }
 
+    handleOptionChange = changeEvent => {
+        this.setState({
+          selectedOption: changeEvent.target.value
+        });
+      };    
+
+
+    handleRadioBtn(result){
+      this.setState({payOnline : result});
+    }
+
+
     render(){
         return(
+          <MDBContainer>
           <MDBCol>
           <MDBCard style={{ width: "45rem" }}>  
             <MDBCardBody>
-              <MDBCardTitle tag="h2" className="page-heading, font-weight-bold text-center mb-3 p-3">Booking Summary</MDBCardTitle>              
+              <MDBCardTitle tag="h2" className="page-heading, font-weight-bold text-center mb-3 p-3">Booking and Order Summary</MDBCardTitle>              
               <MDBRow>
                         <MDBCol className="text-center">
                             <h4 className="mb-4 p-0">
@@ -63,14 +82,52 @@ class BookingOrderSummary extends React.Component{
                                 <p><span className="font-weight-bold" > $57.08 </span></p>
                                 </MDBCardText> 
                             </MDBCol>
+                   
+                            <MDBCol className="text-left">                 
+                                <form>
+                                    <div className="form-check">
+                                    <label>
+                                        <input
+                                        type="radio"
+                                        name="react-tips"
+                                        value="option1"
+                                        checked={this.state.selectedOption === "option1"}
+                                        onChange={this.handleOptionChange}
+                                        className="form-check-input"
+                                        onClick={() => {
+                                          this.handleRadioBtn(true)
+                                        }
+                                        }
 
-                            <MDBCol className="text-center" >
-                            <h6 className="font-weight-bold mb-4 p-0, text-center"><i>Order to be paid in the restaurant</i></h6>
+                                        />
+                                        Pay Now
+                                    </label>
+                                    </div>                                    
+                                       
+                                    <div className="form-check">
+                                    <label>
+                                        <input
+                                        type="radio"
+                                        name="react-tips"
+                                        value="option2"
+                                        checked={this.state.selectedOption === "option2"}
+                                        onChange={this.handleOptionChange}
+                                        className="form-check-input"
+                                        onClick={() => {
+                                          this.handleRadioBtn(false)
+                                        }
+                                        }                                        
+                                        />                                    
+                                        Pay in Store
+                                    </label>
+                                    
+                                    </div>
+
+                                </form>
+                          
                             </MDBCol>
-                           
-                           
-
-                            </MDBRow>
+                                                   
+                            </MDBRow >
                             
                            
                             <hr/>    
@@ -82,14 +139,23 @@ class BookingOrderSummary extends React.Component{
                         </MDBCol>
 
               </MDBRow>
+                
+                <MDBCol className="text-center">
+                {this.state.payOnline ?
+                  <MDBBtn color="indigo">Proceed to Checkout</MDBBtn>
+                  :
+                  <MDBBtn color="indigo"> Confirm Booking Order</MDBBtn>
 
-              <MDBBtn href="#"> <img src={ic_print}></img>Print</MDBBtn>
+                }
+                </MDBCol>             
               
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
+        </MDBContainer>
         )
     }
 }
 
 export default BookingOrderSummary;
+
