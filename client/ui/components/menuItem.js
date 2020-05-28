@@ -68,7 +68,7 @@ class MenuItem extends React.Component {
               </MDBContainer>
             </MDBCardBody>
 
-            <MDBBtn href="/cart" color="primary">
+            <MDBBtn color="primary" onClick={() => {this.props.add_Item(menu);}}>
               {" "}
               Add to Cart <MDBIcon icon="shopping-cart" />
             </MDBBtn>

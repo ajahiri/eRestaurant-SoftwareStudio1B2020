@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { DateTimeBranch } from './DateTimeBranch.js';
+import { Menu } from './Menu.js';
+
 export const Bookings = new Mongo.Collection('bookings');
 
 Bookings.schema = new SimpleSchema({
@@ -14,6 +16,11 @@ Bookings.schema = new SimpleSchema({
     date: {type: String},
     time: {type: String},
     specialRequest: {type: String},
+    onlineOrder: {type: Array, required: true},
+    'onlineOrder.$': {
+        type: Menu,
+    },
+    payedOnline: {type: Boolean},
     payed: {type: Boolean},
     concluded: {type: Boolean}, // Have the customers left the restaurant after dining. The staff member will check them out by changing this to true when the customers leave.
     cancelled: {type: Boolean}, // Has the booking been cancelled?
@@ -21,7 +28,7 @@ Bookings.schema = new SimpleSchema({
 });
 
 Meteor.methods({
-    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, dateNice, time, specialRequest) {
+    'bookings.insert': function(branch, customerName, email, phone, guestNum, date, dateNice, time, specialRequest, onlineOrder, payedOnline, payed) {
         if (!Meteor.userId()) {
             throw new Meteor.Error('Insufficient permissions', "User must be logged in.");
         }
@@ -37,7 +44,9 @@ Meteor.methods({
             dateNice,
             time,
             specialRequest,
-            payed: false,
+            onlineOrder,
+            payedOnline,
+            payed,
             concluded: false,
             cancelled: false,
             createdAt: Date(),
