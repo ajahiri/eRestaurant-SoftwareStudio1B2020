@@ -10,7 +10,15 @@ class BookingContents extends React.Component {
     }
 
     handleLeave() {
-        Meteor.call('bookings.markLeft', this.props.bookingID);
+        Meteor.call('bookings.markLeft', this.props.bookingID, function(error) {
+            if (error) console.log(error);
+        });
+    }
+
+    handleCancel() {
+        Meteor.call('bookings.cancel', this.props.bookingID, function(error) {
+            if (error) console.log(error);
+        });
     }
 
     render() {
@@ -29,6 +37,7 @@ class BookingContents extends React.Component {
                 <MDBContainer>
                     <h3>Hello, {booking.customerName}.</h3>
                     <p>The following information is for the booking ({booking._id}) scheduled on {booking.dateNice}.</p>
+                    {booking.cancelled ? <p className="red-text">THIS BOOKING HAS BEEN CANCELLED!</p> : <></>}
                     <h4>Booking Details</h4>
                     <ul>
                         <li>Name: {booking.customerName}</li>
@@ -65,6 +74,15 @@ class BookingContents extends React.Component {
                             this.handleLeave()
                         }} color="secondary">
                             Mark as Complete
+                        </MDBBtn>
+                        :
+                        <div></div>
+                    }
+                    { (this.props.isStaff || this.props.userID === this.props.bookingData.owner) && !this.props.bookingData.cancelled ?
+                        <MDBBtn onClick={() => {
+                            this.handleCancel()
+                        }} color="danger" >
+                            Cancel Booking
                         </MDBBtn>
                         :
                         <div></div>
