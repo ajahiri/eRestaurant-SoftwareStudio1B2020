@@ -39,7 +39,7 @@ class MenuList extends React.Component {
           <h3 className="h1-responsive font-weight-bold text-center my-5">
             {menuitem.category}
           </h3> 
-          <MenuItem id={menuitem._id} category={menuitem._id} />
+          <MenuItem id={menuitem.title} category={menuitem._id} add_Item={this.props.addItem} />
         </>
         
         );
@@ -52,7 +52,12 @@ class MenuList extends React.Component {
         {/*Fisrt Group of food starts*/}
         
           {this.renderMenu()}
-
+          <MDBBtn onClick={this.props.Test} >Test</MDBBtn>
+          {this.props.cartSize > 0 ?
+            <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.props.NextView}>Next</MDBBtn></MDBCol>
+          :
+            <MDBCol><MDBBtn color="indigo" size='lg' disabled >Next</MDBBtn></MDBCol>
+          }
       </div>
     );
   }

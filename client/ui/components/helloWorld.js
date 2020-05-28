@@ -3,11 +3,13 @@ import React from "react";
 
 const Hello_world = (props) => {
     return(
-        <MDBRow>
-            <MDBCol>
-            <MDBTypography tag="h2" className="page-heading" >Hello World!</MDBTypography>
-            </MDBCol>
-        </MDBRow>
+        <MDBContainer>
+            <MDBRow>
+                <MDBCol>
+                <h2>Menu</h2>
+                </MDBCol>
+            </MDBRow>
+        </MDBContainer>
     )
 }
 

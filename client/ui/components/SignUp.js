@@ -21,25 +21,30 @@ class SignUp extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        Accounts.createUser(
+        if (this.refs.registerPassword.value !== this.refs.confirmPassword.value) {
+            this.setState({error: "Password and confirm password must match. Please try again."});
+        } else {
+            Accounts.createUser(
             {
                 email: this.refs.registerEmail.value,
                 password: this.refs.registerPassword.value,
                 profile: {
                     phone: this.refs.registerPhone.value,
-                    name: this.refs.registerName.value
+                    name: this.refs.registerfName.value,
                 }
             }, (error) => {
-            if (error) {
-                this.setState({error: error.reason});
-            } else {
-                this.setState({error: '', status: 'Sign up successful!'});
-                this.refs.registerEmail.value = '';
-                this.refs.registerPassword.value = '';
-                this.refs.registerPhone.value = '';
-                this.refs.registerName.value = '';
-            }
-        });
+                if (error) {
+                    this.setState({error: error.reason});
+                } else {
+                    this.setState({error: '', status: 'Sign up successful!'});
+                    this.refs.registerEmail.value = '';
+                    this.refs.registerPassword.value = '';
+                    this.refs.registerPhone.value = '';
+                    this.refs.registerfName.value = '';
+                    this.refs.registerlName.value = '';
+                }
+            });
+        }
     }
 
     render() {
@@ -52,10 +57,10 @@ class SignUp extends React.Component {
                     <MDBModalHeader toggle={this.toggle}>SignUp</MDBModalHeader>
                     <MDBModalBody>
                         <form onSubmit={this.handleSubmit.bind(this)}>
-                            <label htmlFor="registerName" className="grey-text">
-                                Your name
+                            <label htmlFor="registerfName" className="grey-text">
+                                Full name
                             </label>
-                            <input ref="registerName" type="text" id="registerName" className="form-control" />
+                            <input ref="registerfName" type="text" id="registerfName" className="form-control" />
                             <br />
                             <label htmlFor="registerPhone" className="grey-text">
                                 Mobile Number
@@ -71,6 +76,12 @@ class SignUp extends React.Component {
                                 Your password
                             </label>
                             <input ref="registerPassword" type="password" id="registerPassword" className="form-control" />
+                            <br />
+                            <label htmlFor="confirmPassword" className="grey-text">
+                                Confirm password
+                            </label>
+                            <input ref="confirmPassword" type="password" id="confirmPassword" className="form-control" />
+                            <br />
                             <div className="text-center mt-4">
                                 <div className="text-danger">{this.state.error}</div>
                                 <div className="text-success">{this.state.status}</div>

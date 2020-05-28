@@ -4,13 +4,11 @@ import {
     MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
     MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardGroup, MDBView, MDBMask, MDBIcon
 } from "mdbreact";
-import ModalMakeOrder from "./modal_make_order";
+import ModalMakeOrder from "../../components/modal_make_order";
 
 const MultiItemlLocations = () => {
     return (
         <MDBContainer>
-
-
             <MDBCard >
                 <MDBCardBody>
                     <MDBRow>
@@ -30,18 +28,14 @@ const MultiItemlLocations = () => {
                             <span> Address: Grimmond Ave, Ashfield NSW 2131</span>
                             <br></br>
                             <span> Phone: 02 446 668</span>
-
-                            
                         </MDBCol>
-
                         <MDBCol>
-                        <br/>
-                        <hr />
-                        <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
-                        <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
-                        <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 12-3:30pm / 5-10:30pm </span></p>
-                        <ModalMakeOrder/>
-
+                            <br/>
+                            <hr />
+                            <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
+                            <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
+                            <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 12-3:30pm / 5-10:30pm </span></p>
+                            <MDBBtn color= "primary" href="/booking">Book now</MDBBtn>
                         </MDBCol>
                     </MDBRow>
                 </MDBCardBody>
@@ -82,7 +76,7 @@ const MultiItemlLocations = () => {
                             <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
                             <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
                             <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 11-3pm / 6-10pm </span></p>
-                            <ModalMakeOrder/>
+                            <MDBBtn color= "primary" href="/booking">Book now</MDBBtn>
                         </MDBCol>
                     </MDBRow>
                     
@@ -125,7 +119,7 @@ const MultiItemlLocations = () => {
                             <p><span> <strong className="font-weight-bold">Cuisine: </strong> Italian</span></p>
                             <p><span> <strong className="font-weight-bold">Cost: </strong>  AUD/$</span ></p>
                             <p><span>  <strong className="font-weight-bold">Open Hours: </strong> 4pm-12am </span></p>
-                            <ModalMakeOrder/>
+                            <MDBBtn color= "primary" href="/booking">Book now</MDBBtn>
                         </MDBCol>
                     </MDBRow>
                 </MDBCardBody>

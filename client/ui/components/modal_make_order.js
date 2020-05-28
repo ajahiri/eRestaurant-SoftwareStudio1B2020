@@ -6,30 +6,33 @@ class ModalMakeOrder extends Component {
     super(props);
 
     this.state = {
-        modal: false,
+        modal: true,
         error: '',
-        status: ''
     }
+    this.toggle = this.toggle.bind(this);
+    this.handleResult = this.handleResult.bind(this);
 }
 
-toggle = () => {
-  this.setState({
-    modal: !this.state.modal
-  });
+toggle() {
+  this.setState({modal: !this.state.modal});
+}
+
+handleResult(result) {
+  this.toggle();
+  this.props.Modal_Result(result);
 }
 
 render() {
   return (
     <MDBContainer>
-      <MDBBtn color= "primary" onClick={this.toggle}>Book now</MDBBtn>
-      <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
+      <MDBModal isOpen={this.state.modal} toggle={this.toggle} centered>
         <MDBModalHeader toggle={this.toggle}>Make a Booking</MDBModalHeader>
         <MDBModalBody>
           Before proceeding to the booking, would you like to make an order now ? It will be ready once you arrive at the restaurant.
         </MDBModalBody>
         <MDBModalFooter>
-          <MDBBtn href="/about" color="primary">Yes</MDBBtn>
-          <MDBBtn href="/booking" color="primary">No</MDBBtn>
+          <MDBBtn color="primary" onClick={()=>{this.handleResult(true);}}>Yes</MDBBtn>
+          <MDBBtn color="primary" onClick={()=>{this.handleResult(false);}}>No</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
     </MDBContainer>
