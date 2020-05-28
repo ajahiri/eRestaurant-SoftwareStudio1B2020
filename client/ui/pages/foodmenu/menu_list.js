@@ -31,15 +31,15 @@ class MenuList extends React.Component {
   }
 
   renderMenu() {
-    return this.props.menucategories.map(menuitem => {
-      // console.log("menuitem");
-      // console.log(menuitem);
+    return this.props.menucategories.map(categoryarr => {
+      // console.log("categoryarr");
+      // console.log(categoryarr);
       return (
         <>
           <h3 className="h1-responsive font-weight-bold text-center my-5">
-            {menuitem.category}
+            {categoryarr.category}
           </h3> 
-          <MenuItem id={menuitem._id} category={menuitem._id} />
+          <MenuItem id={categoryarr._id} category={categoryarr._id} />
         </>
         
         );

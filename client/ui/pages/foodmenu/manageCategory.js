@@ -174,16 +174,20 @@ class ManageCategory extends React.Component {
 
             <MDBContainer>
                 <MDBContainer>
+                <br/>
+                    <hr />
                     <form onSubmit={this.handleSubmit} >
-                        {/* <hr /> */}
+
+
                         <MDBRow center>
                             <MDBTypography tag="h2" className="page-heading" >Insert New Category</MDBTypography>
                         </MDBRow>
+                        <br/>
 
                         <MDBRow left>
                             <MDBCol className="form-inline" sm="12">
                                 <MDBCol sm="6" md="3">
-                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Add New Category: </strong></span>
+                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-info text-wrap ">Add New Category: </strong></span>
                                 </MDBCol>
                                 <MDBCol sm="6" md="3">
                                     <MDBInput label="New Title" size="lg" name='category' type="text" onChange={this.handleChange} />
@@ -203,7 +207,6 @@ class ManageCategory extends React.Component {
                                         <MDBBtn color="info" onClick={this.handleSubmit}>Add Category</MDBBtn>
                                         <br />
                                         <span className="badge badge-info font-weight-bold text-wrap" style={{ fontSize: 'large' }}>{this.state.label}</span>
-                                        <br />
 
                                     </div>
                                 </MDBCol>
@@ -211,20 +214,21 @@ class ManageCategory extends React.Component {
                         </MDBRow>
                     </form>
                 </MDBContainer>
-                <br />
-                <br />
-                <MDBContainer>
 
+                <MDBContainer>
+                    <br/>
+                    <hr />
                     <form onSubmit={this.handleSubmit} >
-                        {/* <hr /> */}
+
                         <MDBRow center>
                             <MDBTypography tag="h2" className="page-heading" >Category to remove</MDBTypography>
                         </MDBRow>
+                        <br/>
 
                         <MDBRow left>
                             <MDBCol className="form-inline" sm="12">
                                 <MDBCol sm="6" md="3">
-                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Select Category To remove: </strong></span>
+                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-danger text-wrap ">Select Category To remove: </strong></span>
                                 </MDBCol>
                                 <MDBCol sm="6" md="3">
                                     <select onChange={this.handleChange} name="removecategory" size="lg" id="removecategory" class="browser-default custom-select">
@@ -237,6 +241,7 @@ class ManageCategory extends React.Component {
                                 </MDBCol> */}
                             </MDBCol>
                         </MDBRow>
+                        <br />
 
                         <MDBRow center>
                             <MDBRow className='btn-confirm-padding'>
@@ -245,7 +250,6 @@ class ManageCategory extends React.Component {
                                         <MDBBtn color="danger" onClick={this.handleRemoveSubmit}>Remove Category</MDBBtn>
                                         <br />
                                         <span className="badge badge-danger font-weight-bold text-wrap" style={{ fontSize: 'large' }}>{this.state.removelabel}</span>
-                                        <br />
 
                                     </div>
                                 </MDBCol>
@@ -256,16 +260,18 @@ class ManageCategory extends React.Component {
                     </form>
                 </MDBContainer>
                 <MDBContainer>
+                    <br/>
                     <form onSubmit={this.handleUpdateSubmit} >
                         {/* <hr /> */}
                         <MDBRow center>
                             <MDBTypography tag="h2" className="page-heading" >Change Category Name</MDBTypography>
                         </MDBRow>
+                        <br/>
 
                         <MDBRow left>
                             <MDBCol className="form-inline" sm="12">
                                 <MDBCol sm="6" md="3">
-                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Select Category To Rename: </strong></span>
+                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-success text-wrap ">Select Category To Rename: </strong></span>
                                 </MDBCol>
                                 <MDBCol sm="6" md="3">
                                     <select onChange={this.handleChange} name="updatecategory" size="lg" id="updatecategory" class="browser-default custom-select">
@@ -278,6 +284,7 @@ class ManageCategory extends React.Component {
                                 </MDBCol>
                             </MDBCol>
                         </MDBRow>
+                        <br />
 
 
                         <MDBRow center>
@@ -287,8 +294,6 @@ class ManageCategory extends React.Component {
                                         <MDBBtn color="success" onClick={this.handleUpdateSubmit}>Update Category</MDBBtn>
                                         <br />
                                         <span className="badge badge-success font-weight-bold text-wrap" style={{ fontSize: 'large' }}>{this.state.updatelabel}</span>
-                                        <br />
-
                                     </div>
                                 </MDBCol>
                             </MDBRow>
