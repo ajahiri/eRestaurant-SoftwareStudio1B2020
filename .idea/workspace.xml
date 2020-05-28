@@ -21,10 +21,17 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/booking/booking.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddBranchForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/AddNewBranch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/home/homeBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/home/homeBody.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/home/homepage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/home/homepage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/home/image_corousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/home/image_carousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/home/multi_item_location.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/home/multi_item_location.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imports/collections/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/Branches.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Branches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/r-bg.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,6 +113,7 @@
       <workItem from="1590544471414" duration="3665000" />
       <workItem from="1590568425749" duration="1423000" />
       <workItem from="1590639549640" duration="2840000" />
+      <workItem from="1590698932431" duration="6105000" />
     </task>
     <servers />
   </component>
@@ -153,6 +161,10 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586791500464" />
     <state x="977" y="359" width="1585" height="1198" key="SettingsEditor/72.27.3768.2133@72.27.3768.2133" timestamp="1587845267800" />
+    <state x="919" y="330" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590699899591">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="919" y="330" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1590699899591" />
     <state x="831" y="303" width="896" height="914" key="search.everywhere.popup" timestamp="1590642356907">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

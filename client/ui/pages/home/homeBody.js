@@ -6,8 +6,8 @@ import {
     MDBMask, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText
 } from "mdbreact";
 
-import ImageCorousel from './image_corousel';
-import MultiItemlLocations from './multi_item_location';
+import ImageCarousel from './image_carousel';
+import MultiItemLocations from './multi_item_location';
 import FooterPage from './footer_page';
 
 
@@ -17,30 +17,31 @@ const HomePage = () => {
         <div>
             <main role="main" className="inner cover">
 
-                <ImageCorousel /> 
+                <ImageCarousel />
 
-                <br></br>
+                <br/>
 
                 <MDBContainer fluid>
                     <hr className="w-responsive mb-2" color="black" />
 
-                    <div className="w-responsive text-left mx-auto p-3 mt-2 " >
+                    <div className="w-responsive text-center mx-auto p-3 mt-2 " >
                         <h3> Find your Table for any Occasion</h3>
                     </div>
+
                     <hr className="w-responsive mb-2" color="black"/>
                 </MDBContainer>
 
 
-                <br></br>
+                <br/>
 
-                <MultiItemlLocations />
+                <MultiItemLocations />
 
-                <br></br>
+                <br/>
 
             </main>
 
 
-            <br></br>
+            <br/>
 
             <FooterPage />
 

@@ -8,6 +8,7 @@ export const Branches = new Mongo.Collection('branches');
 Branches.schema = new SimpleSchema({
     name: {type: String},
     manager: {type: String},
+    promoImage: {type: String},
     staff: [{type: Object}],
     "staff.name": {
         type: String
@@ -44,7 +45,7 @@ Branches.schema = new SimpleSchema({
 
 if (Meteor.isServer) {
     Meteor.methods({
-        'branches.insert': function(bName, bManager, bPhone, bAddress, bCapacity) {
+        'branches.insert': function(bName, bManager, bPhone, bAddress, bCapacity, bPromo) {
             //DEBUG console.log("attempting to add branch");
             if (this.userId) {
                 if (Roles.userIsInRole(this.userId,'admin')) {
@@ -54,6 +55,7 @@ if (Meteor.isServer) {
                         phone: bPhone,
                         address: bAddress,
                         capacity: bCapacity,
+                        promoImage: bPromo,
                         staff: []
                     });
                 } else {

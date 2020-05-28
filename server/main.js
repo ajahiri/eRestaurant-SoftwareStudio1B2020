@@ -49,6 +49,18 @@ Meteor.publish('menucategory', function () {
     return MenuCategory.find();
   });
 
+Meteor.publish('branchGuest', function() {
+    return Branches.find({},{
+        fields: {
+            _id: 1,
+            name: 1,
+            phone: 1,
+            address: 1,
+            branchPromo: 1
+        }
+    });
+})
+
 // Branches Publish, checks for user login and must be in admin group to get data.
 Meteor.publish('branchesAdmin', function () {
     if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(),'admin')) {
