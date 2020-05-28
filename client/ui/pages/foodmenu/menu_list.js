@@ -24,7 +24,11 @@ import {withTracker} from 'meteor/react-meteor-data';
 
 //component
 class MenuList extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {category: "arabian"};
+    console.log(props.category);
+  }
 
   renderMenu() {
     return this.props.wholemenu.map(menulist => {

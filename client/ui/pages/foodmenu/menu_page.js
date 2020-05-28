@@ -9,10 +9,12 @@ import TopPost from './top_post_image';
 import MenuList from './menu_list';
 import AddMenuItem from './addMenuItem';
 import ManageCategory from './manageCategory';
+import {withTracker} from 'meteor/react-meteor-data';
+
 
 class MenuPage extends React.Component {
     render() {
-        if (Meteor.user() && Roles.userIsInRole(Meteor.userId(), 'admin')) 
+        if (this.props.user && this.props.role) 
         {
             return (
 
@@ -46,7 +48,7 @@ class MenuPage extends React.Component {
                                 <TopPost />
                                 <br />
                                 <MDBContainer>
-
+                                    <MenuList />
                                 </MDBContainer>
                             </MDBCard>
 
@@ -60,4 +62,11 @@ class MenuPage extends React.Component {
 }
 
 //export
-export default MenuPage;
+export default withTracker(() => {
+    //Taken from https://guide.meteor.com/react.html#data
+    Meteor.subscribe("menucategory");
+    return {
+        user: Meteor.user(),
+        role: Roles.userIsInRole(Meteor.userId(), 'admin')
+    };
+  })(MenuPage);
