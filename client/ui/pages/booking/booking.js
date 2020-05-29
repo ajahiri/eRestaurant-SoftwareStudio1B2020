@@ -11,6 +11,9 @@ import '../../../main.scss';
 import ModalMakeOrder from '../../components/modal_make_order.js';
 import BookingSummary from '../../components/booking_summary.js';
 import MenuList from '../foodmenu/menu_list.js';
+import BookingOrderConfirm from '../../components/bookingOrder_confirm.js';
+import BookingOrderSummary from '../../components/bookingOrder_summary.js';
+import Invoice from '../../components/invoice.js';
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -18,10 +21,8 @@ class Booking extends React.Component {
     constructor(props) {
         super(props);
 
-        //this.onlineOrder = [];
-
         this.state = {
-            activeView: 'Booking_Form', //other views are 'Booking_Summary', 'Menu', 'Order/Booking_Summary', 'Checkout', 'Invoice/Order/Booking_Summary'
+            activeView: 'Booking_Form', //other views are 'Booking_Summary', 'Menu', 'Order/Booking_Confirm', 'Order/Booking_Confirmed', 'Invoice/Order/Booking_Confirm'
             order_online: false,
             submittedBookingID: '',
             branchAddressNice: '',
@@ -60,7 +61,7 @@ class Booking extends React.Component {
             date: new Date(),
             specialRequest: '',
             onlineOrder: [],
-            payOnline: false,
+            payNow: false,
             payed: false,
             // END Booking Details Attributes
             defaultDateFormat: "\\Se\\lect \\Date...", //Workaround: Used to display placeholder in date picker input field.
@@ -79,31 +80,38 @@ class Booking extends React.Component {
         this.disableTimePicker = this.disableTimePicker.bind(this);
         this.handleModal_Result = this.handleModal_Result.bind(this);
         this.handleBooking_Next = this.handleBooking_Next.bind(this);
+        this.handleMenu_Next = this.handleMenu_Next.bind(this);
+        this.handleConfirm_BookingOrder = this.handleConfirm_BookingOrder.bind(this);
+        this.handleConfirmPayment = this.handleConfirmPayment.bind(this);
         this.addItemToBooking = this.addItemToBooking.bind(this);
+        this.handle_payNow = this.handle_payNow.bind(this);
+        this.handlePayment = this.handlePayment.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
     async handleSubmit() {
-        const {order_online, payOnline, payed} = this.state;
-        if (order_online && payed){    // finish user jounrey at Invoice with Order & Booking Summary
-            //do something...
-        } else if (order_online && !payOnline) { // finish user jounrey at Order & Booking Summary
-            //do soemthing...
-        } else {    // finish user journey at Booking Summary
-        const state = this.state;
+        const {order_online, payNow, payed, branch, guestNum, time, specialRequest, onlineOrder} = this.state;
         const date = new Date(this.state.date); //state.date is array containing the date string. This line converts the array to a readable date string; eg: Fri May
         const dateNice = date.toDateString();
-        this.setState({submittedBookingID: await Meteor.callPromise('bookings.insert', state.branch.value, this.props.user.profile.name, this.props.user.emails[0].address,
-                this.props.user.profile.phone, state.guestNum, date, dateNice, state.time, state.specialRequest, state.onlineOrder/*empty array*/, payOnline/*false*/, payed/*false*/,
+        this.setState({submittedBookingID: await Meteor.callPromise('bookings.insert', branch.value, this.props.user.profile.name, this.props.user.emails[0].address,
+                this.props.user.profile.phone, guestNum, date, dateNice, time, specialRequest, onlineOrder, payNow, payed,
             function(error) {
                 if (error) {
                     console.log(error);
                 }
             }
         )});
-        this.setState({branchAddressNice: await Meteor.callPromise('getBranches.AddressNice', state.branch.value)});
-        this.setState({branchPhone: await Meteor.callPromise('getBranches.Phone', state.branch.value)});
-        this.handleBooking_Next();
+        // this.setState({branchAddressNice: await Meteor.callPromise('getBranches.AddressNice', branch.value)});
+        // this.setState({branchPhone: await Meteor.callPromise('getBranches.Phone', branch.value)});
+        //console.log(order_online + ' ' + payed);
+        if (order_online && payNow){    // finish user jounrey at Invoice with Order & Booking Summary
+            console.log('go to invoice')
+            this.handleConfirmPayment();
+        } else if (order_online && !payNow) { // finish user jounrey at Order & Booking Confirmed
+            console.log('go to menu')
+            this.handleConfirm_BookingOrder();
+        } else {    // finish user journey at Booking Summary        
+            this.handleBooking_Next();
         }
     }
 
@@ -190,8 +198,10 @@ class Booking extends React.Component {
         this.setState({specialRequest: event.target.value});
     }
 
-    handleBranch(branch) {
+    async handleBranch(branch) {
         this.setState({branch});
+        this.setState({branchAddressNice: await Meteor.callPromise('getBranches.AddressNice', branch.value)});
+        this.setState({branchPhone: await Meteor.callPromise('getBranches.Phone', branch.value)});
     }
 
     branchNames() { //builds an array of each branch name and id to be passed to the Selector component
@@ -280,21 +290,23 @@ class Booking extends React.Component {
         this.setState({order_online: result});
     }
 
-    handleRadioBtn(result) {
-        this.setState({payOnline: result});
-    }
-
     handleBooking_Next() {
         if (this.state.order_online) {
-            this.setState({disableBtnNext: true, activeView: 'Menu'});
+            this.setState({activeView: 'Menu'});
         } else {
-            this.setState({disableBtnNext: true, activeView: 'Booking_Summary'});
+            this.setState({activeView: 'Booking_Summary'});
         }
     }
     handleMenu_Next() {
         if (this.state.onlineOrder_Size > 0) {
-            this.setState({disableBtnNext: true, activeView: 'Order/Booking_Summary'});
+            this.setState({activeView: 'Order/Booking_Confirm'});
         }
+    }
+    handleConfirm_BookingOrder(){
+        this.setState({activeView: 'Order/Booking_Summary'});
+    }
+    handleConfirmPayment() {
+        this.setState({activeView: 'Invoice/Order/Booking_Confirm'})
     }
 
     addItemToBooking(item) {
@@ -303,9 +315,18 @@ class Booking extends React.Component {
         this.setState({onlineOrder: newArray, onlineOrder_Size: newArray.length});
     }
 
+    handle_payNow() {
+        this.setState({payNow: !this.state.payNow})
+    }
+
+    handlePayment () {
+        this.setState({payed: true}); //this.findRoutes waits for the state change before continuing.
+        this.handleSubmit();
+        console.log(this.state.activeView + this.state.payed);
+    }
+
     handleBtnTest(event) {
-        let array = this.state.onlineOrder;
-        console.log(array.length);
+        console.log(this.state.activeView + this.state.payed);
     }
 
     render() {
@@ -452,15 +473,15 @@ class Booking extends React.Component {
         } else if (activeView == 'Booking_Summary') {
             return (
                 <BookingSummary
-                            bookingID = {this.state.submittedBookingID}
-                            guests = {guestNum}
-                            date = {new Date(date).toDateString()}
-                            time = {time}
-                            fullName = {this.props.user.profile.name}
-                            branchName = {branch.label}
-                            branchAddressNice = {this.state.branchAddressNice}
-                            branchPhone = {this.state.branchPhone}
-                        />
+                        bookingID = {this.state.submittedBookingID}
+                        guests = {guestNum}
+                        date = {new Date(date).toDateString()}
+                        time = {time}
+                        fullName = {this.props.user.profile.name}
+                        branchName = {branch.label}
+                        branchAddressNice = {this.state.branchAddressNice}
+                        branchPhone = {this.state.branchPhone}
+                    />
             );
         } else if (activeView == 'Menu') {
             return (
@@ -471,13 +492,51 @@ class Booking extends React.Component {
                         NextView = {this.handleMenu_Next}
                     /> 
             );
-        } else if (activeView == 'Order/Booking_Summary') {
+        } else if (activeView == 'Order/Booking_Confirm') {
             return (
-                null
+                <BookingOrderConfirm 
+                    Cart = {this.state.onlineOrder}
+                    payNow = {this.state.payNow}
+                    handle_payNow = {this.handle_payNow}
+                    handle_Submit = {this.handleSubmit}
+                    handlePayment = {this.handlePayment}
+                    bookingID = {this.state.submittedBookingID}
+                    guests = {guestNum}
+                    date = {new Date(date).toDateString()}
+                    time = {time}
+                    fullName = {this.props.user.profile.name}
+                    branchName = {branch.label}
+                    branchAddressNice = {this.state.branchAddressNice}
+                    branchPhone = {this.state.branchPhone}
+                />
             );
-        } else if (activeView == 'Invoice/Order/Booking_Summary') {
+        } else if (activeView == 'Order/Booking_Summary') { 
             return (
-                null
+                <BookingOrderSummary
+                    Cart = {this.state.onlineOrder}
+                    bookingID = {this.state.submittedBookingID}
+                    guests = {guestNum}
+                    date = {new Date(date).toDateString()}
+                    time = {time}
+                    fullName = {this.props.user.profile.name}
+                    branchName = {branch.label}
+                    branchAddressNice = {this.state.branchAddressNice}
+                    branchPhone = {this.state.branchPhone}
+                />
+            );
+        } else if (activeView == 'Invoice/Order/Booking_Confirm') {
+            return (
+                <Invoice
+                    Cart = {this.state.onlineOrder}
+                    bookingID = {this.state.submittedBookingID}
+                    guests = {guestNum}
+                    date = {new Date(date).toDateString()}
+                    time = {time}
+                    fullName = {this.props.user.profile.name}
+                    branchName = {branch.label}
+                    branchAddressNice = {this.state.branchAddressNice}
+                    branchPhone = {this.state.branchPhone}
+                />
             );
         }
     }

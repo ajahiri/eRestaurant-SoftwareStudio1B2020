@@ -69,9 +69,6 @@ Meteor.methods({
         }
         return boooking_id;
     },
-    'getBookingID': function () {
-
-    },
 
     'bookings.markLeft': function (bookingID) {
         if (!Meteor.userId()) throw new Meteor.Error('Insufficient permissions', "User must be logged in.");
