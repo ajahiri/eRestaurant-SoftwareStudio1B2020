@@ -26,7 +26,7 @@ class BookingOrderSummary extends React.Component{
           itemNum ++;
           this.totalCost += parseInt(item.cost);
           return (
-              <tr>
+              <tr key={itemNum}>
                   <td>{itemNum}</td>
                   <td>{item.title}</td>
                   <td>${item.cost}</td>
