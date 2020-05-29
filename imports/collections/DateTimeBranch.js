@@ -25,11 +25,11 @@ Meteor.methods({
     },
     // Called when a combination of Date Time and Branch variables that has already been booked at least once is booked again.
     'date_time_branch.update': function(date, time, branch, guestNum,) {
-        let branchCap = Meteor.call('getBranhces.Capacity');
+        let branchCap = Meteor.call('getBranches.Capacity');
         DateTimeBranch.update({date, time, branch}, {
             $inc: { seatsTaken: guestNum },
         });
-        let matches = DateTimeBranch.findOne({date, time, branch}, {fields:{seatsTaken:1}}).fetch();
+        let matches = DateTimeBranch.findOne({date, time, branch}, {fields:{seatsTaken:1}});
         if(matches.seatsTaken == branchCap) {   // if seatsTaken is = branchCap set available to false
             DateTimeBranch.update({date, time, branch}, {
                 $set: { available: false },
@@ -38,7 +38,7 @@ Meteor.methods({
         console.log('updated DTB');
     },
 
-    'date_time_branch.check': function (date, branch, requestedSeats,) {
+    'date_time_branch.check': async function (date, branch, requestedSeats,) {
         //console.log(branch + ' ' + date);
         let unavailableTimes = [];
         let branchCap = Meteor.call('getBranches.Capacity', branch);

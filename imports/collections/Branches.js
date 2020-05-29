@@ -134,14 +134,13 @@ if (Meteor.isServer) {
             return Branches.find().map( (branch) => { console.log(branch.name); return branch.name; });
         },
         'getBranches.Capacity': function(branch) {
-            let capacity = Branches.find({_id: branch}, {fields:{capacity:1,}}).fetch();
-            return capacity[0].capacity;
+            return Branches.find({_id: branch}, {fields:{capacity:1}}).fetch().map(cap => {return cap.capacity;});
         },
         'getBranches.AddressNice': function (branch_id) {
             let address = Branches.find({_id: branch_id}, {fields:{address:1}}).fetch();
             let ad = address[0].address;
             let addressNice = ad.streetNumber + ' ' + ad.street + ', ' + ad.city + ' ' + ad.postcode + ' ' + ad.state;
-            return addressNice
+            return addressNice;
         },
         'getBranches.Phone': function (branch_id) {
             let Phone = Branches.find({_id: branch_id}, {fields:{phone:1}}).fetch();
