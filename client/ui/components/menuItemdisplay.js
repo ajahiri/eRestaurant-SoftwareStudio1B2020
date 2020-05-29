@@ -38,36 +38,31 @@ class MenuItem extends React.Component {
       return (
        
         <MDBCol id={menu.title} className="mb-2 d-flex col-md-4">
-          <MDBCard className="hoverable">
-            <MDBCardImage className="img-fluid" src={menu.image} />
-            <MDBCardBody>
-              <MDBCardTitle>{menu.title}</MDBCardTitle>
-              <MDBContainer>
-                <MDBRow>
-                  <MDBCardText>
-                    <strong className="font-weight-bold">Ingredients: </strong>
-                    {menu.ingrediants}
-                  </MDBCardText>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCardText>
-                    <span>
-                      {" "}
-                      <strong className="font-weight-bold">Cost: </strong>
-                      {menu.cost}
-                    </span>
-                  </MDBCardText>
-                </MDBRow>
-              </MDBContainer>
-            </MDBCardBody>
-
-            <MDBBtn color="primary" onClick={() => {this.props.add_Item(menu);}}>
-              {" "}
-              Add to Cart <MDBIcon icon="shopping-cart" />
-            </MDBBtn>
-          </MDBCard>
-        </MDBCol>
+        <MDBCard className="hoverable">
+          <MDBCardImage className="img-fluid" src={menu.image} />
+          <MDBCardBody>
+            <MDBCardTitle>{menu.title}</MDBCardTitle>
+            <MDBContainer>
+              <MDBRow>
+                <MDBCardText>
+                  <strong className="font-weight-bold">Ingredients: </strong>
+                  {menu.ingrediants}
+                </MDBCardText>
+              </MDBRow>
+              <hr />
+              <MDBRow>
+                <MDBCardText>
+                  <span>
+                    {" "}
+                    <strong className="font-weight-bold">Cost: </strong>
+                    {menu.cost}
+                  </span>
+                </MDBCardText>
+              </MDBRow>
+            </MDBContainer>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
       );
     });
   }

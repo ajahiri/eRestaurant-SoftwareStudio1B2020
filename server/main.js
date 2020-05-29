@@ -19,32 +19,6 @@ Meteor.publish('menu', function () {
     return Menu.find();
   });
 
-//   Meteor.call('menu.insert',
-//   "arabian",
-//   "312.50",
-//   "Jordan mansaf",
-//   "https://experiencejordan.com/wp-content/uploads/2016/10/Blog-Headers2-1.jpg",
-//   "jaIngredients: spaghetti, tomato-paste, onion, button mushrooms, green peppers, sausage, bacon and Tabasco sauce.k",
-//   function(error) {
-//       if (error) {
-//           console.log(error);
-//       } else {
-//           console.log("Successfully added branch");
-//       }
-//   }
-// );
-
-//   Meteor.call('menucategory.insert',
-//   "classic",
-//   function(error) {
-//       if (error) {
-//           console.log(error);
-//       } else {
-//           console.log("Successfully added branch");
-//       }
-//   }
-// );
-
 Meteor.publish('menucategory', function () {
     return MenuCategory.find();
   });

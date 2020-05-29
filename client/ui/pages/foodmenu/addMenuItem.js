@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTracker } from "meteor/react-meteor-data";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn,MDBTable,MDBTableHead,MDBTableBody, } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, } from "mdbreact";
 import { Menu } from "../../../../imports/collections/Menu";
 import { MenuCategory } from "../../../../imports/collections/MenuCategory";
 
@@ -28,44 +28,44 @@ class AddMenuItem extends React.Component {
 
     }
 
-    deleteItem(e){
+    deleteItem(e) {
         const menuitem = e.currentTarget.getAttribute('menuitem');
         const categoryitem = e.currentTarget.getAttribute('categoryitem');
-        
+
         Meteor.call('menu.remove',
-        menuitem,
-        function(error) {
-            if (error) {
-                // this.setState({label: e.reason});
-                console.log(error);
-            } else {
-                
-                // this.setState({label: "success"});
-                console.log("Successfully removed menu item");
+            menuitem,
+            function (error) {
+                if (error) {
+                    // this.setState({label: e.reason});
+                    console.log(error);
+                } else {
+
+                    // this.setState({label: "success"});
+                    console.log("Successfully removed menu item");
+                }
             }
-        }
         );
 
         var result = this.props.menucategories.find(obj => {
             return obj._id == categoryitem
         });
         Meteor.call('menucategory.updateplus',
-        categoryitem,
-        result.categoryitems -= 1,
-        function (error) {
-            if (error) {
-                // this.setState({label: e.reason});
-                console.log(error);
-            } else {
+            categoryitem,
+            result.categoryitems -= 1,
+            function (error) {
+                if (error) {
+                    // this.setState({label: e.reason});
+                    console.log(error);
+                } else {
 
-                // this.setState({label: "success"});
-                console.log("Successfully Updated category quantity");
+                    // this.setState({label: "success"});
+                    console.log("Successfully Updated category quantity");
+                }
             }
-        }
-    );
+        );
     }
 
-    updateitem(e){
+    updateitem(e) {
         const menuitemid = e.currentTarget.getAttribute('menuitem');
         const categoryitem = e.currentTarget.getAttribute('categoryitem');
 
@@ -73,7 +73,7 @@ class AddMenuItem extends React.Component {
         var menuitem = this.props.wholemenu.find(obj => {
             return obj._id == menuitemid
         });
-        
+
         console.log("update");
         console.log(menuitem.title);
 
@@ -91,35 +91,35 @@ class AddMenuItem extends React.Component {
         ingrediantschanged = true;
 
         Meteor.call('menu.remove',
-        menuitemid,
-        function(error) {
-            if (error) {
-                // this.setState({label: e.reason});
-                console.log(error);
-            } else {
-                
-                // this.setState({label: "success"});
-                console.log("Successfully removed menu item");
+            menuitemid,
+            function (error) {
+                if (error) {
+                    // this.setState({label: e.reason});
+                    console.log(error);
+                } else {
+
+                    // this.setState({label: "success"});
+                    console.log("Successfully removed menu item");
+                }
             }
-        }
         );
 
         var result = this.props.menucategories.find(obj => {
             return obj._id == categoryitem
         });
         Meteor.call('menucategory.updateplus',
-        categoryitem,
-        result.categoryitems -= 1,
-        function (error) {
-            if (error) {
-                // this.setState({label: e.reason});
-                console.log(error);
-            } else {
+            categoryitem,
+            result.categoryitems -= 1,
+            function (error) {
+                if (error) {
+                    // this.setState({label: e.reason});
+                    console.log(error);
+                } else {
 
-                // this.setState({label: "success"});
-                console.log("Successfully Updated category quantity");
+                    // this.setState({label: "success"});
+                    console.log("Successfully Updated category quantity");
+                }
             }
-        }
         );
     }
 
@@ -153,11 +153,10 @@ class AddMenuItem extends React.Component {
     }
 
     renderMenuRows() {
-        return this.props.wholemenu.map(menuitem => 
-        {
-            var result = this.props.menucategories.find( obj => {
+        return this.props.wholemenu.map(menuitem => {
+            var result = this.props.menucategories.find(obj => {
                 return obj._id == menuitem.category
-              });
+            });
             if (typeof result !== 'undefined') {
                 return (
                     <tr key={menuitem._id}  >
@@ -168,9 +167,9 @@ class AddMenuItem extends React.Component {
                         <td>{result.category}</td>
                     </tr>
                 );
-            }else{
+            } else {
                 return (
-                        null
+                    null
                 );
             }
 
@@ -190,40 +189,44 @@ class AddMenuItem extends React.Component {
                     //   console.log(result.categoryitems);
                     if (ingrediantschanged) {
                         if (costchanged && this.state.cost > 0) {
-                            Meteor.call('menu.insert',
-                                this.state.category,
-                                this.state.cost,
-                                this.state.title,
-                                this.state.image,
-                                this.state.ingrediants,
-                                function (error) {
-                                    if (error) {
-                                        // this.setState({label: e.reason});
-                                        console.log(error);
-                                    } else {
+                            if (this.state.title.length <= 30 && this.state.ingrediants.length <= 250) {
+                                Meteor.call('menu.insert',
+                                    this.state.category,
+                                    this.state.cost,
+                                    this.state.title,
+                                    this.state.image,
+                                    this.state.ingrediants,
+                                    function (error) {
+                                        if (error) {
+                                            // this.setState({label: e.reason});
+                                            console.log(error);
+                                        } else {
 
-                                        // this.setState({label: "success"});
-                                        console.log("Successfully added branch");
+                                            // this.setState({label: "success"});
+                                            console.log("Successfully added branch");
+                                        }
                                     }
-                                }
-                            );
+                                );
 
-                            Meteor.call('menucategory.updateplus',
-                                this.state.category,
-                                result.categoryitems += 1,
-                                function (error) {
-                                    if (error) {
-                                        // this.setState({label: e.reason});
-                                        console.log(error);
-                                    } else {
+                                Meteor.call('menucategory.updateplus',
+                                    this.state.category,
+                                    result.categoryitems += 1,
+                                    function (error) {
+                                        if (error) {
+                                            // this.setState({label: e.reason});
+                                            console.log(error);
+                                        } else {
 
-                                        // this.setState({label: "success"});
-                                        console.log("Successfully added category");
+                                            // this.setState({label: "success"});
+                                            console.log("Successfully added category");
+                                        }
                                     }
-                                }
-                            );
+                                );
 
-                            this.setState({ label: "Success" });
+                                this.setState({ label: "Success" });
+                            } else {
+                                this.setState({ label: "Title must be less than 30 Char and Ingrediants must be less than 250 Char" });
+                            }
                         } else {
                             this.setState({ label: "Please check cost field" });
                         }
@@ -314,7 +317,7 @@ class AddMenuItem extends React.Component {
                                 <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Item image: </strong></span>
                             </MDBCol>
                             <MDBCol sm="6" md="3">
-                            <MDBInput label="New image" size="lg" name='image' type="text" value={this.state.image} onChange={this.handleChange} />
+                                <MDBInput label="New image" size="lg" name='image' type="text" value={this.state.image} onChange={this.handleChange} />
                             </MDBCol>
                             {/* <MDBCol sm="6">
                                 {imagechanged ? <span>selected image Is {this.state.image}</span> : <span></span>}
@@ -384,7 +387,7 @@ class AddMenuItem extends React.Component {
 };
 
 export default withTracker(() => {
-      const sub1 = Meteor.subscribe("menu");
+    const sub1 = Meteor.subscribe("menu");
     const sub2 = Meteor.subscribe("menucategory");
 
 
@@ -392,7 +395,7 @@ export default withTracker(() => {
         wholemenu: Menu.find().fetch(), //{ category: "arabian" }
         menucategories: MenuCategory.find().fetch(),
         isReady: Meteor.subscribe('menucategory').ready()
-        
+
     };
 
 })(AddMenuItem);

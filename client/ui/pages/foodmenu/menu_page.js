@@ -6,7 +6,7 @@ import {
 } from "mdbreact";
 
 import TopPost from './top_post_image';
-import MenuList from './menu_list';
+import MenuList from './menu_listdisplay';
 import AddMenuItem from './addMenuItem';
 import ManageCategory from './manageCategory';
 import {withTracker} from 'meteor/react-meteor-data';

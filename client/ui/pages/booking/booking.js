@@ -80,6 +80,7 @@ class Booking extends React.Component {
         this.handleModal_Result = this.handleModal_Result.bind(this);
         this.handleBooking_Next = this.handleBooking_Next.bind(this);
         this.addItemToBooking = this.addItemToBooking.bind(this);
+        this.removeItemFromBooking = this.removeItemFromBooking.bind(this);
 
         this.handleBtnTest = this.handleBtnTest.bind(this);
     }
@@ -299,8 +300,48 @@ class Booking extends React.Component {
 
     addItemToBooking(item) {
         let newArray = this.state.onlineOrder;
-        newArray.push({item_id: item._id, cost: item.cost, title: item.title});
-        this.setState({onlineOrder: newArray, onlineOrder_Size: newArray.length});
+
+        var result = newArray.find(obj => {
+            return obj.item_id == item._id;
+        });
+
+        if(typeof result == 'undefined')
+        {
+            newArray.push({item_id: item._id, cost: item.cost, title: item.title, quantity: 1});
+            this.setState({onlineOrder: newArray, onlineOrder_Size: newArray.length});
+        } else{
+            result.quantity += 1;
+            this.setState({onlineOrder: newArray, onlineOrder_Size: newArray.length});
+        }
+
+    }
+
+    removeItemFromBooking(itemID) 
+    {
+        // let newArray = this.state.onlineOrder;
+        // var filteredArray = newArray.filter(x => {
+        //     return x.item_id != itemID;
+        // })
+
+        // this.setState({onlineOrder: filteredArray, onlineOrder_Size: filteredArray.length});
+
+
+        let newArray = this.state.onlineOrder;
+
+        var result = newArray.find(obj => {
+            return obj.item_id == itemID;
+        });
+
+        if(result.quantity == 1)
+        {
+            var filteredArray = newArray.filter(x => {
+                return x.item_id != itemID;
+            })
+            this.setState({onlineOrder: filteredArray, onlineOrder_Size: filteredArray.length});
+        } else{
+            result.quantity -= 1;
+            this.setState({onlineOrder: newArray, onlineOrder_Size: newArray.length});
+        }
     }
 
     handleBtnTest(event) {
@@ -469,7 +510,9 @@ class Booking extends React.Component {
                         Test = {this.handleBtnTest}
                         cartSize = {this.state.onlineOrder_Size}
                         NextView = {this.handleMenu_Next}
-                    /> 
+                        itemArray = {this.state.onlineOrder}
+                        removeItem = {this.removeItemFromBooking} 
+    /> 
             );
         } else if (activeView == 'Order/Booking_Summary') {
             return (
