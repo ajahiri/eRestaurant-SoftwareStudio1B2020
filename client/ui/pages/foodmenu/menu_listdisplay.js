@@ -4,7 +4,6 @@ import MenuItem from "../../components/menuItemdisplay";
 import { MenuCategory } from "../../../../imports/collections/MenuCategory";
 import {withTracker} from 'meteor/react-meteor-data';
 
-//component
 class MenuList extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,7 @@ class MenuList extends React.Component {
     return (
       <div>
         {/*Fisrt Group of food starts*/}
-        
+
           {this.renderMenu()}
 
       </div>

@@ -37,23 +37,22 @@ class MenuItem extends React.Component {
     return filtered.map((menu) => {
       return (
        
-        <MDBCol id={menu.title} className="mb-2 d-flex col-md-4">
-          <MDBCard className="hoverable">
-            <MDBCardImage className="img-fluid" src={menu.image} />
-            <MDBCardBody>
-              <MDBCardTitle>{menu.title}</MDBCardTitle>
-              <MDBContainer>
-                <MDBRow>
-                  <MDBCardText>
+        <MDBCol id={menu.title} className="d-flex p-3  col-4">
+          <MDBCard className="hoverable" style={{height: '45rem', width: '100%'}}>
+              <MDBCardImage className="img-fluid" style={{height: '20rem', width: '100%'}} src={menu.image} />
+            <MDBCardBody style={{height: '20rem'}}>
+              <MDBCardTitle style={{height: '4rem'}}>{menu.title}</MDBCardTitle>
+              <MDBContainer style={{height: '15rem'}}>
+                <MDBRow className="overflow-hidden" style={{height: '10rem', width:'100%', display: 'block'}}>
+                  <MDBCardText className="text-wrap  text-justify">
                     <strong className="font-weight-bold">Ingredients: </strong>
                     {menu.ingrediants}
                   </MDBCardText>
                 </MDBRow>
                 <hr />
-                <MDBRow>
+                <MDBRow style={{height: '5rem'}}>
                   <MDBCardText>
                     <span>
-                      {" "}
                       <strong className="font-weight-bold">Cost: </strong>
                       {menu.cost}
                     </span>
@@ -61,7 +60,6 @@ class MenuItem extends React.Component {
                 </MDBRow>
               </MDBContainer>
             </MDBCardBody>
-
             <MDBBtn color="primary" onClick={() => {this.props.add_Item(menu);}}>
               {" "}
               Add to Cart <MDBIcon icon="shopping-cart" />
