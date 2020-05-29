@@ -16,14 +16,13 @@ class Invoice extends React.Component{
       //generates random id;
     let guid = () => {
       let s4 = () => {
-          return Math.floor((1 + Math.random()) * 0x10000)
-              .toString(16)
-              .substring(1);
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
       }
       //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
       return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
-
     return guid();
     //"c2181edf-041b-0a61-3651-79d671fa3db7"
     }
@@ -56,6 +55,7 @@ class Invoice extends React.Component{
               <MDBCardTitle tag="h2" className="page-heading, font-weight-bold text-center mb-3 p-3">Invoice</MDBCardTitle>              
               <MDBRow center>
                   <h5 className=" mb-4 p-0">Invoice#: {this.invoiceID()}</h5>
+                  <h5 className=" mb-4 p-0">Booking#: {bookingID}</h5>
               </MDBRow>
               <MDBRow>
                         <MDBCol>
@@ -65,6 +65,7 @@ class Invoice extends React.Component{
                               <h6 className=" mb-4 p-0">From:</h6>
                               <h6 className="font-weight-bold mb-4 p-0">Sapori Unici {branchName}</h6>
                               <h6 className="mb-4 p-0">{branchAddressNice}</h6>
+                              <h6 className="mb-4 p-0">{branchPhone}</h6>
                               <h6 className=" mb-4 p-0"><strong>Invoice date: </strong> {new Date().toDateString()}</h6>
 
                             </MDBCol>
