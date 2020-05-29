@@ -84,7 +84,7 @@ class Booking extends React.Component {
         this.handleConfirm_BookingOrder = this.handleConfirm_BookingOrder.bind(this);
         this.handleConfirmPayment = this.handleConfirmPayment.bind(this);
         this.addItemToBooking = this.addItemToBooking.bind(this);
-
+//s
         this.removeItemFromBooking = this.removeItemFromBooking.bind(this);
 
         this.handle_payNow = this.handle_payNow.bind(this);
@@ -340,7 +340,7 @@ class Booking extends React.Component {
 
         // this.setState({onlineOrder: filteredArray, onlineOrder_Size: filteredArray.length});
 
-
+//jj
         let newArray = this.state.onlineOrder;
 
         var result = newArray.find(obj => {
