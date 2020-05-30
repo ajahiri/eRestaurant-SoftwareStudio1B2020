@@ -38,7 +38,7 @@ class MenuItem extends React.Component {
       return (
        
         <MDBCol id={menu.title} className="d-flex p-3  col-4">
-          <MDBCard className="hoverable" style={{height: '45rem', width: '100%'}}>
+          <MDBCard className="hoverable" style={{height: '40rem', width: '100%'}}>
               <MDBCardImage className="img-fluid" style={{height: '20rem', width: '100%'}} src={menu.image} />
             <MDBCardBody style={{height: '20rem'}}>
               <MDBCardTitle style={{height: '4rem'}}>{menu.title}</MDBCardTitle>
@@ -60,10 +60,7 @@ class MenuItem extends React.Component {
                 </MDBRow>
               </MDBContainer>
             </MDBCardBody>
-            <MDBBtn color="primary" onClick={() => {this.props.add_Item(menu);}}>
-              {" "}
-              Add to Cart <MDBIcon icon="shopping-cart" />
-            </MDBBtn>
+
           </MDBCard>
         </MDBCol>
       );
