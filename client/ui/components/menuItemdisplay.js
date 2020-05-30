@@ -37,7 +37,7 @@ class MenuItem extends React.Component {
     return filtered.map((menu) => {
       return (
        
-        <MDBCol id={menu.title} className="d-flex p-3  col-4">
+        <MDBCol id={menu.title} className="d-flex p-3  col-sm-6 col-md-4">
           <MDBCard className="hoverable" style={{height: '40rem', width: '100%'}}>
               <MDBCardImage className="img-fluid" style={{height: '20rem', width: '100%'}} src={menu.image} />
             <MDBCardBody style={{height: '20rem'}}>
@@ -45,7 +45,7 @@ class MenuItem extends React.Component {
               <MDBContainer style={{height: '15rem'}}>
                 <MDBRow className="overflow-hidden" style={{height: '10rem', width:'100%', display: 'block'}}>
                   <MDBCardText className="text-wrap  text-justify">
-                    <strong className="font-weight-bold">Ingredients: </strong>
+                    <strong className="text-dark">Ingredients: </strong>
                     {menu.ingrediants}
                   </MDBCardText>
                 </MDBRow>
@@ -53,8 +53,8 @@ class MenuItem extends React.Component {
                 <MDBRow style={{height: '5rem'}}>
                   <MDBCardText>
                     <span>
-                      <strong className="font-weight-bold">Cost: </strong>
-                      {menu.cost}
+                      <strong className="text-dark">Cost: </strong>
+                      <span class="text-success">${menu.cost}</span> 
                     </span>
                   </MDBCardText>
                 </MDBRow>

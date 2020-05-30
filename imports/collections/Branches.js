@@ -19,7 +19,7 @@ Branches.schema = new SimpleSchema({
     "staff.role": {
         type: String
     },
-    phone: {type: Number},
+    phone: {type: String},
     address: {type: Object},
     "address.unitNo": {
         type: String              //Can have unit numbers 3A 2B etc
