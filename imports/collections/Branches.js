@@ -8,6 +8,7 @@ export const Branches = new Mongo.Collection('branches');
 Branches.schema = new SimpleSchema({
     name: {type: String},
     manager: {type: String},
+    promoImage: {type: String},
     staff: [{type: Object}],
     "staff.name": {
         type: String
@@ -18,7 +19,7 @@ Branches.schema = new SimpleSchema({
     "staff.role": {
         type: String
     },
-    phone: {type: Number},
+    phone: {type: String},
     address: {type: Object},
     "address.unitNo": {
         type: String              //Can have unit numbers 3A 2B etc
@@ -44,7 +45,7 @@ Branches.schema = new SimpleSchema({
 
 if (Meteor.isServer) {
     Meteor.methods({
-        'branches.insert': function(bName, bManager, bPhone, bAddress, bCapacity) {
+        'branches.insert': function(bName, bManager, bPhone, bAddress, bCapacity, bPromo) {
             //DEBUG console.log("attempting to add branch");
             if (this.userId) {
                 if (Roles.userIsInRole(this.userId,'admin')) {
@@ -54,6 +55,7 @@ if (Meteor.isServer) {
                         phone: bPhone,
                         address: bAddress,
                         capacity: bCapacity,
+                        branchPromo: bPromo,
                         staff: []
                     });
                 } else {
@@ -132,9 +134,18 @@ if (Meteor.isServer) {
             return Branches.find().map( (branch) => { console.log(branch.name); return branch.name; });
         },
         'getBranches.Capacity': function(branch) {
-            let capacity = Branches.find({_id: branch}, {fields:{capacity:1,}}).fetch();
-            return capacity[0].capacity;
-        }
+            return Branches.find({_id: branch}, {fields:{capacity:1}}).fetch().map(cap => {return cap.capacity;});
+        },
+        'getBranches.AddressNice': function (branch_id) {
+            let address = Branches.find({_id: branch_id}, {fields:{address:1}}).fetch();
+            let ad = address[0].address;
+            let addressNice = ad.streetNumber + ' ' + ad.street + ', ' + ad.city + ' ' + ad.postcode + ' ' + ad.state;
+            return addressNice;
+        },
+        'getBranches.Phone': function (branch_id) {
+            let Phone = Branches.find({_id: branch_id}, {fields:{phone:1}}).fetch();
+            return Phone[0].phone;
+        },
     });
 }
 

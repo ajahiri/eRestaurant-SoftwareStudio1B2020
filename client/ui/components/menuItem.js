@@ -1,9 +1,6 @@
 //librares
 import React, { Component } from "react";
 import {
-  MDBCarousel,
-  MDBCarouselInner,
-  MDBCarouselItem,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -15,10 +12,6 @@ import {
   MDBBtn,
   MDBCardGroup,
   MDBIcon,
-  MDBCollapse,
-  MDBCollapseHeader,
-  MDBInput,
-  MDBTypography,
 } from "mdbreact";
 import { Menu } from "../../../imports/collections/Menu";
 import {withTracker} from 'meteor/react-meteor-data';
@@ -30,7 +23,8 @@ class MenuItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {category: "arabian"};
-    console.log(props.category);
+    // console.log("props.category");
+    // console.log(props.category);
   }
 
   renderRows() {
@@ -43,32 +37,30 @@ class MenuItem extends React.Component {
     return filtered.map((menu) => {
       return (
        
-        <MDBCol id={menu.title} className="mb-2 d-flex col-md-4">
-          <MDBCard className="hoverable">
-            <MDBCardImage className="img-fluid" src={menu.image} />
-            <MDBCardBody>
-              <MDBCardTitle>{menu.title}</MDBCardTitle>
-              <MDBContainer>
-                <MDBRow>
-                  <MDBCardText>
-                    <strong className="font-weight-bold">Ingredients: </strong>
+        <MDBCol key={menu.item_id} id={menu.title} className="d-flex p-3  col-sm-6 col-md-4">
+          <MDBCard className="hoverable" style={{height: '42rem', width: '100%'}}>
+              <MDBCardImage className="img-fluid" style={{height: '20rem', width: '100%'}} src={menu.image} />
+            <MDBCardBody style={{height: '20rem'}}>
+              <MDBCardTitle style={{height: '4rem'}}>{menu.title}</MDBCardTitle>
+              <MDBContainer style={{height: '15rem'}}>
+                <MDBRow className="overflow-hidden" style={{height: '10rem', width:'100%', display: 'block'}}>
+                  <MDBCardText className="text-wrap  text-justify">
+                    <strong className="text-dark">Ingredients: </strong>
                     {menu.ingrediants}
                   </MDBCardText>
                 </MDBRow>
                 <hr />
-                <MDBRow>
+                <MDBRow style={{height: '5rem'}}>
                   <MDBCardText>
                     <span>
-                      {" "}
-                      <strong className="font-weight-bold">Cost: </strong>
-                      {menu.cost}
+                      <strong className="text-dark">Cost: </strong>
+                      <span class="text-success">${menu.cost}</span> 
                     </span>
                   </MDBCardText>
                 </MDBRow>
               </MDBContainer>
             </MDBCardBody>
-
-            <MDBBtn href="/cart" color="primary">
+            <MDBBtn color="primary" onClick={() => {this.props.add_Item(menu);}}>
               {" "}
               Add to Cart <MDBIcon icon="shopping-cart" />
             </MDBBtn>
@@ -84,8 +76,7 @@ class MenuItem extends React.Component {
   render() {
     return(
 
-        <section className="my-5">
-            
+        <section id={this.props.wholemenu._id} className="my-5">
             <MDBCardGroup>
                 {this.renderRows()}
             </MDBCardGroup>

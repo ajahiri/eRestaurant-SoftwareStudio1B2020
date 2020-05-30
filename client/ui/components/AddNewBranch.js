@@ -14,7 +14,7 @@ class AddNewBranch extends React.Component {
         return this.props.branches.map(branch => {
             const ad = branch.address;
             const addressNice = ad.streetNumber + ' ' +
-                                ad.street + ', ' + ad.city + ' ' + ad.postcode + ' ' + ad.state;
+                                ad.street + ', ' + ad.city + ' ' + ad.postCode + ' ' + ad.state;
             return (
                 <tr key={branch._id}>
                     <td>{branch._id}</td>

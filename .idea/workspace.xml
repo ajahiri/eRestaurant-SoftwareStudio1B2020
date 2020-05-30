@@ -21,6 +21,18 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/routing/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/routing/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/bookingOrder_confirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/bookingOrder_confirm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/bookingOrder_summary.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/bookingOrder_summary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/booking_summary.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/booking_summary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/invoice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/invoice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/components/useraccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/useraccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/foodmenu/addMenuItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/foodmenu/addMenuItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/foodmenu/menu_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/foodmenu/menu_list.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/home/footer_page.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/home/footer_page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,6 +111,11 @@
       <workItem from="1589727932345" duration="7199000" />
       <workItem from="1590373301108" duration="2657000" />
       <workItem from="1590464055934" duration="2407000" />
+      <workItem from="1590544471414" duration="3665000" />
+      <workItem from="1590568425749" duration="1423000" />
+      <workItem from="1590639549640" duration="2840000" />
+      <workItem from="1590698932431" duration="6328000" />
+      <workItem from="1590805334014" duration="16546000" />
     </task>
     <servers />
   </component>
@@ -146,11 +163,16 @@
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586791500464" />
     <state x="977" y="359" width="1585" height="1198" key="SettingsEditor/72.27.3768.2133@72.27.3768.2133" timestamp="1587845267800" />
-    <state x="3167" y="467" width="1344" height="1409" key="search.everywhere.popup" timestamp="1588242944391">
-      <screen x="1920" y="0" width="3840" height="2160" />
+    <state x="919" y="330" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590699899591">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="919" y="330" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1590699899591" />
+    <state x="831" y="303" width="896" height="914" key="search.everywhere.popup" timestamp="1590642356907">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="2751" y="-19" width="896" height="913" key="search.everywhere.popup/0.0.1920.1040/1920.-322.2560.1400@1920.-322.2560.1400" timestamp="1587794680790" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.-324.2560.1400@0.0.1920.1040" timestamp="1586793425624" />
+    <state x="831" y="303" width="896" height="914" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1590642356907" />
     <state x="3167" y="467" width="1344" height="1409" key="search.everywhere.popup/1920.0.3840.2160/0.498.1920.1080@1920.0.3840.2160" timestamp="1588242944391" />
   </component>
 </project>

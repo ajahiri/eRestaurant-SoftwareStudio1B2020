@@ -13,7 +13,7 @@ Menu.schema = new SimpleSchema({
 });
 
 Meteor.methods({
-    'menu.insert': function (category, cost, title, image, ingrediants) {
+    'menu.insert': function (category,cost,title,image,ingrediants) {
         if (!this.userId) {
             throw new Meteor.Error('Not logged in', "Must be logged in");
         } else {
@@ -31,5 +31,12 @@ Meteor.methods({
                 console.log(Menu.find().fetch());
             }
         }
-    }
+    },
+    'menu.remove': function (id) {
+        // if (!this.userId) {
+        //     throw new Meteor.Error('Not logged in', "Must be logged in");
+        // }
+        console.log("attempting to remove menu item");
+        Menu.remove(id)
+    },
 });

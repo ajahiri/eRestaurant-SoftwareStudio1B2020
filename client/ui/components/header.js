@@ -47,15 +47,11 @@ class Header extends React.Component {
                         </MDBNavItem>
                         
                         <MDBNavItem>
-                            <MDBNavLink to="/about">Menu</MDBNavLink>
+                            <MDBNavLink to="/menu">Menu</MDBNavLink>
                         </MDBNavItem>
 
                         <MDBNavItem>
                             <MDBNavLink to="/booking">Book</MDBNavLink>
-                        </MDBNavItem>
-
-                        <MDBNavItem>
-                            <MDBNavLink to="/cart">Cart <MDBIcon icon="shopping-cart" /> </MDBNavLink>
                         </MDBNavItem>
                         {
                             this.props.isStaff || this.props.isManager  ?

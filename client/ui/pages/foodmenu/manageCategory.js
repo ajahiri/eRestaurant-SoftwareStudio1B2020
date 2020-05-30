@@ -3,27 +3,28 @@ import { withTracker } from "meteor/react-meteor-data";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, } from "mdbreact";
 import { MenuCategory } from "../../../../imports/collections/MenuCategory";
 
-var categorychanged = false, categoryRemovechanged = false;
+var categorychanged = false, categoryRemovechanged = false, categoryUpdatechanged = false;
 
 
 class ManageCategory extends React.Component {
     constructor(props) {
         super(props);
         //state
-        this.state = { category: '' ,removecategory: '' ,label: "Insert New Category",removelabel: "Remove Category"};
+        this.state = { category: '', updatecategory: "", updatecategoryname: "", removecategory: '', label: "Insert New Category", removelabel: "Remove Category", updatelabel: "Select Category to update" };
         //methods
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRemoveSubmit = this.handleRemoveSubmit.bind(this);
-        
+        this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
+
 
     }
 
     renderCategories() {
         return this.props.menucategories.map((category) => {
             return (
-                <option value={category._id} >{category.category}</option>
+                <option value={category._id} key={category._id} >{category.category}</option>
             );
         });
 
@@ -46,6 +47,9 @@ class ManageCategory extends React.Component {
 
         if (name == 'removecategory')
             categoryRemovechanged = true;
+
+        if (name == 'updatecategory')
+            categoryUpdatechanged = true;
     }
 
     handleSubmit(event) {
@@ -78,39 +82,76 @@ class ManageCategory extends React.Component {
         event.preventDefault();
     }
 
+    handleUpdateSubmit() {
+        // console.log();
+        if (Meteor.user() && Roles.userIsInRole(Meteor.userId(), 'admin')) {
+            if (categoryUpdatechanged) {
+                console.log("updatecategory");
+                console.log(this.state.updatecategory);
+                console.log(this.state.updatecategoryname);
+
+                Meteor.call('menucategory.update',
+                this.state.updatecategory,
+                this.state.updatecategoryname,
+                    function (error) {
+                        if (error) {
+                            // this.setState({label: e.reason});
+                            console.log(error);
+                        } else {
+
+                            // this.setState({label: "success"});
+                            console.log("Successfully updated category");
+                        }
+                    }
+                );
+
+                // MenuCategory.remove(this.state.updatecategory);
+
+                this.setState({ updatelabel: "Successfuly Updated" });
+
+
+            } else {
+                this.setState({ updatelabel: "Please Select a category to Update" });
+            }
+
+        } else {
+            this.setState({ label: "User Must Be logged in and Must Be Admin" });
+        }
+        event.preventDefault();
+    }
+
     handleRemoveSubmit(event) {
         // console.log();
         if (Meteor.user() && Roles.userIsInRole(Meteor.userId(), 'admin')) {
             if (categoryRemovechanged) {
                 var result = this.props.menucategories.find(obj => {
                     return obj._id == this.state.removecategory
-                  });
+                });
                 //   console.log("result nummmm");
                 //   console.log(result);
-                if(result.categoryitems == 0)
-                {
+                if (result.categoryitems == 0) {
 
-                Meteor.call('menucategory.remove',
-                this.state.removecategory,
-                function(error) {
-                    if (error) {
-                        // this.setState({label: e.reason});
-                        console.log(error);
-                    } else {
-                        
-                        // this.setState({label: "success"});
-                        console.log("Successfully removed category");
-                    }
+                    Meteor.call('menucategory.remove',
+                        this.state.removecategory,
+                        function (error) {
+                            if (error) {
+                                // this.setState({label: e.reason});
+                                console.log(error);
+                            } else {
+
+                                // this.setState({label: "success"});
+                                console.log("Successfully removed category");
+                            }
+                        }
+                    );
+
+                    // MenuCategory.remove(this.state.removecategory);
+
+                    this.setState({ removelabel: "Successfuly removed" });
+                } else {
+                    this.setState({ removelabel: "Please Remove all items from category before removing" });
+
                 }
-                );
-
-                // MenuCategory.remove(this.state.removecategory);
-
-                this.setState({ removelabel: "Successfuly removed" });
-            }else{
-                this.setState({ removelabel: "Please Remove all items from category before removing" });
-
-            }
 
             } else {
                 this.setState({ removelabel: "Please Select a category to remove" });
@@ -142,7 +183,7 @@ class ManageCategory extends React.Component {
                         <MDBRow left>
                             <MDBCol className="form-inline" sm="12">
                                 <MDBCol sm="6" md="3">
-                                    <span style={{ fontSize: 'x-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Add New Category: </strong></span>
+                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Add New Category: </strong></span>
                                 </MDBCol>
                                 <MDBCol sm="6" md="3">
                                     <MDBInput label="New Title" size="lg" name='category' type="text" onChange={this.handleChange} />
@@ -159,7 +200,7 @@ class ManageCategory extends React.Component {
                             <MDBRow className='btn-confirm-padding'>
                                 <MDBCol sm="6" md="12">
                                     <div className="text-center">
-                                        <MDBBtn color="primary" onClick={this.handleSubmit}>Confirm Change</MDBBtn>
+                                        <MDBBtn color="info" onClick={this.handleSubmit}>Add Category</MDBBtn>
                                         <br />
                                         <span className="badge badge-info font-weight-bold text-wrap" style={{ fontSize: 'large' }}>{this.state.label}</span>
                                         <br />
@@ -170,8 +211,8 @@ class ManageCategory extends React.Component {
                         </MDBRow>
                     </form>
                 </MDBContainer>
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <MDBContainer>
 
                     <form onSubmit={this.handleSubmit} >
@@ -201,9 +242,51 @@ class ManageCategory extends React.Component {
                             <MDBRow className='btn-confirm-padding'>
                                 <MDBCol sm="6" md="12">
                                     <div className="text-center">
-                                        <MDBBtn color="danger" onClick={this.handleRemoveSubmit}>Confirm Change</MDBBtn>
+                                        <MDBBtn color="danger" onClick={this.handleRemoveSubmit}>Remove Category</MDBBtn>
                                         <br />
                                         <span className="badge badge-danger font-weight-bold text-wrap" style={{ fontSize: 'large' }}>{this.state.removelabel}</span>
+                                        <br />
+
+                                    </div>
+                                </MDBCol>
+                            </MDBRow>
+                        </MDBRow>
+
+                        <hr />
+                    </form>
+                </MDBContainer>
+                <MDBContainer>
+                    <form onSubmit={this.handleUpdateSubmit} >
+                        {/* <hr /> */}
+                        <MDBRow center>
+                            <MDBTypography tag="h2" className="page-heading" >Change Category Name</MDBTypography>
+                        </MDBRow>
+
+                        <MDBRow left>
+                            <MDBCol className="form-inline" sm="12">
+                                <MDBCol sm="6" md="3">
+                                    <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Select Category To Rename: </strong></span>
+                                </MDBCol>
+                                <MDBCol sm="6" md="3">
+                                    <select onChange={this.handleChange} name="updatecategory" size="lg" id="updatecategory" class="browser-default custom-select">
+                                        <option selected>Choose Category</option>
+                                        {this.renderCategories()}
+                                    </select>
+                                </MDBCol>
+                                <MDBCol sm="6" md="3">
+                                    {categoryUpdatechanged ? <MDBInput label="New Name" size="lg" name='updatecategoryname' type="text" onChange={this.handleChange} /> : <span></span>}
+                                </MDBCol>
+                            </MDBCol>
+                        </MDBRow>
+
+
+                        <MDBRow center>
+                            <MDBRow className='btn-confirm-padding'>
+                                <MDBCol sm="6" md="12">
+                                    <div className="text-center">
+                                        <MDBBtn color="success" onClick={this.handleUpdateSubmit}>Update Category</MDBBtn>
+                                        <br />
+                                        <span className="badge badge-success font-weight-bold text-wrap" style={{ fontSize: 'large' }}>{this.state.updatelabel}</span>
                                         <br />
 
                                     </div>

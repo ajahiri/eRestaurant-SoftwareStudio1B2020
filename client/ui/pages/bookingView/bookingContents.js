@@ -10,7 +10,28 @@ class BookingContents extends React.Component {
     }
 
     handleLeave() {
-        Meteor.call('bookings.markLeft', this.props.bookingID);
+        Meteor.call('bookings.markLeft', this.props.bookingID, function(error) {
+            if (error) console.log(error);
+        });
+    }
+
+    handleCancel() {
+        Meteor.call('bookings.cancel', this.props.bookingID, function(error) {
+            if (error) console.log(error);
+        });
+    }
+
+    renderItems() {
+        return this.props.bookingData.onlineOrder.map(item => {
+            return (
+                <tr key={item.item_id}>
+                    <td>{item.quantity}</td>
+                    <td>{item.title}</td>
+                    <td>${item.cost}</td>
+                    <td>${item.cost * item.quantity}</td>
+                </tr>
+            );
+        })
     }
 
     render() {
@@ -29,6 +50,7 @@ class BookingContents extends React.Component {
                 <MDBContainer>
                     <h3>Hello, {booking.customerName}.</h3>
                     <p>The following information is for the booking ({booking._id}) scheduled on {booking.dateNice}.</p>
+                    {booking.cancelled ? <p className="red-text">THIS BOOKING HAS BEEN CANCELLED!</p> : <></>}
                     <h4>Booking Details</h4>
                     <ul>
                         <li>Name: {booking.customerName}</li>
@@ -37,34 +59,44 @@ class BookingContents extends React.Component {
                         <li>Number of Guests: {booking.guestNum}</li>
                         <li>Time (24 hour time): {booking.time}</li>
                         { booking.payed ? <li>Payed: Payment Received</li> : <li>Payed: No Payment</li> }
-                        { booking.concluded ? <li>Finished: Booking Finished</li> : <li>Finished: Not Finished</li> }
+                        { booking.concluded ? <li className="font-weight-bold">Finished: Booking Finished</li> : <li>Finished: Not Finished</li> }
                         { booking.cancelled ? <li>Cancel Status: Cancelled</li> : <li>Cancel Status: Not Cancelled</li> }
                         <li>Booking ID: {booking._id}</li>
                     </ul>
-                    <h4>Order Items: </h4>
-                    <MDBTable responsive striped>
-                        <MDBTableHead color="primary-color" textWhite>
-                            <tr>
-                                <th>Qty</th>
-                                <th>Item Name</th>
-                                <th>Itm. Price</th>
-                                <th>Tot. Price</th>
-                            </tr>
-                        </MDBTableHead>
-                        <MDBTableBody>
-                            <tr>
-                                <td>2</td>
-                                <td>Chicken Burger</td>
-                                <td>$15.00</td>
-                                <td>$30.00</td>
-                            </tr>
-                        </MDBTableBody>
-                    </MDBTable>
-                    { this.props.isStaff && !this.props.bookingData.concluded ?
+                    {booking.onlineOrder ?
+                        <>
+                        <h4>Order Items: </h4>
+                        <MDBTable responsive striped>
+                            <MDBTableHead color="primary-color" textWhite>
+                                <tr>
+                                    <th>Qty</th>
+                                    <th>Item Name</th>
+                                    <th>Itm. Price</th>
+                                    <th>Tot. Price</th>
+                                </tr>
+                            </MDBTableHead>
+                            <MDBTableBody>
+                                {this.renderItems()}
+                            </MDBTableBody>
+                        </MDBTable>
+                        </>
+                        :
+                        <></>
+                    }
+                    { this.props.isStaff && !booking.concluded && !booking.cancelled ?
                         <MDBBtn onClick={() => {
                             this.handleLeave()
                         }} color="secondary">
                             Mark as Complete
+                        </MDBBtn>
+                        :
+                        <div></div>
+                    }
+                    { (this.props.isStaff || this.props.userID === booking.owner) && !booking.cancelled && !booking.concluded ?
+                        <MDBBtn onClick={() => {
+                            this.handleCancel()
+                        }} color="danger" >
+                            Cancel Booking
                         </MDBBtn>
                         :
                         <div></div>

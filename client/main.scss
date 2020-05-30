@@ -1,3 +1,7 @@
+html, body {
+  height:100% !important;
+}
+
 @import "ui/pages/home/homepage.scss";
 @import './ui/pages/booking/booking.scss';
 
@@ -22,4 +26,13 @@
 .page-heading {
   padding-top: 20px;
   padding-left: 60px;
+}
+
+.carouselInner {
+  height: 500px !important;
+}
+
+.menuBanner {
+  background-size: cover;
+  background-image: url('./images/menuBanner.png');
 }

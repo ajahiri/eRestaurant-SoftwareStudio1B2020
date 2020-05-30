@@ -14,15 +14,6 @@ const CustomInput = ({ label, ...props }) => {
                 ) : null }
             </MDBInput>
         </React.Fragment>
-        /*
-        <React.Fragment>
-            <label className="grey-text" htmlFor={props.id}>{label}</label>
-            <input className="form-control" {...field} {...props} />
-            {meta.touched && meta.error ? (
-                <div className="invalid-feedback">{meta.error}</div>
-            ) : null}
-        </React.Fragment>
-        */
     );
 };
 
