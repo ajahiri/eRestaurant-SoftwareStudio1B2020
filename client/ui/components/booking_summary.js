@@ -42,7 +42,6 @@ class BookingSummary extends React.Component{
                       <span> Phone: {branchPhone} </span>                            
                   </MDBCol>
                 </MDBRow>
-                <MDBBtn href="#" >Print</MDBBtn>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

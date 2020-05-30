@@ -35,7 +35,7 @@ class MultiItemLocations extends React.Component {
 
                                 <span> Address: {addressNice}</span>
                                 <br></br>
-                                <span> Phone: 0{branch.phone}</span>
+                                <span> Phone: {branch.phone}</span>
                             </MDBCol>
                             <MDBCol>
                                 <br/>

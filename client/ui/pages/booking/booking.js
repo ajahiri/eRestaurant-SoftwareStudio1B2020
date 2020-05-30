@@ -14,6 +14,8 @@ import MenuList from '../foodmenu/menu_list.js';
 import BookingOrderConfirm from '../../components/bookingOrder_confirm.js';
 import BookingOrderSummary from '../../components/bookingOrder_summary.js';
 import Invoice from '../../components/invoice.js';
+import ReactToPrint from "react-to-print";
+import PrintButton from "../../components/PrintButton";
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -516,6 +518,7 @@ class Booking extends React.Component {
             );
         } else if (activeView == 'Booking_Summary') {
             return (
+                <>
                 <BookingSummary
                         bookingID = {this.state.submittedBookingID}
                         guests = {guestNum}
@@ -525,7 +528,19 @@ class Booking extends React.Component {
                         branchName = {branch.label}
                         branchAddressNice = {this.state.branchAddressNice}
                         branchPhone = {this.state.branchPhone}
+                        ref={el => (this.summaryRef = el)}
+                />
+                <div className="container">
+                    <ReactToPrint
+                        trigger={() => {
+                            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                            // to the root node of the returned component as it will be overwritten.
+                            return <a href="#"><PrintButton context="Summary" /></a>;
+                        }}
+                        content={() => this.summaryRef}
                     />
+                </div>
+                </>
             );
         } else if (activeView == 'Menu') {
             return (
@@ -558,6 +573,7 @@ class Booking extends React.Component {
             );
         } else if (activeView == 'Order/Booking_Summary') { 
             return (
+                <>
                 <BookingOrderSummary
                     Cart = {this.state.onlineOrder}
                     bookingID = {this.state.submittedBookingID}
@@ -568,10 +584,23 @@ class Booking extends React.Component {
                     branchName = {branch.label}
                     branchAddressNice = {this.state.branchAddressNice}
                     branchPhone = {this.state.branchPhone}
+                    ref={el => (this.orderSummaryRef = el)}
                 />
+                <div className="container">
+                    <ReactToPrint
+                        trigger={() => {
+                            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                            // to the root node of the returned component as it will be overwritten.
+                            return <a href="#"><PrintButton context="Summary" /></a>;
+                        }}
+                        content={() => this.orderSummaryRef}
+                    />
+                </div>
+                </>
             );
         } else if (activeView == 'Invoice/Order/Booking_Confirm') {
             return (
+                <>
                 <Invoice
                     Cart = {this.state.onlineOrder}
                     bookingID = {this.state.submittedBookingID}
@@ -582,7 +611,19 @@ class Booking extends React.Component {
                     branchName = {branch.label}
                     branchAddressNice = {this.state.branchAddressNice}
                     branchPhone = {this.state.branchPhone}
+                    ref={el => (this.invoiceRef = el)}
                 />
+                <div className="container">
+                    <ReactToPrint
+                        trigger={() => {
+                            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                            // to the root node of the returned component as it will be overwritten.
+                            return <a href="#"><PrintButton context="Invoice" /></a>;
+                        }}
+                        content={() => this.invoiceRef}
+                    />
+                </div>
+                </>
             );
         }
     }
