@@ -22,9 +22,10 @@ const AddBranchForm = ({defaultBranch}) => {
                 branchManager: Yup.string()
                     .email("Invalid Email address.")
                     .required("Branch manager email is required."),
-                branchPhone: Yup.number()
-                    .max(9999999999, "Can't be more than 10 digits in number")
-                    .positive("Phone number must be positive")
+                branchPhone: Yup.string()
+                    .min(10, "Phone number must be 10 digits.")
+                    .max(10, "Phone number must be 10 digits.")
+                    .matches("^[0-9]+$", "Invalid phone number.")
                     .required("Branch phone number is required."),
                 branchCapacity: Yup.number()
                     .min(1, "Seating capacity must be greater than 1.")
@@ -83,7 +84,7 @@ const AddBranchForm = ({defaultBranch}) => {
                                 label="Phone Number"
                                 id="branchPhone"
                                 name="branchPhone"
-                                type="number"
+                                type="text"
                             />
                             <CustomInput
                                 label="Seating Capacity"
