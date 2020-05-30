@@ -33,7 +33,7 @@ class Invoice extends React.Component{
       let Cart = this.props.Cart;
       return Cart.map(item => {
           itemNum ++;
-          this.totalCost += parseInt(item.cost);
+          this.totalCost += parseFloat(item.cost);
           return (
               <tr key={itemNum}>
                   <td>{itemNum}</td>
