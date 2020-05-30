@@ -274,7 +274,7 @@ class ManageCategory extends React.Component {
                                     </select>
                                 </MDBCol>
                                 <MDBCol sm="6" md="3">
-                                    {categoryUpdatechanged ? <MDBInput label="New image" size="lg" name='updatecategoryname' type="text" onChange={this.handleChange} /> : <span></span>}
+                                    {categoryUpdatechanged ? <MDBInput label="New Name" size="lg" name='updatecategoryname' type="text" onChange={this.handleChange} /> : <span></span>}
                                 </MDBCol>
                             </MDBCol>
                         </MDBRow>

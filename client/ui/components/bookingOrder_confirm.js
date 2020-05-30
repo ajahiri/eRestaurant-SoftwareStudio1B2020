@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import {MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
-  MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardGroup, MDBView, MDBMask, MDBIcon, MDBTable, MDBTableBody} from  "mdbreact";
+  MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBCardGroup, MDBView, MDBMask, MDBIcon, MDBTable, MDBTableBody, MDBTableHead} from  "mdbreact";
 import Checkout from './checkout.js';
 
 
@@ -32,11 +32,12 @@ class BookingOrderConfirm extends React.Component{
         let Cart = this.props.Cart;
         return Cart.map(item => {
             itemNum ++;
-            this.totalCost += parseInt(item.cost);
+            this.totalCost += parseFloat(item.cost);
             return (
                 <tr key={itemNum}>
                     <td>{itemNum}</td>
                     <td>{item.title}</td>
+                    <td>{item.quantity}</td>
                     <td>${item.cost}</td>
                 </tr>
             );
@@ -58,9 +59,16 @@ class BookingOrderConfirm extends React.Component{
                             <h6 className=" mb-4 p-0">{fullName}</h6>
                             <hr/> 
                             <MDBTable borderless>
+                                <MDBTableHead>
+                                    <td></td>
+                                    <td><strong>Item</strong></td>
+                                    <td><strong>Quantity</strong></td>
+                                    <td><strong>Cost</strong></td>
+                                </MDBTableHead>
                                 <MDBTableBody>
                                     {this.renderRows()}
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td>Total: ${this.totalCost}</td>

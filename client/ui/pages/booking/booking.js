@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
 import Select from 'react-select';
-import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter,} from  "mdbreact";
+import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBTooltip,} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
 import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
@@ -25,7 +25,7 @@ class Booking extends React.Component {
 
         this.state = {
             activeView: 'Booking_Form', //other views are 'Booking_Summary', 'Menu', 'Order/Booking_Confirm', 'Order/Booking_Confirmed', 'Invoice/Order/Booking_Confirm'
-            order_online: false,
+            order_online: true,
             submittedBookingID: '',
             branchAddressNice: '',
             branchPhone: '',
@@ -89,6 +89,7 @@ class Booking extends React.Component {
 //s
         this.removeItemFromBooking = this.removeItemFromBooking.bind(this);
 
+        this.handle_orderNow = this.handle_orderNow.bind(this);
         this.handle_payNow = this.handle_payNow.bind(this);
         this.handlePayment = this.handlePayment.bind(this);
 
@@ -111,13 +112,14 @@ class Booking extends React.Component {
         // this.setState({branchPhone: await Meteor.callPromise('getBranches.Phone', branch.value)});
         //console.log(order_online + ' ' + payed);
         if (order_online && payNow){    // finish user jounrey at Invoice with Order & Booking Summary
-            console.log('go to invoice')
+            //console.log('go to invoice')
             this.handleConfirmPayment();
         } else if (order_online && !payNow) { // finish user jounrey at Order & Booking Confirmed
-            console.log('go to menu')
+            //console.log('go to menu')
             this.handleConfirm_BookingOrder();
         } else {    // finish user journey at Booking Summary        
             this.handleBooking_Next();
+            //console.log('go to booking_summary')
         }
     }
 
@@ -257,6 +259,7 @@ class Booking extends React.Component {
                     }
                 }
             );
+            this.enableTimePicker();
             if (unavailable_times.length > 0) {
                 unavailable_times.map((time) => {
                     if (time == "4:00") {
@@ -284,8 +287,6 @@ class Booking extends React.Component {
                         this.disableTimePicker();
                     }
                 });
-            } else {
-                this.enableTimePicker();
             }
         } else {
             this.disableTimePicker();
@@ -330,7 +331,6 @@ class Booking extends React.Component {
             result.quantity += 1;
             this.setState({onlineOrder: newArray, onlineOrder_Size: newArray.length});
         }
-
     }
 
     removeItemFromBooking(itemID) 
@@ -361,6 +361,10 @@ class Booking extends React.Component {
         }
     }
 
+    handle_orderNow() {
+        this.setState({order_online: !this.state.order_online})
+    }
+
     handle_payNow() {
         this.setState({payNow: !this.state.payNow})
     }
@@ -368,11 +372,10 @@ class Booking extends React.Component {
     handlePayment () {
         this.setState({payed: true}); //this.findRoutes waits for the state change before continuing.
         this.handleSubmit();
-        console.log(this.state.activeView + this.state.payed);
     }
 
     handleBtnTest(event) {
-        console.log(this.state.activeView + this.state.payed);
+        console.log("disableFour: " + this.state.disableFour);
     }
 
     render() {
@@ -410,7 +413,7 @@ class Booking extends React.Component {
             return (
                 /////////////////////////////////////////////////// **Booking_Form START** ////////////////////////////////////
                 <div>
-                    <ModalMakeOrder Modal_Result={this.handleModal_Result}/>
+                    {/* <ModalMakeOrder Modal_Result={this.handleModal_Result}/> */}
                     <MDBContainer>
                         <MDBRow>
                             <h2>Make a Booking</h2>
@@ -453,7 +456,6 @@ class Booking extends React.Component {
                                     }}
                                     onOpen={() => {
                                         this.setState({ defaultDateFormat: "F j, Y", disableGuestNum: false});
-                                        
                                     }}
                                     onClose={() => {
                                         // Bug Fix: If backspace is used when input field is selected input field is blank
@@ -504,13 +506,37 @@ class Booking extends React.Component {
                                 <MDBInput type="textarea" label="Special Request" hint="Let us know if you have any special event requests!" outline size="lg" onChange={this.handleSpecialRequest}/>
                             </MDBCol>
                         </MDBRow>
+                        <MDBRow>
+                            <MDBCol className="text-left">
+                                <div>
+                                    <div className="custom-control custom-checkbox">
+                                        <input
+                                            id="defaultChecked"
+                                            type="checkbox"
+                                            className = 'custome-control-input'
+                                            onChange={this.handle_orderNow}
+                                            defaultChecked
+                                        />
+                                        <MDBTooltip
+                                            domElement
+                                            placement="top"
+                                            tag="label"
+                                        >
+                                            <strong className='bold' htmlFor="defaultChecked"> &nbsp; Order Now!</strong>
+                                            <label>Order you Meal's now so they are ready when you arrive!</label>
+                                        </MDBTooltip>
+                                    </div>
+                                </div>
+                            </MDBCol>
+                        </MDBRow>
+                        <hr/>
                         <MDBRow className='btn-confirm-padding'>
                             {order_online ?
-                                <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleBooking_Next} disabled={disableBtnNext.valueOf()} >Next</MDBBtn></MDBCol>
+                                <MDBCol><MDBBtn color="indigo" onClick={this.handleBooking_Next} disabled={disableBtnNext.valueOf()} >Next</MDBBtn></MDBCol>
                                 :
-                                <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.handleSubmit} disabled={disableBtnNext.valueOf()} >Confirm Booking</MDBBtn></MDBCol>
+                                <MDBCol><MDBBtn color="indigo" onClick={this.handleSubmit} disabled={disableBtnNext.valueOf()} >Confirm Booking</MDBBtn></MDBCol>
                             }
-                            <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
+                            {/* <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol> */}
                         </MDBRow>
                     </MDBContainer>
                 </div>
