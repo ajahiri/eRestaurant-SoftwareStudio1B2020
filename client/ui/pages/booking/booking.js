@@ -259,6 +259,7 @@ class Booking extends React.Component {
                     }
                 }
             );
+            this.enableTimePicker();
             if (unavailable_times.length > 0) {
                 unavailable_times.map((time) => {
                     if (time == "4:00") {
@@ -286,8 +287,6 @@ class Booking extends React.Component {
                         this.disableTimePicker();
                     }
                 });
-            } else {
-                this.enableTimePicker();
             }
         } else {
             this.disableTimePicker();
@@ -376,7 +375,7 @@ class Booking extends React.Component {
     }
 
     handleBtnTest(event) {
-        console.log(this.state.activeView);
+        console.log("disableFour: " + this.state.disableFour);
     }
 
     render() {
@@ -533,11 +532,11 @@ class Booking extends React.Component {
                         <hr/>
                         <MDBRow className='btn-confirm-padding'>
                             {order_online ?
-                                <MDBCol><MDBBtn color="indigo" /*size='lg'*/ onClick={this.handleBooking_Next} disabled={disableBtnNext.valueOf()} >Next</MDBBtn></MDBCol>
+                                <MDBCol><MDBBtn color="indigo" onClick={this.handleBooking_Next} disabled={disableBtnNext.valueOf()} >Next</MDBBtn></MDBCol>
                                 :
-                                <MDBCol><MDBBtn color="indigo" /*size='lg'*/ onClick={this.handleSubmit} disabled={disableBtnNext.valueOf()} >Confirm Booking</MDBBtn></MDBCol>
+                                <MDBCol><MDBBtn color="indigo" onClick={this.handleSubmit} disabled={disableBtnNext.valueOf()} >Confirm Booking</MDBBtn></MDBCol>
                             }
-                            {/* <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol> */}
+                            <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
                         </MDBRow>
                     </MDBContainer>
                 </div>
