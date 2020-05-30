@@ -37,7 +37,7 @@ class MenuItem extends React.Component {
     return filtered.map((menu) => {
       return (
        
-        <MDBCol id={menu.title} className="d-flex p-3  col-sm-6 col-md-4">
+        <MDBCol key={menu.item_id} id={menu.title} className="d-flex p-3  col-sm-6 col-md-4">
           <MDBCard className="hoverable" style={{height: '40rem', width: '100%'}}>
               <MDBCardImage className="img-fluid" style={{height: '20rem', width: '100%'}} src={menu.image} />
             <MDBCardBody style={{height: '20rem'}}>

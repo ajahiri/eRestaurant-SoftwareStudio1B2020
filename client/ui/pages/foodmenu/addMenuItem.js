@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTracker } from "meteor/react-meteor-data";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBTypography, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, } from "mdbreact";
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, } from "mdbreact";
 import { Menu } from "../../../../imports/collections/Menu";
 import { MenuCategory } from "../../../../imports/collections/MenuCategory";
 
@@ -22,7 +22,7 @@ class AddMenuItem extends React.Component {
     renderCategories() {
         return this.props.menucategories.map((category) => {
             return (
-                <option value={category._id} >{category.category}</option>
+                <option value={category._id} key={category._id}>{category.category}</option>
             );
         });
 
@@ -261,7 +261,7 @@ class AddMenuItem extends React.Component {
                 <form onSubmit={this.handleSubmit} >
                     <hr />
                     <MDBRow center>
-                        <MDBTypography tag="h2" className="page-heading" >Insert New Menu Item</MDBTypography>
+                        <h2 className="page-heading" >Insert New Menu Item</h2>
                     </MDBRow>
 
 
@@ -301,7 +301,7 @@ class AddMenuItem extends React.Component {
                                 <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Ingrediants: </strong></span>
                             </MDBCol>
                             <MDBCol sm="6" md="6">
-                                <div class="form-group purple-border ">
+                                <div className="form-group purple-border ">
                                     <textarea placeholder="Ingrediants" name='ingrediants' value={this.state.ingrediants} className="purple-border md-textarea form-control exampleFormControlTextarea4" onChange={this.handleChange} rows="4" cols="50" ></textarea>
                                 </div>
                             </MDBCol>

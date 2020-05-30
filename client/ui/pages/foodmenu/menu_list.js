@@ -46,12 +46,12 @@ class MenuList extends React.Component {
       // console.log(menuitem);
 
       return (
-        <>
+        <div key={menuitem._id}>
           <h3 className="h1-responsive font-weight-bold text-center my-5">
             {menuitem.category}
           </h3>
           <MenuItem id={menuitem.title} category={menuitem._id} add_Item={this.props.addItem} />
-        </>
+        </div>
 
       );
     });

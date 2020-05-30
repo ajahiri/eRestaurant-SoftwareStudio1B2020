@@ -24,7 +24,7 @@ class ManageCategory extends React.Component {
     renderCategories() {
         return this.props.menucategories.map((category) => {
             return (
-                <option value={category._id} >{category.category}</option>
+                <option value={category._id} key={category._id} >{category.category}</option>
             );
         });
 

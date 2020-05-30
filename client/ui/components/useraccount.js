@@ -218,7 +218,7 @@ class UserAcount extends React.Component {
 export default withTracker(() => {
     Meteor.subscribe('bookingsUser');
     return {
-        userBookings: Bookings.find().fetch(),
+        userBookings: Bookings.find({},{$sort: {createdAt: -1}}).fetch(),
         currentUser: Meteor.user(),
         isReady: Meteor.subscribe('bookingsUser').ready(),
     }
