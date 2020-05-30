@@ -298,11 +298,11 @@ class AddMenuItem extends React.Component {
                     <MDBRow left>
                         <MDBCol className="form-inline" sm="12">
                             <MDBCol sm="6" md="3">
-                                <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Ingrediants: </strong></span>
+                                <span style={{ fontSize: 'xx-large' }} className="font-weight-bold"><strong className="badge badge-primary text-wrap ">Ingredients: </strong></span>
                             </MDBCol>
                             <MDBCol sm="6" md="6">
                                 <div className="form-group purple-border ">
-                                    <textarea placeholder="Ingrediants" name='ingrediants' value={this.state.ingrediants} className="purple-border md-textarea form-control exampleFormControlTextarea4" onChange={this.handleChange} rows="4" cols="50" ></textarea>
+                                    <textarea placeholder="Ingredients" name='ingrediants' value={this.state.ingrediants} className="purple-border md-textarea form-control exampleFormControlTextarea4" onChange={this.handleChange} rows="4" cols="50" ></textarea>
                                 </div>
                             </MDBCol>
                             {/* <MDBCol sm="6">

@@ -24,22 +24,6 @@ class StaffDashboard extends React.Component {
                     <td>{booking.dateNice}</td>
                     <td>{booking.time}</td>
                     <td>{booking.guestNum}</td>
-                    <td>
-                        Items go here
-                        {/*
-                        {branch.staff ?
-                            <ul className="staffInBranchList">
-                                {branch.staff.map(staff => {
-                                    return (
-                                        <li key={staff.name + staff.role}>{staff.name} | {staff.role}</li>
-                                    );
-                                })}
-                            </ul>
-                            :
-                            <p>No Staff</p>
-                        }
-                        */}
-                    </td>
                     <td>{booking.specialRequest}</td>
                 </tr>
             );
@@ -102,7 +86,6 @@ class StaffDashboard extends React.Component {
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Guests</th>
-                                <th>Order Items</th>
                                 <th>Special Requests</th>
                             </tr>
                         </MDBTableHead>

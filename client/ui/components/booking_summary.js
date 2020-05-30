@@ -18,7 +18,7 @@ class BookingSummary extends React.Component{
         return(
           <MDBContainer>
             <MDBCol >
-            <MDBCard center style={{ width: "45rem" }}>  
+            <MDBCard className="mx-auto" style={{ width: "45rem" }}>
               <MDBCardBody>
                 <MDBCardTitle tag="h2" className="page-heading, font-weight-bold text-center mb-3 p-3">Booking Summary</MDBCardTitle>           
                 <MDBRow>

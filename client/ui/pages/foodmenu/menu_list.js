@@ -75,7 +75,7 @@ class MenuList extends React.Component {
         </MDBTable>
 
         {this.renderMenu()}
-        <MDBBtn onClick={this.props.Test} >Test</MDBBtn>
+        {/*<MDBBtn onClick={this.props.Test}>Test</MDBBtn>*/}
         {this.props.cartSize > 0 ?
           <MDBCol><MDBBtn color="indigo" size='lg' onClick={this.props.NextView}>Next</MDBBtn></MDBCol>
           :

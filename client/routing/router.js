@@ -30,18 +30,15 @@ export default function App() {
                             <HomePage />
                         </div>
                     </Route>
-                    <Route exact path="/about">
+                    <Route exact path="/menu">
                         <Header />
                         <MenuPage />
                         <FooterPage/>
                     </Route>
-                    <Route exact path="/cart">
-                        <Header />
-                        <Cart />
-                    </Route>
                     <Route exact path="/booking">
                         <Header /> 
                         <Booking />
+                        <FooterPage/>
                     </Route>
                     <Route exact path="/contact">
                         <Header />
