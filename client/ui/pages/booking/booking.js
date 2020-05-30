@@ -536,7 +536,7 @@ class Booking extends React.Component {
                                 :
                                 <MDBCol><MDBBtn color="indigo" onClick={this.handleSubmit} disabled={disableBtnNext.valueOf()} >Confirm Booking</MDBBtn></MDBCol>
                             }
-                            <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol>
+                            {/* <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol> */}
                         </MDBRow>
                     </MDBContainer>
                 </div>
