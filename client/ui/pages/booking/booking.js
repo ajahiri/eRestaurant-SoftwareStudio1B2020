@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import React from "react";
 import Select from 'react-select';
-import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBTooltip,} from  "mdbreact";
+import {MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBTooltip, MDBAlert,} from  "mdbreact";
 import Flatpickr from "react-flatpickr";
 import { Bookings } from '../../../../imports/collections/Bookings.js';
 import { Branches } from '../../../../imports/collections/Branches.js';
@@ -16,6 +16,7 @@ import BookingOrderSummary from '../../components/bookingOrder_summary.js';
 import Invoice from '../../components/invoice.js';
 import ReactToPrint from "react-to-print";
 import PrintButton from "../../components/PrintButton";
+import { render } from 'react-dom';
 
 /* NOTE: Using MDBTypography tag produces a warning in the browser consol. Does not affect functionality -> Warning: Received `false` for a non-boolean attribute `abbr`. */
 
@@ -30,6 +31,7 @@ class Booking extends React.Component {
             branchAddressNice: '',
             branchPhone: '',
             onlineOrder_Size: 0,
+            doubleBooked_Alert: false,
 
             // Time btns START
             btnFour: 'indigo',
@@ -71,6 +73,7 @@ class Booking extends React.Component {
         
         this.handleBtnSelect = this.handleBtnSelect.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
+        // this.handleModalOkay = this.handleModalOkay.bind(this);
         this.handleGuestNum = this.handleGuestNum.bind(this);
         this.handleSpecialRequest = this.handleSpecialRequest.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -194,9 +197,18 @@ class Booking extends React.Component {
     }
     // END handleBtnSelect /////////////////////////////////////////////////////////////////////////////////////////
     
-    handleDateChange(date){
-        this.setState({ date: date, disableGuestNum: false});
+    async handleDateChange(date){
+        let result = await Meteor.callPromise('bookings.checkUser', this.props.userID, new Date(date).toDateString());
+        if (result != null) {
+            this.setState({date: date, doubleBooked_Alert: !this.state.doubleBooked_Alert});
+        } else {
+            this.setState({ date: date, disableGuestNum: false});
+        }
     }
+
+    // handleModalOkay() {
+    //     this.setState({doubleBooked_Alert: !this.state.doubleBooked_Alert, defaultDateFormat: "\\Se\\lect \\Date..."})
+    // }
 
     handleGuestNum(event) {
         this.setState({guestNum: Number(event.target.value)});
@@ -375,12 +387,12 @@ class Booking extends React.Component {
     }
 
     handleBtnTest(event) {
-        console.log("disableFour: " + this.state.disableFour);
+        console.log(this.state.doubleBooked_Alert);
     }
 
     render() {
         const {
-            activeView,
+            activeView, doubleBooked_Alert,
             date, defaultDateFormat,
             time,
             branch, guestNum,
@@ -389,7 +401,7 @@ class Booking extends React.Component {
             disableFour, disableFive, disableSix, disableSeven, disableEight, disableNine, disableTen,
             order_online,
         } = this.state;
-
+        
         if (!this.props.userID) {
             return (
                 <MDBCol center sm="6" md="12">
@@ -415,6 +427,18 @@ class Booking extends React.Component {
                 <div>
                     {/* <ModalMakeOrder Modal_Result={this.handleModal_Result}/> */}
                     <MDBContainer>
+                        {/* <MDBModal isOpen={doubleBooked_Alert}>
+                            <MDBModalHeader>
+                                Header
+                            </MDBModalHeader>
+                            <MDBModalBody>
+                                You already made a booking today bro!
+                            </MDBModalBody>
+                            <MDBModalFooter>
+                                <MDBBtn onClick={this.handleModalOkay}>Okay</MDBBtn>
+                                <MDBBtn href="/manageaccount">View My Bookings</MDBBtn>
+                            </MDBModalFooter>
+                        </MDBModal> */}
                         <MDBRow>
                             <h2>Make a Booking</h2>
                         </MDBRow>
@@ -455,7 +479,8 @@ class Booking extends React.Component {
                                         this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
                                     }}
                                     onOpen={() => {
-                                        this.setState({ defaultDateFormat: "F j, Y", disableGuestNum: false});
+                                        this.setState({ defaultDateFormat: "F j, Y"});
+                                        this.handleDateChange(new Date());
                                     }}
                                     onClose={() => {
                                         // Bug Fix: If backspace is used when input field is selected input field is blank
@@ -522,7 +547,7 @@ class Booking extends React.Component {
                                             placement="top"
                                             tag="label"
                                         >
-                                            <strong className='bold' htmlFor="defaultChecked"> &nbsp; Order Now!</strong>
+                                            <strong className='bold' htmlFor="defaultChecked"> {" "} Order Food Now?</strong>
                                             <label>Order you Meal's now so they are ready when you arrive!</label>
                                         </MDBTooltip>
                                     </div>
@@ -538,6 +563,14 @@ class Booking extends React.Component {
                             }
                             {/* <MDBCol><MDBBtn onClick={this.handleBtnTest}>Test</MDBBtn></MDBCol> */}
                         </MDBRow>
+                        {doubleBooked_Alert ?
+                            <MDBRow center>
+                                <MDBAlert color='danger'>
+                                    <center>You have already made a booking at Supori Unici {branch.label} for {new Date(date).toDateString()}.<br/>
+                                    <a href="/manageaccount" className="alert-link">Click here to view your bookings.</a></center>
+                                </MDBAlert>
+                            </MDBRow>
+                        : null}
                     </MDBContainer>
                 </div>
             /////////////////////////////////////////////////// **Booking_Form END** ////////////////////////////////////

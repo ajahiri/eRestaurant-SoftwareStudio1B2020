@@ -133,6 +133,10 @@ if (Meteor.isServer) {
         "getBranches.Names": function() {
             return Branches.find().map( (branch) => { console.log(branch.name); return branch.name; });
         },
+        'getBranch.Name_byID': function (branch_id) {
+            //console.log(branch_id);
+            return Branches.findOne({_id: branch_id}, {fields:{name:1}}).name;
+        },
         'getBranches.Capacity': function(branch) {
             return Branches.find({_id: branch}, {fields:{capacity:1}}).fetch().map(cap => {return cap.capacity;});
         },
