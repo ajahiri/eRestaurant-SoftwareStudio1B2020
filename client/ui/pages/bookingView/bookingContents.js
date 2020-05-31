@@ -2,11 +2,24 @@ import React from "react";
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from "meteor/react-meteor-data";
 import {Bookings} from "../../../../imports/collections/Bookings";
+import {Branches} from "../../../../imports/collections/Branches";
 import {Menu} from "../../../../imports/collections/Menu";
-import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTable, MDBTableBody, MDBTableHead} from "mdbreact";
+import {
+    MDBBtn,
+    MDBCard,
+    MDBCardBody, MDBCardTitle,
+    MDBCol,
+    MDBContainer,
+    MDBIcon,
+    MDBRow,
+    MDBTable,
+    MDBTableBody,
+    MDBTableHead
+} from "mdbreact";
 
 import PrintButton from "../../components/PrintButton";
 import ReactToPrint from "react-to-print";
+import BookingInvoice from "../../components/BookingInvoice";
 
 class BookingContents extends React.Component {
     constructor(props) {
@@ -160,6 +173,16 @@ class BookingContents extends React.Component {
                         :
                         <div></div>
                     }
+                    <BookingInvoice ref={el => (this.summaryRef = el)} booking={this.props.bookingData}/>
+                    <ReactToPrint
+                        className="mx-auto"
+                        trigger={() => {
+                            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
+                            // to the root node of the returned component as it will be overwritten.
+                            return <a href="#"><PrintButton context="Invoice" /></a>;
+                        }}
+                        content={() => this.summaryRef}
+                    />
                 </MDBContainer>
             );
         } else {
@@ -180,6 +203,7 @@ export default withTracker(({bookingID}) => {
     const subscriptions = {
         bookingData: Meteor.subscribe('bookingData', bookingID),
         menuItems: Meteor.subscribe('menu'),
+        relevantBranch: Meteor.subscribe('branchGuest'),
     }
     /*
     Meteor.subscribe('branchStaff');
@@ -190,6 +214,6 @@ export default withTracker(({bookingID}) => {
         bookingData: Bookings.findOne({_id: bookingID}),
         menuItems:  Menu.find().fetch(),
         isReady: subscriptions.bookingData.ready(),
-        isStaff: Roles.userIsInRole(Meteor.userId(),['admin', 'manager', 'staff'])
+        isStaff: Roles.userIsInRole(Meteor.userId(),['admin', 'manager', 'staff']),
     }
 })(BookingContents);

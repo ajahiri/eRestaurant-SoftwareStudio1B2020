@@ -22,8 +22,6 @@
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/bookingView/booking_view.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/booking_view.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imports/collections/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +104,7 @@
       <workItem from="1590639549640" duration="2840000" />
       <workItem from="1590698932431" duration="6328000" />
       <workItem from="1590805334014" duration="16739000" />
-      <workItem from="1590890253872" duration="5739000" />
+      <workItem from="1590890253872" duration="12046000" />
     </task>
     <servers />
   </component>
