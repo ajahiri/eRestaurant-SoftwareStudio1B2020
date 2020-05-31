@@ -28,24 +28,24 @@ class Invoice extends React.Component{
     }
 
     renderRows() {
-      this.totalCost = 0;
-      let itemNum = 0;
-      let Cart = this.props.Cart;
-      return Cart.map(item => {
-          itemNum ++;
-          this.totalCost += parseFloat(item.cost) * item.quantity;
+      return this.props.Cart.map(item => {
           return (
-              <tr key={itemNum}>
-                  <td>{itemNum}</td>
+              <tr key={item.item_id}>
+                  <td>{item.quantity}</td>
                   <td>{item.title}</td>
                   <td>${item.cost}</td>
+                  <td>${(parseFloat(item.cost) * parseInt(item.quantity)).toFixed(2)}</td>
               </tr>
           );
       });
-    }
+  }
 
     render(){
       const {bookingID, guests, date, time, fullName, branchName, branchAddressNice, branchPhone} = this.props;
+      let totalCost = 0.0;
+      this.props.Cart.forEach(item => {
+          totalCost += (parseFloat(item.cost) * parseInt(item.quantity));
+      })
         return(
           <MDBContainer>
           <MDBRow>
@@ -80,12 +80,21 @@ class Invoice extends React.Component{
                           <h6 className="font-weight-bold mb-4 p-0">Table for {guests} on {date} at {time}</h6>
                          
                           <MDBTable borderless>
+                                <MDBTableHead>
+                                    <tr>
+                                        <td>Qty.</td>
+                                        <td>Item</td>
+                                        <td>Price</td>
+                                        <td>Sub-total</td>
+                                    </tr>
+                                </MDBTableHead>
                                 <MDBTableBody>
                                     {this.renderRows()}
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td>Total: ${this.totalCost}</td>
+                                        <td></td>
+                                        <td>Total: ${totalCost.toFixed(2)}</td>
                                     </tr>
                                 </MDBTableBody>
                             </MDBTable>

@@ -27,18 +27,13 @@ class BookingOrderConfirm extends React.Component{
     }
 
     renderRows() {
-        this.totalCost = 0;
-        let itemNum = 0;
-        let Cart = this.props.Cart;
-        return Cart.map(item => {
-            itemNum ++;
-            this.totalCost += parseFloat(item.cost) * item.quantity;
+        return this.props.Cart.map(item => {
             return (
-                <tr key={itemNum}>
-                    <td>{itemNum}</td>
-                    <td>{item.title}</td>
+                <tr key={item.item_id}>
                     <td>{item.quantity}</td>
+                    <td>{item.title}</td>
                     <td>${item.cost}</td>
+                    <td>${(parseFloat(item.cost) * parseInt(item.quantity)).toFixed(2)}</td>
                 </tr>
             );
         });
@@ -46,6 +41,10 @@ class BookingOrderConfirm extends React.Component{
 
     render(){
         const {handlePayment, handle_payNow, handle_Submit, guests, date, time, fullName, branchName, branchAddressNice, branchPhone} = this.props;
+        let totalCost = 0.0;
+        this.props.Cart.forEach(item => {
+            totalCost += (parseFloat(item.cost) * parseInt(item.quantity));
+        })
         return(
             <MDBContainer>
             <MDBRow>
@@ -57,13 +56,15 @@ class BookingOrderConfirm extends React.Component{
                         <MDBCol className="text-center">
                             <h5 className="font-weight-bold mb-4 p-0">Table for {guests} on {date} at {time}</h5>
                             <h6 className=" mb-4 p-0">{fullName}</h6>
-                            <hr/> 
+                            <hr/>
                             <MDBTable borderless>
                                 <MDBTableHead>
-                                    <td></td>
-                                    <td><strong>Item</strong></td>
-                                    <td><strong>Quantity</strong></td>
-                                    <td><strong>Cost</strong></td>
+                                    <tr>
+                                        <td>Qty.</td>
+                                        <td>Item</td>
+                                        <td>Price</td>
+                                        <td>Sub-total</td>
+                                    </tr>
                                 </MDBTableHead>
                                 <MDBTableBody>
                                     {this.renderRows()}
@@ -71,7 +72,7 @@ class BookingOrderConfirm extends React.Component{
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td>Total: ${this.totalCost}</td>
+                                        <td>Total: ${totalCost.toFixed(2)}</td>
                                     </tr>
                                 </MDBTableBody>
                             </MDBTable>

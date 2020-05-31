@@ -28,7 +28,7 @@ class BookingInvoice extends React.Component {
                     <td>{item.quantity}</td>
                     <td>{item.title}</td>
                     <td>${item.cost}</td>
-                    <td>${item.cost * item.quantity}</td>
+                    <td>${(parseFloat(item.cost) * parseInt(item.quantity)).toFixed(2)}</td>
                 </tr>
             );
         })
@@ -93,7 +93,7 @@ class BookingInvoice extends React.Component {
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td>Total: ${totalCost}</td>
+                                                    <td>Total: ${totalCost.toFixed(2)}</td>
                                                 </tr>
                                             </MDBTableBody>
                                         </MDBTable>
