@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 import { DateTimeBranch } from './DateTimeBranch.js';
 import { Menu } from './Menu.js';
+import { Branches } from './Branches.js';
 
 export const Bookings = new Mongo.Collection('bookings');
 
@@ -96,5 +97,15 @@ Meteor.methods({
         DateTimeBranch.update({date: relevantBooking.dateNice, time: relevantBooking.time, branch: relevantBooking.branch}, { $inc: { seatsTaken: decrement } });
 
         Bookings.update({_id: bookingID}, { $set: {cancelled: true} });
-    }
+    },
+    'bookings.checkUser': function (userID, dateNice) {
+        let result = null;
+        Branches.find().map(branch => {
+            if (Bookings.findOne({owner: userID, dateNice: dateNice, branch: branch._id}) != null) {
+                result = Bookings.findOne({owner: userID, dateNice: dateNice, branch: branch._id});
+            }
+        });
+        //console.log(result);
+        return result;
+    },
 });
