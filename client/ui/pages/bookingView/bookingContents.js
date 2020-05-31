@@ -2,7 +2,11 @@ import React from "react";
 import {Meteor} from 'meteor/meteor';
 import {withTracker} from "meteor/react-meteor-data";
 import {Bookings} from "../../../../imports/collections/Bookings";
+import {Menu} from "../../../../imports/collections/Menu";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTable, MDBTableBody, MDBTableHead} from "mdbreact";
+
+import PrintButton from "../../components/PrintButton";
+import ReactToPrint from "react-to-print";
 
 class BookingContents extends React.Component {
     constructor(props) {
@@ -21,6 +25,12 @@ class BookingContents extends React.Component {
         });
     }
 
+    handlePay() {
+        Meteor.call('bookings.pay', this.props.bookingID, function(error) {
+            if (error) console.log(error);
+        });
+    }
+
     renderItems() {
         return this.props.bookingData.onlineOrder.map(item => {
             return (
@@ -29,6 +39,25 @@ class BookingContents extends React.Component {
                     <td>{item.title}</td>
                     <td>${item.cost}</td>
                     <td>${item.cost * item.quantity}</td>
+                </tr>
+            );
+        })
+    }
+
+    renderMenu() {
+        return this.props.menuItems.map(item => {
+            return (
+                <tr key={item._id}>
+                    <td>{item.title}</td>
+                    <td>${item.cost}</td>
+                    <td>{item.ingrediants}</td>
+                    <td>
+                        <MDBBtn onClick={() => {
+                            Meteor.call('bookings.addItem', item, this.props.bookingID);
+                        }} color="primary" >
+                            Add to Order
+                        </MDBBtn>
+                    </td>
                 </tr>
             );
         })
@@ -58,7 +87,8 @@ class BookingContents extends React.Component {
                         <li>Date: {booking.dateNice}</li>
                         <li>Number of Guests: {booking.guestNum}</li>
                         <li>Time (24 hour time): {booking.time}</li>
-                        { booking.payed ? <li>Payed: Payment Received</li> : <li>Payed: No Payment</li> }
+                        { booking.payed ? <li className="font-weight-bold">Payed In-Store: Payment Received</li> : <li>Payed in-Store: No Payment</li> }
+                        { booking.payedOnline ? <li className="font-weight-bold">Payed Online: Payment Received</li> : <li>Payed Online: No Payment</li> }
                         { booking.concluded ? <li className="font-weight-bold">Finished: Booking Finished</li> : <li>Finished: Not Finished</li> }
                         { booking.cancelled ? <li>Cancel Status: Cancelled</li> : <li>Cancel Status: Not Cancelled</li> }
                         <li>Booking ID: {booking._id}</li>
@@ -92,12 +122,41 @@ class BookingContents extends React.Component {
                         :
                         <div></div>
                     }
+                    { this.props.isStaff && !booking.payedOnline && !booking.payed ?
+                        <MDBBtn onClick={() => {
+                            this.handlePay()
+                        }} color="secondary">
+                            Mark as Payed in Store
+                        </MDBBtn>
+                        :
+                        <div></div>
+                    }
                     { (this.props.isStaff || this.props.userID === booking.owner) && !booking.cancelled && !booking.concluded ?
                         <MDBBtn onClick={() => {
                             this.handleCancel()
                         }} color="danger" >
                             Cancel Booking
                         </MDBBtn>
+                        :
+                        <div></div>
+                    }
+                    {(this.props.isStaff) ?
+                        <MDBRow>
+                            <h3>Add Menu Items to Booking</h3>
+                            <MDBTable responsive striped>
+                                <MDBTableHead color="primary-color" textWhite>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Price</th>
+                                        <th>Ingredients</th>
+                                        <th>Add to Order</th>
+                                    </tr>
+                                </MDBTableHead>
+                                <MDBTableBody>
+                                    {this.renderMenu()}
+                                </MDBTableBody>
+                            </MDBTable>
+                        </MDBRow>
                         :
                         <div></div>
                     }
@@ -119,7 +178,8 @@ class BookingContents extends React.Component {
 
 export default withTracker(({bookingID}) => {
     const subscriptions = {
-        bookingData: Meteor.subscribe('bookingData', bookingID)
+        bookingData: Meteor.subscribe('bookingData', bookingID),
+        menuItems: Meteor.subscribe('menu'),
     }
     /*
     Meteor.subscribe('branchStaff');
@@ -128,6 +188,7 @@ export default withTracker(({bookingID}) => {
     return {
         userID: Meteor.userId(),
         bookingData: Bookings.findOne({_id: bookingID}),
+        menuItems:  Menu.find().fetch(),
         isReady: subscriptions.bookingData.ready(),
         isStaff: Roles.userIsInRole(Meteor.userId(),['admin', 'manager', 'staff'])
     }

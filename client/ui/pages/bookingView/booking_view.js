@@ -17,18 +17,7 @@ class BookingViewContainer extends React.Component {
         return (
             <div>
                 <Header/>
-                <BookingContents ref={el => (this.componentRef = el)} bookingID={this.props.match.params.bookingID} />
-                <div className="container">
-                    <ReactToPrint
-                        trigger={() => {
-                            // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-                            // to the root node of the returned component as it will be overwritten.
-                            return <a href="#"><PrintButton context="Booking" /></a>;
-                        }}
-                        content={() => this.componentRef}
-                    />
-                </div>
-
+                <BookingContents bookingID={this.props.match.params.bookingID} />
                 <FooterPage/>
             </div>
         );

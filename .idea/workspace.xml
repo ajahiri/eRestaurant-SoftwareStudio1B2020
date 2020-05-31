@@ -21,19 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="adc01731-3878-4345-8c75-d89f423e9007" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/routing/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/routing/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/bookingOrder_confirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/bookingOrder_confirm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/bookingOrder_summary.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/bookingOrder_summary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/booking_summary.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/booking_summary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/invoice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/invoice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/components/useraccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/components/useraccount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/foodmenu/addMenuItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/foodmenu/addMenuItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/foodmenu/menu_list.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/foodmenu/menu_list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/home/footer_page.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/home/footer_page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/staff_dashboard/staff_dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/bookingContents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/bookingView/booking_view.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/bookingView/booking_view.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imports/collections/Bookings.js" beforeDir="false" afterPath="$PROJECT_DIR$/imports/collections/Bookings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +105,8 @@
       <workItem from="1590568425749" duration="1423000" />
       <workItem from="1590639549640" duration="2840000" />
       <workItem from="1590698932431" duration="6328000" />
-      <workItem from="1590805334014" duration="16546000" />
+      <workItem from="1590805334014" duration="16739000" />
+      <workItem from="1590890253872" duration="5739000" />
     </task>
     <servers />
   </component>
