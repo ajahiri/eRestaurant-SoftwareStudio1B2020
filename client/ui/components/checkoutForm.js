@@ -36,13 +36,7 @@ const CheckOutForm = ({defaultCard}) => {
                         .required("Card security number is required."),
                 })}
                 onSubmit={(values,actions) => {
-                    actions.setStatus(undefined);
 
-                    actions.setStatus ({ loading: true });
-                    setTimeout(function(){
-                        actions.setStatus ({ loading: false });
-                        actions.setStatus ({ apiSuccess: true });
-                    }, 5000);
                 }}
             >
                 { props => (
@@ -87,32 +81,6 @@ const CheckOutForm = ({defaultCard}) => {
                                 name="cardCode"
                                 type="text"
                             />
-                        </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                        <MDBCol>
-                        <div className="text-center">
-                        <MDBBtn type="submit" color="primary">
-                        Pay
-                        <MDBIcon far icon="paper-plane" className="ml-1" />
-                        </MDBBtn>
-                        </div>
-                        {props.status && props.status.loading ? (
-                            <MDBRow>
-                                <div className="spinner-border mx-auto" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </div>
-                            </MDBRow>
-                        ) : (
-                            <></>
-                        )}
-                        {props.status && props.status.apiSuccess ? (
-                            <MDBAlert color="success" >
-                                Payment success, thank you!
-                            </MDBAlert>
-                        ) : (
-                            <></>
-                        )}
                         </MDBCol>
                     </MDBRow>
                     </Form>
