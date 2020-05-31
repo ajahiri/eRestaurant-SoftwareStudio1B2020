@@ -33,7 +33,7 @@ class Invoice extends React.Component{
       let Cart = this.props.Cart;
       return Cart.map(item => {
           itemNum ++;
-          this.totalCost += parseFloat(item.cost);
+          this.totalCost += parseFloat(item.cost) * item.quantity;
           return (
               <tr key={itemNum}>
                   <td>{itemNum}</td>
@@ -64,8 +64,8 @@ class Invoice extends React.Component{
                             <MDBCol>
                               <h6 className=" mb-4 p-0">From:</h6>
                               <h6 className="font-weight-bold mb-4 p-0">Sapori Unici {branchName}</h6>
-                              <h6 className="mb-4 p-0">{branchAddressNice}</h6>
-                              <h6 className="mb-4 p-0">{branchPhone}</h6>
+                              <h6 className="mb-4 p-0">Address: {branchAddressNice}</h6>
+                              <h6 className="mb-4 p-0">Phone: {branchPhone}</h6>
                               <h6 className=" mb-4 p-0"><strong>Invoice date: </strong> {new Date().toDateString()}</h6>
 
                             </MDBCol>

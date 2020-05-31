@@ -200,9 +200,9 @@ class Booking extends React.Component {
     async handleDateChange(date){
         let result = await Meteor.callPromise('bookings.checkUser', this.props.userID, new Date(date).toDateString());
         if (result != null) {
-            this.setState({date: date, doubleBooked_Alert: !this.state.doubleBooked_Alert});
+            this.setState({date: date, doubleBooked_Alert: true, disableGuestNum: true});
         } else {
-            this.setState({ date: date, disableGuestNum: false});
+            this.setState({ doubleBooked_Alert: false, date: date, disableGuestNum: false});
         }
     }
 
@@ -481,6 +481,7 @@ class Booking extends React.Component {
                                     onOpen={() => {
                                         this.setState({ defaultDateFormat: "F j, Y"});
                                         this.handleDateChange(new Date());
+                                        this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
                                     }}
                                     onClose={() => {
                                         // Bug Fix: If backspace is used when input field is selected input field is blank

@@ -22,7 +22,6 @@ class MenuList extends React.Component {
           </h3> 
           <MenuItem id={categoryarr._id} category={categoryarr._id} />
         </>
-        
         );
     });
 };
