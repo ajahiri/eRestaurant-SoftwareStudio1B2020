@@ -91,7 +91,7 @@ const SignUpForm = ({defaultUser}) => {
                             <MDBCol>
                                 <div className="text-center">
                                     <MDBBtn type="submit" color="primary">
-                                        Add Branch
+                                        Sign Up
                                         <MDBIcon far icon="paper-plane" className="ml-1" />
                                     </MDBBtn>
                                 </div>
