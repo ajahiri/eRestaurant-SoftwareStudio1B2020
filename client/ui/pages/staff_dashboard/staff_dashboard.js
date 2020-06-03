@@ -65,9 +65,8 @@ class StaffDashboard extends React.Component {
                         this.props.branch ?
                             <div>
                                 <h2>Your Branch</h2>
-                                <p>Temporary representation:</p>
                                 <p>ID: {this.props.branch._id}</p>
-                                <p>Name: {this.props.branch.name}</p>
+                                <p className="font-weight-bold">Name: {this.props.branch.name}</p>
                                 <p>Phone: {this.props.branch.phone}</p>
                                 <p>Address: {addressNice}</p>
                                 <p>Date: {new Date().toDateString()}</p>

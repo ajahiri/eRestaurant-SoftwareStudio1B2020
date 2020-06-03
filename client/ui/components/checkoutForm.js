@@ -81,6 +81,7 @@ const CheckOutForm = ({defaultCard}) => {
                                 name="cardCode"
                                 type="text"
                             />
+                            <img src="https://www.digitaltalks.org/wp-content/uploads/2016/09/Mastercard-Developers.jpg" alt="Mastercard Developers" width="150" height="60" />
                         </MDBCol>
                     </MDBRow>
                     </Form>
