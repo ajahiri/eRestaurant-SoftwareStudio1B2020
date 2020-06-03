@@ -200,9 +200,11 @@ class Booking extends React.Component {
     async handleDateChange(date){
         let result = await Meteor.callPromise('bookings.checkUser', this.props.userID, new Date(date).toDateString());
         if (result != null) {
-            this.setState({date: date, doubleBooked_Alert: true, disableGuestNum: true});
+            this.setState({date: date, doubleBooked_Alert: true, disableBtnNext: true});
+            this.disableTimePicker();
         } else {
-            this.setState({ doubleBooked_Alert: false, date: date, disableGuestNum: false});
+            this.setState({ date: date, doubleBooked_Alert: false, disableGuestNum: false});
+            this.availabilityCheck(date.toDateString(), this.state.branch.value, this.state.guestNum);
         }
     }
 
@@ -239,6 +241,7 @@ class Booking extends React.Component {
     enableTimePicker(){
         if (this.state.guestNum > 0) {
             this.setState({
+                time: '',
                 disableFour: false,
                 disableFive: false,
                 disableSix: false,
@@ -246,12 +249,20 @@ class Booking extends React.Component {
                 disableEight: false,
                 disableNine: false,
                 disableTen: false,
+                btnFour: 'indigo',
+                btnFive: 'indigo',
+                btnSix: 'indigo',
+                btnSeven: 'indigo',
+                btnEight: 'indigo',
+                btnNine: 'indigo',
+                btnTen: 'indigo',
             })
         }
     }
 
     disableTimePicker(){
         this.setState({
+            time: '',
             disableFour: true,
             disableFive: true,
             disableSix: true,
@@ -259,11 +270,18 @@ class Booking extends React.Component {
             disableEight: true,
             disableNine: true,
             disableTen: true,
+            btnFour: 'indigo',
+            btnFive: 'indigo',
+            btnSix: 'indigo',
+            btnSeven: 'indigo',
+            btnEight: 'indigo',
+            btnNine: 'indigo',
+            btnTen: 'indigo',
         })
     }
 
     async availabilityCheck(date, branch, guestNum) {
-        if (this.state.defaultDateFormat != '\\Se\\lect \\Date...' && guestNum > 0) {
+        if (this.state.defaultDateFormat != '\\Se\\lect \\Date...' && guestNum > 0 && !this.state.doubleBooked_Alert) {
             let unavailable_times = await Meteor.callPromise('date_time_branch.check', date, branch, guestNum,
                 function(error) {
                     if (error) {
@@ -302,6 +320,7 @@ class Booking extends React.Component {
             }
         } else {
             this.disableTimePicker();
+            this.setState({disableBtnNext: true});
         }
     }
 
@@ -476,18 +495,17 @@ class Booking extends React.Component {
                                     value={date}
                                     onChange={date => {
                                         this.handleDateChange(date);
-                                        this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
                                     }}
                                     onOpen={() => {
                                         this.setState({ defaultDateFormat: "F j, Y"});
                                         this.handleDateChange(new Date());
-                                        this.availabilityCheck(new Date(date).toDateString(), branch.value, guestNum);
                                     }}
                                     onClose={() => {
                                         // Bug Fix: If backspace is used when input field is selected input field is blank
                                         if (date.length==0) {
                                             this.setState({ defaultDateFormat: "\\Se\\lect \\Date..." }); //resets placeholder value
                                             this.setState({ date: new Date() }) //resets date to Date() -> returns todays date
+                                            this.disableTimePicker();
                                         }
                                     }}
                                     options={{
